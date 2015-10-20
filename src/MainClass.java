@@ -1,12 +1,13 @@
 /**
  * Created by anton on 10/17/15.
+ * Main class for project
  */
 import java.sql.*;
 import java.io.*;
 public class MainClass {
     public static void main(String[] args){
-        String url = "jdbc:oracle:thin:@131.230.133.11:1521:cs";
         String server = "131.230.133.11";
+        String port ="1521";
         String dbname = "cs";
         Database db = new Database();
         String queryString = "SELECT * FROM Student";
@@ -18,26 +19,15 @@ public class MainClass {
         console.printf("Please enter your username: ");
         String username = console.readLine();
         console.printf("Please enter your password: ");
-        //String username = new String(userChars);
         char[] passwordChars = console.readPassword();
         String pass = new String(passwordChars);
-
-        try {
-            // initialize the JDBC driver
-            String driver = "oracle.jdbc.driver.OracleDriver";
-            Class.forName(driver);
-            //DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
-
-        }
-        catch (Exception ex){
-            System.out.println("Cannot load Oracle driver");
-        }
         try {
             // connect to the db
-            Connection con = db.connect(server, dbname, username, pass);
-            //Connection con = DriverManager.getConnection(url,username,pass);
+            Connection con = db.connect(server, port, dbname, username, pass);
+            // query the db
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(queryString);
+            // print the result
             while (rs.next()){
                 int id = rs.getInt(1);
                 String fname = rs.getString(2);
@@ -48,6 +38,7 @@ public class MainClass {
                 System.out.println("lname is "+lname);
                 System.out.println("grade is "+grade);
             }
+            // close the db connection
             st.close();
             con.close();
         }
