@@ -6,6 +6,9 @@ import java.io.*;
 public class MainClass {
     public static void main(String[] args){
         String url = "jdbc:oracle:thin:@131.230.133.11:1521:cs";
+        String server = "131.230.133.11";
+        String dbname = "cs";
+        Database db = new Database();
         String queryString = "SELECT * FROM Student";
         Console console = System.console();
         if (console == null) {
@@ -18,15 +21,21 @@ public class MainClass {
         //String username = new String(userChars);
         char[] passwordChars = console.readPassword();
         String pass = new String(passwordChars);
+
         try {
-            DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
+            // initialize the JDBC driver
+            String driver = "oracle.jdbc.driver.OracleDriver";
+            Class.forName(driver);
+            //DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
 
         }
         catch (Exception ex){
             System.out.println("Cannot load Oracle driver");
         }
         try {
-            Connection con = DriverManager.getConnection(url,username,pass);
+            // connect to the db
+            Connection con = db.connect(server, dbname, username, pass);
+            //Connection con = DriverManager.getConnection(url,username,pass);
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(queryString);
             while (rs.next()){

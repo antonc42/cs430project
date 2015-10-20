@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cacf3faa-0e6a-40bb-a97c-51ff42fc7691" name="Default" comment="" />
+    <list default="true" id="cacf3faa-0e6a-40bb-a97c-51ff42fc7691" name="Default" comment="started trying to make database object for handing db operations">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Database.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/cs430project/MainClass.class" afterPath="$PROJECT_DIR$/out/production/cs430project/MainClass.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MainClass.java" afterPath="$PROJECT_DIR$/src/MainClass.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="cs430project.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -26,13 +31,25 @@
       <file leaf-file-name="MainClass.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/MainClass.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.40756756">
-              <caret line="23" column="9" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
+            <state vertical-scroll-proportion="0.32459018">
+              <caret line="11" column="30" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
-                <marker date="1445139599835" expanded="true" signature="242:256" placeholder="SELECT table..user_tables..." />
-                <marker date="1445139599835" expanded="true" signature="242:263" placeholder="SELECT * FRO..Student..." />
+                <marker date="1445299208250" expanded="true" signature="352:366" placeholder="SELECT table..user_tables..." />
+                <marker date="1445299208250" expanded="true" signature="352:373" placeholder="SELECT * FRO..Student..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Database.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Database.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -59,6 +76,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/MainClass.java" />
+        <option value="$PROJECT_DIR$/src/Database.java" />
       </list>
     </option>
   </component>
@@ -401,12 +419,12 @@
       <updated>1445129628616</updated>
       <workItem from="1445129630602" duration="1082000" />
       <workItem from="1445137291930" duration="3040000" />
-      <workItem from="1445297317141" duration="477000" />
+      <workItem from="1445297317141" duration="2630000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4599000" />
+    <option name="totallyTimeSpent" value="6752000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="992" y="24" width="918" height="1056" extended-state="4" />
@@ -414,6 +432,7 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32984293" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -430,7 +449,6 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32984293" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -449,6 +467,10 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="started trying to make database object for handing db operations" />
+    <option name="LAST_COMMIT_MESSAGE" value="started trying to make database object for handing db operations" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
@@ -465,8 +487,8 @@
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
-            <marker date="1445139599835" expanded="true" signature="242:256" placeholder="SELECT table..user_tables..." />
-            <marker date="1445139599835" expanded="true" signature="242:263" placeholder="SELECT * FRO..Student..." />
+            <marker date="1445299208250" expanded="true" signature="352:366" placeholder="SELECT table..user_tables..." />
+            <marker date="1445299208250" expanded="true" signature="352:373" placeholder="SELECT * FRO..Student..." />
           </folding>
         </state>
       </provider>
@@ -478,21 +500,31 @@
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
-            <marker date="1445139599835" expanded="true" signature="242:256" placeholder="SELECT table..user_tables..." />
-            <marker date="1445139599835" expanded="true" signature="242:263" placeholder="SELECT * FRO..Student..." />
+            <marker date="1445299208250" expanded="true" signature="352:366" placeholder="SELECT table..user_tables..." />
+            <marker date="1445299208250" expanded="true" signature="352:373" placeholder="SELECT * FRO..Student..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Database.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/MainClass.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.40756756">
-          <caret line="23" column="9" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
+        <state vertical-scroll-proportion="0.32459018">
+          <caret line="11" column="30" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
-            <marker date="1445139599835" expanded="true" signature="242:256" placeholder="SELECT table..user_tables..." />
-            <marker date="1445139599835" expanded="true" signature="242:263" placeholder="SELECT * FRO..Student..." />
+            <marker date="1445299208250" expanded="true" signature="352:366" placeholder="SELECT table..user_tables..." />
+            <marker date="1445299208250" expanded="true" signature="352:373" placeholder="SELECT * FRO..Student..." />
           </folding>
         </state>
       </provider>
