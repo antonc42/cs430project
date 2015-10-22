@@ -10,6 +10,7 @@ public class MainClass {
         String port ="1521";
         String dbname = "cs";
         Database db = new Database();
+
         String queryString = "SELECT * FROM Student";
         Console console = System.console();
         if (console == null) {
@@ -24,7 +25,8 @@ public class MainClass {
         try {
             // connect to the db
             Connection con = db.connect(server, port, dbname, username, pass);
-            // query the db
+            db.setupDB(con);
+            /*// query the db
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(queryString);
             // print the result
@@ -39,7 +41,7 @@ public class MainClass {
                 System.out.println("grade is "+grade);
             }
             // close the db connection
-            st.close();
+            st.close();*/
             con.close();
         }
         catch (Exception ex){
