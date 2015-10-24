@@ -30,6 +30,14 @@ public class Database {
         return con;
     }
     public boolean setupDB(Connection con){
+        // drop table queries
+        String clearStudent = "DROP TABLE Student";
+        String clearDepartment = "DROP TABLE Department";
+        String clearFaculty =  "DROP TABLE Faculty";
+        String clearCourses =  "DROP TABLE Courses";
+        String clearEnrolled =  "DROP TABLE Enrolled";
+        String clearStaff =  "DROP TABLE Staff";
+        // table schema
         String StudentSchema = "CREATE TABLE Student (" +
                 "sid INTEGER," +
                 "sname VARCHAR(100)," +
@@ -73,18 +81,39 @@ public class Database {
                 "depid INTEGER REFERENCES Department (did)," +
                 "PRIMARY KEY (sid)" +
                 ")";
-        String clearStudent = "DROP TABLE Student";
-        String clearDepartment = "DROP TABLE Department";
-        String clearFaculty =  "DROP TABLE Faculty";
-        String clearCourses =  "DROP TABLE Courses";
-        String clearEnrolled =  "DROP TABLE Enrolled";
-        String clearStaff =  "DROP TABLE Staff";
-        runDefineManip(con,clearStudent);
-        runDefineManip(con,clearDepartment);
-        runDefineManip(con,clearFaculty);
-        runDefineManip(con,clearCourses);
-        runDefineManip(con,clearEnrolled);
+        // insert data queries
+        String EnrolledData = "INSERT ALL" +
+                "INTO Enrolled VALUES (1,'CS430',90,85,97)" +
+                "INTO Enrolled VALUES (2,'IST225',50,65,70)" +
+                "INTO Enrolled VALUES (3,'ISAT415',100,100,100)" +
+                "INTO Enrolled VALUES (4,'CS101',0,0,0)" +
+                "INTO Enrolled VALUES (5,'CP101',23,18,35)" +
+                "INTO Enrolled VALUES (6,'ENG222',82,77,75)" +
+                "INTO Enrolled VALUES (7,'CP330',50,51,52)" +
+                "INTO Enrolled VALUES (8,'MAT108',63,18,23)" +
+                "INTO Enrolled VALUES (9,'MAT125',53,19,68)" +
+                "INTO Enrolled VALUES (10,'UC101',90,97,95)" +
+                "SELECT * FROM dual";
+        String StaffData = "INSERT ALL" +
+                "INTO Staff VALUES (1,'Hubert Davidson',1)" +
+                "INTO Staff VALUES (2,'Iona Overton,2)" +
+                "INTO Staff VALUES (3,'Raphael Tifft',3)" +
+                "INTO Staff VALUES (4,'Anneka Irvine',4)" +
+                "INTO Staff VALUES (5,'Carley Revie',5)" +
+                "INTO Staff VALUES (6,'Aric Samson',6)" +
+                "INTO Staff VALUES (7,'Charnette Gardyner',7)" +
+                "INTO Staff VALUES (8,'Reynold Stacy',8)" +
+                "INTO Staff VALUES (9,'Vince Hanley',9)" +
+                "INTO Staff VALUES (10,'Cynthia Coel',10)" +
+                "SELECT * FROM dual";
+        // remove any existing tables
         runDefineManip(con,clearStaff);
+        runDefineManip(con,clearEnrolled);
+        runDefineManip(con,clearCourses);
+        runDefineManip(con,clearFaculty);
+        runDefineManip(con,clearDepartment);
+        runDefineManip(con,clearStudent);
+        // create tables
         runDefineManip(con,StudentSchema);
         runDefineManip(con,DepartmentSchema);
         runDefineManip(con,FacultySchema);
