@@ -30,43 +30,27 @@ public class Database {
         return con;
     }
     public boolean setupDB(Connection con){
-        /*String sqlfile = "schema.sql";
-        String line = null;
-        try {
-            FileReader read = new FileReader(sqlfile);
-            BufferedReader buffer = new BufferedReader(read);
-            while ((line = buffer.readLine()) != null){
-                System.out.println(line);
-            }
-            buffer.close();
-        }
-        catch (FileNotFoundException ex) {
-            System.out.println("Cannot open file '"+sqlfile+"'");
-        }
-        catch (IOException ex){
-            System.out.println("Cannot read file '"+sqlfile+"'");
-        }*/
-        String StudentSchema = "CREATE TABLE IF NOT EXISTS Student (" +
+        String StudentSchema = "CREATE TABLE Student (" +
                 "sid INTEGER," +
                 "sname VARCHAR(100)," +
                 "major VARCHAR(50)," +
                 "s_level VARCHAR(10)," +
                 "age INTEGER," +
-                "CONSTRAINT (s_level IN ('freshman','sophomore','junior','senior','master','phd'))," +
+                "CONSTRAINT student_level CHECK (s_level IN ('freshman','sophomore','junior','senior','master','phd'))," +
                 "PRIMARY KEY (sid)" +
                 ")";
-        String DepartmentSchema = "CREATE TABLE IF NOT EXISTS Department (" +
+        String DepartmentSchema = "CREATE TABLE Department (" +
                 "did INTEGER," +
                 "dname VARCHAR(100)," +
                 "PRIMARY KEY (did)" +
                 ")";
-        String FacultySchema = "CREATE TABLE IF NOT EXISTS Faculty (" +
+        String FacultySchema = "CREATE TABLE Faculty (" +
                 "fid INTEGER," +
                 "fname VARCHAR(100)," +
                 "depid INTEGER REFERENCES Department (did)," +
                 "PRIMARY KEY (fid)" +
                 ")";
-        String CoursesSchema = "CREATE TABLE IF NOT EXISTS Courses (" +
+        String CoursesSchema = "CREATE TABLE Courses (" +
                 "cid VARCHAR(10)," +
                 "cname VARCHAR(50)," +
                 "meets_at VARCHAR(30)," +
@@ -75,51 +59,72 @@ public class Database {
                 "limit INTEGER," +
                 "PRIMARY KEY (cid)" +
                 ")";
-        String EnrolledSchema = "CREATE TABLE IF NOT EXISTS Enrolled (" +
+        String EnrolledSchema = "CREATE TABLE Enrolled (" +
                 "sid INTEGER REFERENCES Student (sid)," +
                 "cid VARCHAR(10) REFERENCES Courses (cid)," +
-                "exam1 INTEGER CONSTRAINT (exam1 >= 0 AND exam1 <= 100)," +
-                "exam2: INTEGER CONSTRAINT (exam2 >= 0 AND exam2 <= 100)," +
-                "final INTEGER CONSTRAINT (final >= 0 AND final <= 100)," +
+                "exam1 INTEGER CHECK (exam1 >= 0 AND exam1 <= 100)," +
+                "exam2 INTEGER CHECK (exam2 >= 0 AND exam2 <= 100)," +
+                "final INTEGER CHECK (final >= 0 AND final <= 100)," +
                 "PRIMARY KEY (sid, cid)" +
                 ")";
-        String StaffSchema = "CREATE TABLE IF NOT EXISTS Staff (" +
+        String StaffSchema = "CREATE TABLE Staff (" +
                 "sid INTEGER," +
                 "sname VARCHAR(100)," +
                 "depid INTEGER REFERENCES Department (did)," +
                 "PRIMARY KEY (sid)" +
                 ")";
-        /*System.out.println(StudentSchema);
-        System.out.println(DepartmentSchema);
-        System.out.println(FacultySchema);
-        System.out.println(CoursesSchema);
-        System.out.println(EnrolledSchema);
-        System.out.println(StaffSchema);*/
         String clearStudent = "DROP TABLE Student";
         String clearDepartment = "DROP TABLE Department";
-        String clearFaculty = "DROP TABLE Faculty";
-        String clearCourses = "DROP TABLE Courses";
-        String clearEnrolled = "DROP TABLE Enrolled";
-        String clearStaff = "DROP TABLE Staff";
+        String clearFaculty =  "DROP TABLE Faculty";
+        String clearCourses =  "DROP TABLE Courses";
+        String clearEnrolled =  "DROP TABLE Enrolled";
+        String clearStaff =  "DROP TABLE Staff";
+        runDefineManip(con,clearStudent);
+        runDefineManip(con,clearDepartment);
+        runDefineManip(con,clearFaculty);
+        runDefineManip(con,clearCourses);
+        runDefineManip(con,clearEnrolled);
+        runDefineManip(con,clearStaff);
+        runDefineManip(con,StudentSchema);
+        runDefineManip(con,DepartmentSchema);
+        runDefineManip(con,FacultySchema);
+        runDefineManip(con,CoursesSchema);
+        runDefineManip(con,EnrolledSchema);
+        runDefineManip(con,StaffSchema);
+        return true;
+    }
+    public boolean ignoreSQLError (Integer sqlerror){
+        if (sqlerror == null){
+            System.out.println("No SQL Error given!");
+            return false;
+        }
+        // table or view does not exist
+        if (sqlerror == 942){
+            return true;
+        }
+        return false;
+    }
+    public boolean runDefineManip (Connection con, String statement){
+        if (statement == null){
+            System.err.println("No Statement given!");
+            return false;
+        }
         try {
-            Statement st = con.createStatement();
-            st.executeQuery(clearStudent);
-            st.executeQuery(clearDepartment);
-            st.executeQuery(clearFaculty);
-            st.executeQuery(clearCourses);
-            st.executeQuery(clearEnrolled);
-            st.executeQuery(clearStaff);
-            st.executeQuery(StudentSchema);
-            st.executeQuery(DepartmentSchema);
-            st.executeQuery(FacultySchema);
-            st.executeQuery(CoursesSchema);
-            st.executeQuery(EnrolledSchema);
-            st.executeQuery(StaffSchema);
-            st.close();
+            PreparedStatement prep = con.prepareStatement(statement);
+            prep.execute();
+            prep.close();
+            return true;
         }
         catch (Exception ex){
-            System.out.println("SQLException: "+ex);
+            if (ex instanceof SQLException){
+                if (ignoreSQLError(((SQLException)ex).getErrorCode()) == false) {
+                    System.out.println("SQLException: "+ex);
+                }
+            }
+            else {
+                System.out.println("SQLException: "+ex);
+            }
+            return false;
         }
-        return true;
     }
 }
