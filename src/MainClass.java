@@ -6,6 +6,7 @@ import java.sql.*;
 import java.io.*;
 public class MainClass {
     public static void main(String[] args){
+    /*
         String server = "131.230.133.11";
         String port ="1521";
         String dbname = "cs";
@@ -23,9 +24,10 @@ public class MainClass {
         char[] passwordChars = console.readPassword();
         String pass = new String(passwordChars);
         try {
+    */
             // connect to the db
-            Connection con = db.connect(server, port, dbname, username, pass);
-            db.setupDB(con);
+    //        Connection con = db.connect(server, port, dbname, username, pass);
+    //        db.setupDB(con);
             /*// query the db
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(queryString);
@@ -42,10 +44,17 @@ public class MainClass {
             }
             // close the db connection
             st.close();*/
-            con.close();
-        }
+    //        con.close();
+    /*    }
         catch (Exception ex){
             System.out.println("SQLException: "+ex);
         }
+    */
+        // do some code here to check if setup is done already
+        // if so, go straigt to login box
+        // if not, go to setup
+        Login loginbox = new Login();
+        loginbox.pack();
+        loginbox.setVisible(true);
     }
 }

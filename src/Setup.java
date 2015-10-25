@@ -1,6 +1,3 @@
-
-import javax.swing.JOptionPane;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,14 +8,12 @@ import javax.swing.JOptionPane;
  *
  * @author anton
  */
-public class Login extends javax.swing.JFrame {
+public class Setup extends javax.swing.JFrame {
 
-    //private String DBUser;
-    //private String DBPw;
     /**
-     * Creates new form GUI
+     * Creates new form Setup
      */
-    public Login() {
+    public Setup() {
         initComponents();
     }
 
@@ -31,22 +26,22 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        userLabel = new javax.swing.JLabel();
-        userPw = new javax.swing.JLabel();
-        userText = new javax.swing.JTextField();
+        dbUserLabel = new javax.swing.JLabel();
+        dbUserPw = new javax.swing.JLabel();
+        dbUserText = new javax.swing.JTextField();
         cancelButton = new javax.swing.JButton();
         loginButton = new javax.swing.JButton();
-        pwField = new javax.swing.JPasswordField();
+        dbPwField = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        userLabel.setText("Username:");
+        dbUserLabel.setText("Database Username:");
 
-        userPw.setText("Password:");
+        dbUserPw.setText("Database Password:");
 
-        userText.addActionListener(new java.awt.event.ActionListener() {
+        dbUserText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userTextActionPerformed(evt);
+                dbUserTextActionPerformed(evt);
             }
         });
 
@@ -64,9 +59,9 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        pwField.addActionListener(new java.awt.event.ActionListener() {
+        dbPwField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pwFieldActionPerformed(evt);
+                dbPwFieldActionPerformed(evt);
             }
         });
 
@@ -83,12 +78,12 @@ public class Login extends javax.swing.JFrame {
                         .addComponent(cancelButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(userPw)
-                            .addComponent(userLabel))
+                            .addComponent(dbUserPw)
+                            .addComponent(dbUserLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(userText)
-                            .addComponent(pwField, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))))
+                            .addComponent(dbUserText)
+                            .addComponent(dbPwField, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -96,12 +91,12 @@ public class Login extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(userLabel)
-                    .addComponent(userText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dbUserLabel)
+                    .addComponent(dbUserText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(userPw)
-                    .addComponent(pwField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dbUserPw)
+                    .addComponent(dbPwField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelButton)
@@ -112,53 +107,34 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void dbUserTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dbUserTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dbUserTextActionPerformed
+
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         System.exit(0);
     }//GEN-LAST:event_cancelButtonActionPerformed
 
-    private void userTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userTextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_userTextActionPerformed
-
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        
+
         //JOptionPane.showMessageDialog(rootPane, "User: "+dbuser+"\nPass: "+dbpw);
         // put db login check here
         this.setVisible(false);
         MainWindow main = new MainWindow();
         main.pack();
         main.setVisible(true);
-        main.setDBUser(userText.getText());
-        main.setDBPw(String.valueOf(pwField.getPassword()));
+        main.setDBUser(dbUserText.getText());
+        main.setDBPw(String.valueOf(dbPwField.getPassword()));
     }//GEN-LAST:event_loginButtonActionPerformed
 
-    private void pwFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwFieldActionPerformed
+    private void dbPwFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dbPwFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_pwFieldActionPerformed
+    }//GEN-LAST:event_dbPwFieldActionPerformed
 
-/*
-    public String getDBUser () {
-        return this.DBUser;
-    }
-    
-    public void setDBUser (String value) {
-        this.DBUser = value;
-    }
-    
-    public String getDBPw () {
-        return this.DBPw;
-    }
-    
-    public void setDBPw (String value) {
-        this.DBPw = value;
-    }
-*/
-    
     /**
      * @param args the command line arguments
      */
-    
-    //public static void main(String args[]) {
+ //   public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -173,35 +149,32 @@ public class Login extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Setup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Setup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Setup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Setup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-    */
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
+*/
         /* Create and display the form */
-    /*
+/*
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                new Setup().setVisible(true);
             }
         });
-    */
-    //}
+    }
+*/
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
+    private javax.swing.JPasswordField dbPwField;
+    private javax.swing.JLabel dbUserLabel;
+    private javax.swing.JLabel dbUserPw;
+    private javax.swing.JTextField dbUserText;
     private javax.swing.JButton loginButton;
-    private javax.swing.JPasswordField pwField;
-    private javax.swing.JLabel userLabel;
-    private javax.swing.JLabel userPw;
-    private javax.swing.JTextField userText;
     // End of variables declaration//GEN-END:variables
 }
