@@ -24,26 +24,32 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="loginButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cancelButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="dbUserLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                      <Component id="initDBLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="dbUserPw" min="-2" max="-2" attributes="0"/>
+                      <Component id="saveConfLabel" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="dbUserText" alignment="0" max="32767" attributes="0"/>
+                  <Component id="dbPwField" alignment="0" pref="160" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="dbUserPw" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="dbUserLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="initDBCheck" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="saveConfCheck" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="dbUserText" alignment="0" max="32767" attributes="0"/>
-                          <Component id="dbPwField" alignment="0" pref="160" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="loginButton" max="32767" attributes="0"/>
+                          <Component id="cancelButton" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="36" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -61,11 +67,22 @@
                   <Component id="dbPwField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="cancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="loginButton" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="initDBLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="initDBCheck" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="loginButton" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="saveConfLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="saveConfCheck" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="cancelButton" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="14" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -82,9 +99,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="dbUserText">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dbUserTextActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="cancelButton">
       <Properties>
@@ -103,9 +117,20 @@
       </Events>
     </Component>
     <Component class="javax.swing.JPasswordField" name="dbPwField">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dbPwFieldActionPerformed"/>
-      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="initDBLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Initialize Database"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="initDBCheck">
+    </Component>
+    <Component class="javax.swing.JLabel" name="saveConfLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Save Configuration"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="saveConfCheck">
     </Component>
   </SubComponents>
 </Form>

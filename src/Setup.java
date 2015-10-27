@@ -15,6 +15,36 @@ public class Setup extends javax.swing.JFrame {
      */
     public Setup() {
         initComponents();
+        /* Set the Nimbus look and feel */
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        /*
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Setup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Setup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Setup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Setup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        */
+        /*
+        try {
+            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+            }
+        catch (Exception e) {
+            e.printStackTrace();
+            }
+        */
     }
 
     /**
@@ -32,18 +62,16 @@ public class Setup extends javax.swing.JFrame {
         cancelButton = new javax.swing.JButton();
         loginButton = new javax.swing.JButton();
         dbPwField = new javax.swing.JPasswordField();
+        initDBLabel = new javax.swing.JLabel();
+        initDBCheck = new javax.swing.JCheckBox();
+        saveConfLabel = new javax.swing.JLabel();
+        saveConfCheck = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         dbUserLabel.setText("Database Username:");
 
         dbUserPw.setText("Database Password:");
-
-        dbUserText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dbUserTextActionPerformed(evt);
-            }
-        });
 
         cancelButton.setText("Cancel");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -59,32 +87,35 @@ public class Setup extends javax.swing.JFrame {
             }
         });
 
-        dbPwField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dbPwFieldActionPerformed(evt);
-            }
-        });
+        initDBLabel.setText("Initialize Database");
+
+        saveConfLabel.setText("Save Configuration");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(loginButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cancelButton))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(dbUserLabel)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(initDBLabel)
+                        .addComponent(dbUserPw)
+                        .addComponent(saveConfLabel)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(dbUserText)
+                    .addComponent(dbPwField, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dbUserPw)
-                            .addComponent(dbUserLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(dbUserText)
-                            .addComponent(dbPwField, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))))
-                .addContainerGap(36, Short.MAX_VALUE))
+                            .addComponent(initDBCheck)
+                            .addComponent(saveConfCheck))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,18 +129,22 @@ public class Setup extends javax.swing.JFrame {
                     .addComponent(dbUserPw)
                     .addComponent(dbPwField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cancelButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(initDBLabel)
+                        .addComponent(initDBCheck))
                     .addComponent(loginButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(saveConfLabel)
+                        .addComponent(saveConfCheck))
+                    .addComponent(cancelButton))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void dbUserTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dbUserTextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dbUserTextActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         System.exit(0);
@@ -119,55 +154,24 @@ public class Setup extends javax.swing.JFrame {
 
         //JOptionPane.showMessageDialog(rootPane, "User: "+dbuser+"\nPass: "+dbpw);
         // put db login check here
+        if (initDBCheck.isSelected()) {
+            
+        }
+        if (saveConfCheck.isSelected()) {
+            
+        }
         this.setVisible(false);
-        MainWindow main = new MainWindow();
-        main.pack();
-        main.setVisible(true);
-        main.setDBUser(dbUserText.getText());
-        main.setDBPw(String.valueOf(dbPwField.getPassword()));
+        Login loginbox = new Login();
+        //loginbox.pack();
+        loginbox.setVisible(true);
+        loginbox.setDBUser(dbUserText.getText());
+        loginbox.setDBPw(String.valueOf(dbPwField.getPassword()));
     }//GEN-LAST:event_loginButtonActionPerformed
-
-    private void dbPwFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dbPwFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dbPwFieldActionPerformed
 
     /**
      * @param args the command line arguments
      */
- //   public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-    /*
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Setup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Setup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Setup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Setup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-*/
-        /* Create and display the form */
-/*
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Setup().setVisible(true);
-            }
-        });
-    }
-*/
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
@@ -175,6 +179,10 @@ public class Setup extends javax.swing.JFrame {
     private javax.swing.JLabel dbUserLabel;
     private javax.swing.JLabel dbUserPw;
     private javax.swing.JTextField dbUserText;
+    private javax.swing.JCheckBox initDBCheck;
+    private javax.swing.JLabel initDBLabel;
     private javax.swing.JButton loginButton;
+    private javax.swing.JCheckBox saveConfCheck;
+    private javax.swing.JLabel saveConfLabel;
     // End of variables declaration//GEN-END:variables
 }

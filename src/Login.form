@@ -82,9 +82,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="userText">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="userTextActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="cancelButton">
       <Properties>
@@ -103,9 +100,6 @@
       </Events>
     </Component>
     <Component class="javax.swing.JPasswordField" name="pwField">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pwFieldActionPerformed"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>

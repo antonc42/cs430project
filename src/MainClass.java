@@ -52,9 +52,15 @@ public class MainClass {
     */
         // do some code here to check if setup is done already
         // if so, go straigt to login box
-        // if not, go to setup
+        /*
         Login loginbox = new Login();
         loginbox.pack();
         loginbox.setVisible(true);
+        */
+        // if not, go to setup
+        Setup setupbox = new Setup();
+        setupbox.pack();
+        setupbox.setVisible(true);
+        
     }
 }
