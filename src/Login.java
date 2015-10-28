@@ -33,7 +33,7 @@ public class Login extends javax.swing.JFrame {
 
         userLabel = new javax.swing.JLabel();
         userPw = new javax.swing.JLabel();
-        userText = new javax.swing.JTextField();
+        userName = new javax.swing.JTextField();
         cancelButton = new javax.swing.JButton();
         loginButton = new javax.swing.JButton();
         pwField = new javax.swing.JPasswordField();
@@ -75,7 +75,7 @@ public class Login extends javax.swing.JFrame {
                             .addComponent(userLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(userText)
+                            .addComponent(userName)
                             .addComponent(pwField, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
@@ -85,7 +85,7 @@ public class Login extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(userLabel)
-                    .addComponent(userText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(userName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(userPw)
@@ -108,17 +108,19 @@ public class Login extends javax.swing.JFrame {
         
         //JOptionPane.showMessageDialog(rootPane, "User: "+dbuser+"\nPass: "+dbpw);
         // put db login check here
+        
         this.setVisible(false);
         MainWindow main = new MainWindow();
-        //main.pack();
+        if (userName.getText().equals("anton")) {
+            main.setStudent();
+        }
+        else {
+            main.notStudent();
+        }
         main.setVisible(true);
         main.setDBUser(getDBUser());
         main.setDBPw(getDBPw());
     }//GEN-LAST:event_loginButtonActionPerformed
-    
-    /**
-     * @param args the command line arguments
-     */
     
     public String getDBUser () {
         return this.DBUser;
@@ -141,7 +143,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton loginButton;
     private javax.swing.JPasswordField pwField;
     private javax.swing.JLabel userLabel;
+    private javax.swing.JTextField userName;
     private javax.swing.JLabel userPw;
-    private javax.swing.JTextField userText;
     // End of variables declaration//GEN-END:variables
 }
