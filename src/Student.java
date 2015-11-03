@@ -8,12 +8,15 @@
  *
  * @author anton
  */
-public class Results extends javax.swing.JFrame {
+public class Student extends javax.swing.JFrame {
 
+    private String DBUser;
+    private String DBPw;
+    
     /**
-     * Creates new form Results
+     * Creates new form Student
      */
-    public Results() {
+    public Student() {
         try {
             javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
             }
@@ -32,44 +35,38 @@ public class Results extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        resScroll = new javax.swing.JScrollPane();
-        resTable = new javax.swing.JTable();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        resTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        resScroll.setViewportView(resTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(resScroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(resScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    public void setRowCol (int row, int col){
-        resTable.setModel(null);
+    
+    public String getDBUser () {
+        return this.DBUser;
+    }
+    
+    public void setDBUser (String value) {
+        this.DBUser = value;
+    }
+    
+    public String getDBPw () {
+        return this.DBPw;
+    }
+    
+    public void setDBPw (String value) {
+        this.DBPw = value;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane resScroll;
-    private javax.swing.JTable resTable;
     // End of variables declaration//GEN-END:variables
 }

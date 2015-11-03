@@ -59,7 +59,6 @@ public class MainClass {
         */
         // if not, go to setup
         Setup setupbox = new Setup();
-        setupbox.pack();
         setupbox.setVisible(true);
         
     }

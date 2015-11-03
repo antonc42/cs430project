@@ -14,7 +14,7 @@ public class Setup extends javax.swing.JFrame {
      * Creates new form Setup
      */
     public Setup() {
-        initComponents();
+        
         /* Set the Nimbus look and feel */
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -37,14 +37,15 @@ public class Setup extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Setup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         */
-        /*
+        
         try {
             javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
             }
         catch (Exception e) {
             e.printStackTrace();
             }
-        */
+        
+        initComponents();
     }
 
     /**
@@ -162,16 +163,10 @@ public class Setup extends javax.swing.JFrame {
         }
         this.setVisible(false);
         Login loginbox = new Login();
-        //loginbox.pack();
         loginbox.setVisible(true);
         loginbox.setDBUser(dbUserText.getText());
         loginbox.setDBPw(String.valueOf(dbPwField.getPassword()));
     }//GEN-LAST:event_loginButtonActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;

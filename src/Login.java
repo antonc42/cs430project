@@ -19,6 +19,12 @@ public class Login extends javax.swing.JFrame {
      * Creates new form GUI
      */
     public Login() {
+        try {
+            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+            }
+        catch (Exception e) {
+            e.printStackTrace();
+            }
         initComponents();
     }
 
@@ -110,16 +116,21 @@ public class Login extends javax.swing.JFrame {
         // put db login check here
         
         this.setVisible(false);
-        MainWindow main = new MainWindow();
-        if (userName.getText().equals("anton")) {
-            main.setStudent();
+        
+        
+        if (!userName.getText().equals("anton")) {
+            FacultyStaff fs = new FacultyStaff();
+            fs.setVisible(true);
+            fs.setDBUser(getDBUser());
+            fs.setDBPw(getDBPw());
         }
-        else {
-            main.notStudent();
+        else if (userName.getText().equals("anton")) {
+            Student student = new Student();
+            student.setVisible(true);
+            student.setDBUser(getDBUser());
+            student.setDBPw(getDBPw());
         }
-        main.setVisible(true);
-        main.setDBUser(getDBUser());
-        main.setDBPw(getDBPw());
+        
     }//GEN-LAST:event_loginButtonActionPerformed
     
     public String getDBUser () {
