@@ -371,6 +371,11 @@ public class FacultyStaff extends javax.swing.JFrame {
     private void stuSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stuSearchActionPerformed
         Results popup = new Results();
         popup.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
+        String[] cols = {"Test"};
+        Object[][] rows = {{"Test"}};
+        popup.setCols(cols);
+        popup.setRows(rows);
+        popup.populateTable();
         popup.setVisible(true);
     }//GEN-LAST:event_stuSearchActionPerformed
 

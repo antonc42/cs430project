@@ -1,3 +1,8 @@
+
+import javax.swing.JTable;
+import javax.swing.table.*;
+import java.awt.Component;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -24,6 +29,26 @@ public class Student extends javax.swing.JFrame {
             e.printStackTrace();
             }
         initComponents();
+        coursesTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        for (int column = 0; column < coursesTable.getColumnCount(); column++) {
+            TableColumn tableColumn = coursesTable.getColumnModel().getColumn(column);
+            int preferredWidth = tableColumn.getMinWidth();
+            int maxWidth = tableColumn.getMaxWidth();
+            for (int row = 0; row < coursesTable.getRowCount(); row++) {
+                TableCellRenderer cellRenderer = coursesTable.getCellRenderer(row, column);
+                Component c = coursesTable.prepareRenderer(cellRenderer, row, column);
+                int width = c.getPreferredSize().width + coursesTable.getIntercellSpacing().width;
+                preferredWidth = Math.max(preferredWidth, width);
+                //  We've exceeded the maximum width, no need to check other rows
+                if (preferredWidth >= maxWidth) {
+                    preferredWidth = maxWidth;
+                    break;
+                }
+            }
+            tableColumn.setPreferredWidth( preferredWidth );
+        }
+        this.revalidate();
+        this.repaint();
     }
 
     /**
@@ -35,17 +60,135 @@ public class Student extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        tabs = new javax.swing.JTabbedPane();
+        personalInfo = new javax.swing.JPanel();
+        nameLabel = new javax.swing.JLabel();
+        name = new javax.swing.JLabel();
+        majorLabel = new javax.swing.JLabel();
+        major = new javax.swing.JLabel();
+        levelLabel = new javax.swing.JLabel();
+        level = new javax.swing.JLabel();
+        ageLabel = new javax.swing.JLabel();
+        age = new javax.swing.JLabel();
+        courses = new javax.swing.JPanel();
+        coursesScroll = new javax.swing.JScrollPane();
+        coursesTable = new javax.swing.JTable();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        nameLabel.setText("Name:");
+
+        majorLabel.setText("Major:");
+
+        levelLabel.setText("Level:");
+
+        ageLabel.setText("Age:");
+
+        javax.swing.GroupLayout personalInfoLayout = new javax.swing.GroupLayout(personalInfo);
+        personalInfo.setLayout(personalInfoLayout);
+        personalInfoLayout.setHorizontalGroup(
+            personalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(personalInfoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(personalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(majorLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(levelLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(ageLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addGroup(personalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(age)
+                    .addComponent(level)
+                    .addComponent(major)
+                    .addComponent(name))
+                .addContainerGap(717, Short.MAX_VALUE))
+        );
+        personalInfoLayout.setVerticalGroup(
+            personalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(personalInfoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(personalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nameLabel)
+                    .addComponent(name))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(personalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(majorLabel)
+                    .addComponent(major))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(personalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(levelLabel)
+                    .addComponent(level))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(personalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ageLabel)
+                    .addComponent(age))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        tabs.addTab("Personal Information", personalInfo);
+
+        coursesTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Name", "Time", "Location", "Instructor", "Enrolled", "Maximum", "Exam 1 Score", "Exam 2 Score", "Final Score"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        coursesTable.getTableHeader().setReorderingAllowed(false);
+        coursesScroll.setViewportView(coursesTable);
+        if (coursesTable.getColumnModel().getColumnCount() > 0) {
+            coursesTable.getColumnModel().getColumn(0).setMinWidth(50);
+            coursesTable.getColumnModel().getColumn(1).setMinWidth(50);
+            coursesTable.getColumnModel().getColumn(2).setMinWidth(50);
+            coursesTable.getColumnModel().getColumn(3).setMinWidth(75);
+            coursesTable.getColumnModel().getColumn(4).setMinWidth(85);
+            coursesTable.getColumnModel().getColumn(5).setMinWidth(75);
+            coursesTable.getColumnModel().getColumn(6).setMinWidth(85);
+            coursesTable.getColumnModel().getColumn(7).setMinWidth(100);
+            coursesTable.getColumnModel().getColumn(8).setMinWidth(100);
+            coursesTable.getColumnModel().getColumn(9).setMinWidth(85);
+        }
+
+        javax.swing.GroupLayout coursesLayout = new javax.swing.GroupLayout(courses);
+        courses.setLayout(coursesLayout);
+        coursesLayout.setHorizontalGroup(
+            coursesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(coursesScroll)
+        );
+        coursesLayout.setVerticalGroup(
+            coursesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(coursesScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+        );
+
+        tabs.addTab("Courses", courses);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(tabs)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -66,7 +209,20 @@ public class Student extends javax.swing.JFrame {
     public void setDBPw (String value) {
         this.DBPw = value;
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel age;
+    private javax.swing.JLabel ageLabel;
+    private javax.swing.JPanel courses;
+    private javax.swing.JScrollPane coursesScroll;
+    private javax.swing.JTable coursesTable;
+    private javax.swing.JLabel level;
+    private javax.swing.JLabel levelLabel;
+    private javax.swing.JLabel major;
+    private javax.swing.JLabel majorLabel;
+    private javax.swing.JLabel name;
+    private javax.swing.JLabel nameLabel;
+    private javax.swing.JPanel personalInfo;
+    private javax.swing.JTabbedPane tabs;
     // End of variables declaration//GEN-END:variables
 }

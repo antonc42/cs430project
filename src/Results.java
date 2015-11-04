@@ -10,6 +10,9 @@
  */
 public class Results extends javax.swing.JFrame {
 
+    private String[] colNames;
+    private Object[][] rowContent;
+    
     /**
      * Creates new form Results
      */
@@ -20,6 +23,10 @@ public class Results extends javax.swing.JFrame {
         catch (Exception e) {
             e.printStackTrace();
             }
+        String[] defaultCols = {"Column1","Column2","Column3","Column4"};
+        Object[][] defaultRows = {{"row1","row1","row1","row1"}};
+        setColsPriv(defaultCols);
+        setRowsPriv(defaultRows);
         initComponents();
     }
 
@@ -35,37 +42,58 @@ public class Results extends javax.swing.JFrame {
         resScroll = new javax.swing.JScrollPane();
         resTable = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         resTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        resScroll.setViewportView(resTable);
+            this.getRows(),
+            this.getCols()
+        )
+        {public boolean isCellEditable(int row, int column){return false;}}
+    );
+    resScroll.setViewportView(resTable);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(resScroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(resScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-        );
+    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+    getContentPane().setLayout(layout);
+    layout.setHorizontalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(resScroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+    );
+    layout.setVerticalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(resScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+    );
 
-        pack();
+    pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void setRowCol (int row, int col){
-        resTable.setModel(null);
+    public void setCols (String[] cols){
+        colNames = cols;
+    }
+    public void setRows (Object[][] rows){
+        rowContent = rows;
+    }
+    
+    private void setColsPriv (String[] cols){
+        colNames = cols;
+    }
+    private void setRowsPriv (Object[][] rows){
+        rowContent = rows;
+    }
+    
+    public String[] getCols (){
+        return colNames;
+    }
+    public Object[][] getRows (){
+        return rowContent;
+    }
+    
+    public void populateTable () {
+        resTable.setModel(new javax.swing.table.DefaultTableModel(
+            this.getRows(),
+            this.getCols()
+        )
+        {public boolean isCellEditable(int row, int column){return false;}}
+        );
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
