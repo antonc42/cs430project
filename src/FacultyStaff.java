@@ -113,6 +113,8 @@ public class FacultyStaff extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        studentTab.setPreferredSize(new java.awt.Dimension(700, 500));
+
         studIDLabel.setText("ID");
 
         stuNameLabel.setText("Name");
@@ -223,6 +225,8 @@ public class FacultyStaff extends javax.swing.JFrame {
 
         tabs.addTab("Students", studentTab);
 
+        facultyTab.setPreferredSize(new java.awt.Dimension(700, 50));
+
         facIDLabel.setText("ID");
 
         facNameLabel.setText("Name");
@@ -309,6 +313,8 @@ public class FacultyStaff extends javax.swing.JFrame {
         );
 
         tabs.addTab("Faculty", facultyTab);
+
+        staffTab.setPreferredSize(new java.awt.Dimension(700, 500));
 
         staIDLabel.setText("ID");
 
@@ -397,6 +403,8 @@ public class FacultyStaff extends javax.swing.JFrame {
 
         tabs.addTab("Staff", staffTab);
 
+        deptTab.setPreferredSize(new java.awt.Dimension(700, 500));
+
         depIDLabel.setText("ID");
 
         depNameLabel.setText("Name");
@@ -466,6 +474,8 @@ public class FacultyStaff extends javax.swing.JFrame {
         );
 
         tabs.addTab("Departments", deptTab);
+
+        courseTab.setPreferredSize(new java.awt.Dimension(700, 500));
 
         corIDLabel.setText("ID");
 
@@ -584,6 +594,8 @@ public class FacultyStaff extends javax.swing.JFrame {
 
         tabs.addTab("Courses", courseTab);
 
+        enrlTab.setPreferredSize(new java.awt.Dimension(700, 500));
+
         enrlCourseLabel.setText("Course");
 
         enrlStudentLabel.setText("Student");
@@ -690,28 +702,28 @@ public class FacultyStaff extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 727, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(tabs)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(tabs)
+                .addGap(0, 0, 0))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void stuSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stuSearchActionPerformed
-        Results popup = new Results();
-        popup.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
-        String[] cols = {"Test"};
-        Object[][] rows = {{"Test"}};
-        popup.setCols(cols);
-        popup.setRows(rows);
-        popup.populateTable();
-        popup.setVisible(true);
+//        Results popup = new Results();
+//        popup.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
+//        String[] cols = {"Test"};
+//        Object[][] rows = {{"Test"}};
+//        popup.setCols(cols);
+//        popup.setRows(rows);
+//        popup.populateTable();
+//        popup.setVisible(true);
     }//GEN-LAST:event_stuSearchActionPerformed
 
     private void facSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facSearchActionPerformed
