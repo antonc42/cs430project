@@ -60,21 +60,18 @@ public class Student extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        tabs = new javax.swing.JTabbedPane();
-        personalInfo = new javax.swing.JPanel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
         nameLabel = new javax.swing.JLabel();
-        name = new javax.swing.JLabel();
         majorLabel = new javax.swing.JLabel();
-        major = new javax.swing.JLabel();
         levelLabel = new javax.swing.JLabel();
-        level = new javax.swing.JLabel();
         ageLabel = new javax.swing.JLabel();
-        age = new javax.swing.JLabel();
-        courses = new javax.swing.JPanel();
         coursesScroll = new javax.swing.JScrollPane();
         coursesTable = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(700, 500));
 
         nameLabel.setText("Name:");
 
@@ -83,49 +80,6 @@ public class Student extends javax.swing.JFrame {
         levelLabel.setText("Level:");
 
         ageLabel.setText("Age:");
-
-        javax.swing.GroupLayout personalInfoLayout = new javax.swing.GroupLayout(personalInfo);
-        personalInfo.setLayout(personalInfoLayout);
-        personalInfoLayout.setHorizontalGroup(
-            personalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(personalInfoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(personalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(majorLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(levelLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(ageLabel, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(18, 18, 18)
-                .addGroup(personalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(age)
-                    .addComponent(level)
-                    .addComponent(major)
-                    .addComponent(name))
-                .addContainerGap(717, Short.MAX_VALUE))
-        );
-        personalInfoLayout.setVerticalGroup(
-            personalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(personalInfoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(personalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nameLabel)
-                    .addComponent(name))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(personalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(majorLabel)
-                    .addComponent(major))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(personalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(levelLabel)
-                    .addComponent(level))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(personalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ageLabel)
-                    .addComponent(age))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        tabs.addTab("Personal Information", personalInfo);
 
         coursesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -165,30 +119,59 @@ public class Student extends javax.swing.JFrame {
             coursesTable.getColumnModel().getColumn(9).setMinWidth(85);
         }
 
-        javax.swing.GroupLayout coursesLayout = new javax.swing.GroupLayout(courses);
-        courses.setLayout(coursesLayout);
-        coursesLayout.setHorizontalGroup(
-            coursesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(coursesScroll)
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(nameLabel)
+                .addGap(18, 190, Short.MAX_VALUE)
+                .addComponent(majorLabel)
+                .addGap(18, 190, Short.MAX_VALUE)
+                .addComponent(levelLabel)
+                .addGap(18, 191, Short.MAX_VALUE)
+                .addComponent(ageLabel)
+                .addContainerGap())
+            .addComponent(coursesScroll, javax.swing.GroupLayout.Alignment.TRAILING)
         );
-        coursesLayout.setVerticalGroup(
-            coursesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(coursesScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nameLabel)
+                    .addComponent(majorLabel)
+                    .addComponent(levelLabel)
+                    .addComponent(ageLabel))
+                .addGap(18, 18, 18)
+                .addComponent(coursesScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE))
         );
 
-        tabs.addTab("Courses", courses);
+        jTabbedPane1.addTab("Student Info", jPanel1);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 755, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 427, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Course Search", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(tabs)
-                .addGap(0, 0, 0))
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 763, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jTabbedPane1)
         );
 
         pack();
@@ -211,18 +194,14 @@ public class Student extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel age;
     private javax.swing.JLabel ageLabel;
-    private javax.swing.JPanel courses;
     private javax.swing.JScrollPane coursesScroll;
     private javax.swing.JTable coursesTable;
-    private javax.swing.JLabel level;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel levelLabel;
-    private javax.swing.JLabel major;
     private javax.swing.JLabel majorLabel;
-    private javax.swing.JLabel name;
     private javax.swing.JLabel nameLabel;
-    private javax.swing.JPanel personalInfo;
-    private javax.swing.JTabbedPane tabs;
     // End of variables declaration//GEN-END:variables
 }

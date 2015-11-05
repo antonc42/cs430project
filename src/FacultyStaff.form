@@ -193,7 +193,7 @@
                 <Component class="javax.swing.JTable" name="stuTable">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="5" rowCount="4">
+                      <Table columnCount="5" rowCount="0">
                         <Column editable="false" title="ID" type="java.lang.Integer"/>
                         <Column editable="false" title="Name" type="java.lang.String"/>
                         <Column editable="true" title="Major" type="java.lang.String"/>
@@ -348,7 +348,7 @@
                 <Component class="javax.swing.JTable" name="facTable">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="3" rowCount="4">
+                      <Table columnCount="3" rowCount="0">
                         <Column editable="false" title="ID" type="java.lang.Integer"/>
                         <Column editable="false" title="Name" type="java.lang.String"/>
                         <Column editable="false" title="Department" type="java.lang.String"/>
@@ -491,7 +491,7 @@
                 <Component class="javax.swing.JTable" name="staTable">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="3" rowCount="4">
+                      <Table columnCount="3" rowCount="0">
                         <Column editable="false" title="ID" type="java.lang.Integer"/>
                         <Column editable="false" title="Name" type="java.lang.String"/>
                         <Column editable="false" title="Department" type="java.lang.String"/>
@@ -616,7 +616,7 @@
                 <Component class="javax.swing.JTable" name="depTable">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="2" rowCount="4">
+                      <Table columnCount="2" rowCount="0">
                         <Column editable="true" title="ID" type="java.lang.Object"/>
                         <Column editable="false" title="Name" type="java.lang.Object"/>
                       </Table>
@@ -803,7 +803,7 @@
                 <Component class="javax.swing.JTable" name="corTable">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="6" rowCount="4">
+                      <Table columnCount="6" rowCount="0">
                         <Column editable="false" title="ID" type="java.lang.Integer"/>
                         <Column editable="false" title="Name" type="java.lang.String"/>
                         <Column editable="false" title="Time" type="java.lang.String"/>
@@ -989,7 +989,7 @@
                 <Component class="javax.swing.JTable" name="enrlTable">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="5" rowCount="4">
+                      <Table columnCount="5" rowCount="0">
                         <Column editable="false" title="Course" type="java.lang.String"/>
                         <Column editable="false" title="Student" type="java.lang.String"/>
                         <Column editable="false" title="Exam 1" type="java.lang.Integer"/>

@@ -136,10 +136,7 @@ public class FacultyStaff extends javax.swing.JFrame {
 
         stuTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Name", "Major", "Level", "Age"
@@ -242,10 +239,7 @@ public class FacultyStaff extends javax.swing.JFrame {
 
         facTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "ID", "Name", "Department"
@@ -331,10 +325,7 @@ public class FacultyStaff extends javax.swing.JFrame {
 
         staTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "ID", "Name", "Department"
@@ -418,10 +409,7 @@ public class FacultyStaff extends javax.swing.JFrame {
 
         depTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "ID", "Name"
@@ -498,10 +486,7 @@ public class FacultyStaff extends javax.swing.JFrame {
 
         corTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Name", "Time", "Location", "Instructor", "Size Limit"
@@ -615,10 +600,7 @@ public class FacultyStaff extends javax.swing.JFrame {
 
         enrlTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Course", "Student", "Exam 1", "Exam 2", "Final"
