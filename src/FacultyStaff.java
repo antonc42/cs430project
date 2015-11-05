@@ -37,7 +37,7 @@ public class FacultyStaff extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        tabs = new javax.swing.JTabbedPane();
+        facstaffTab = new javax.swing.JTabbedPane();
         studentTab = new javax.swing.JPanel();
         studIDLabel = new javax.swing.JLabel();
         studID = new javax.swing.JTextField();
@@ -220,7 +220,7 @@ public class FacultyStaff extends javax.swing.JFrame {
                 .addComponent(stuScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE))
         );
 
-        tabs.addTab("Students", studentTab);
+        facstaffTab.addTab("Students", studentTab);
 
         facultyTab.setPreferredSize(new java.awt.Dimension(700, 50));
 
@@ -306,7 +306,7 @@ public class FacultyStaff extends javax.swing.JFrame {
                 .addComponent(facScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE))
         );
 
-        tabs.addTab("Faculty", facultyTab);
+        facstaffTab.addTab("Faculty", facultyTab);
 
         staffTab.setPreferredSize(new java.awt.Dimension(700, 500));
 
@@ -392,7 +392,7 @@ public class FacultyStaff extends javax.swing.JFrame {
                 .addComponent(staScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE))
         );
 
-        tabs.addTab("Staff", staffTab);
+        facstaffTab.addTab("Staff", staffTab);
 
         deptTab.setPreferredSize(new java.awt.Dimension(700, 500));
 
@@ -461,7 +461,7 @@ public class FacultyStaff extends javax.swing.JFrame {
                 .addComponent(depScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE))
         );
 
-        tabs.addTab("Departments", deptTab);
+        facstaffTab.addTab("Departments", deptTab);
 
         courseTab.setPreferredSize(new java.awt.Dimension(700, 500));
 
@@ -577,7 +577,7 @@ public class FacultyStaff extends javax.swing.JFrame {
                 .addComponent(corScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE))
         );
 
-        tabs.addTab("Courses", courseTab);
+        facstaffTab.addTab("Courses", courseTab);
 
         enrlTab.setPreferredSize(new java.awt.Dimension(700, 500));
 
@@ -677,20 +677,20 @@ public class FacultyStaff extends javax.swing.JFrame {
                 .addComponent(enrlScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE))
         );
 
-        tabs.addTab("Enrollment", enrlTab);
+        facstaffTab.addTab("Enrollment", enrlTab);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(tabs)
+                .addComponent(facstaffTab)
                 .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(tabs)
+                .addComponent(facstaffTab)
                 .addGap(0, 0, 0))
         );
 
@@ -792,6 +792,7 @@ public class FacultyStaff extends javax.swing.JFrame {
     private javax.swing.JScrollPane facScroll;
     private javax.swing.JButton facSearch;
     private javax.swing.JTable facTable;
+    private javax.swing.JTabbedPane facstaffTab;
     private javax.swing.JPanel facultyTab;
     private javax.swing.JTextField staDep;
     private javax.swing.JLabel staDepLabel;
@@ -817,6 +818,5 @@ public class FacultyStaff extends javax.swing.JFrame {
     private javax.swing.JTextField studID;
     private javax.swing.JLabel studIDLabel;
     private javax.swing.JPanel studentTab;
-    private javax.swing.JTabbedPane tabs;
     // End of variables declaration//GEN-END:variables
 }

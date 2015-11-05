@@ -60,15 +60,31 @@ public class Student extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
+        stuTabs = new javax.swing.JTabbedPane();
+        stuInfoTab = new javax.swing.JPanel();
         nameLabel = new javax.swing.JLabel();
         majorLabel = new javax.swing.JLabel();
         levelLabel = new javax.swing.JLabel();
         ageLabel = new javax.swing.JLabel();
         coursesScroll = new javax.swing.JScrollPane();
         coursesTable = new javax.swing.JTable();
-        jPanel2 = new javax.swing.JPanel();
+        dropButton = new javax.swing.JButton();
+        courseTab = new javax.swing.JPanel();
+        corIDLabel = new javax.swing.JLabel();
+        corID = new javax.swing.JTextField();
+        corNameLabel = new javax.swing.JLabel();
+        corName = new javax.swing.JTextField();
+        corTimeLabel = new javax.swing.JLabel();
+        corTime = new javax.swing.JTextField();
+        corRoomLabel = new javax.swing.JLabel();
+        corRoom = new javax.swing.JTextField();
+        corInstructorLabel = new javax.swing.JLabel();
+        corInstructor = new javax.swing.JTextField();
+        corSizeLabel = new javax.swing.JLabel();
+        corSize = new javax.swing.JTextField();
+        corSearch = new javax.swing.JButton();
+        corScroll = new javax.swing.JScrollPane();
+        corTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(700, 500));
@@ -119,63 +135,177 @@ public class Student extends javax.swing.JFrame {
             coursesTable.getColumnModel().getColumn(9).setMinWidth(85);
         }
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        dropButton.setText("Drop");
+
+        javax.swing.GroupLayout stuInfoTabLayout = new javax.swing.GroupLayout(stuInfoTab);
+        stuInfoTab.setLayout(stuInfoTabLayout);
+        stuInfoTabLayout.setHorizontalGroup(
+            stuInfoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(coursesScroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 754, Short.MAX_VALUE)
+            .addGroup(stuInfoTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(nameLabel)
-                .addGap(18, 190, Short.MAX_VALUE)
-                .addComponent(majorLabel)
-                .addGap(18, 190, Short.MAX_VALUE)
-                .addComponent(levelLabel)
-                .addGap(18, 191, Short.MAX_VALUE)
-                .addComponent(ageLabel)
+                .addGroup(stuInfoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(levelLabel)
+                    .addComponent(nameLabel))
+                .addGap(272, 272, 272)
+                .addGroup(stuInfoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(stuInfoTabLayout.createSequentialGroup()
+                        .addComponent(majorLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(dropButton))
+                    .addComponent(ageLabel))
                 .addContainerGap())
-            .addComponent(coursesScroll, javax.swing.GroupLayout.Alignment.TRAILING)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        stuInfoTabLayout.setVerticalGroup(
+            stuInfoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, stuInfoTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nameLabel)
-                    .addComponent(majorLabel)
+                .addGroup(stuInfoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(stuInfoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(nameLabel)
+                        .addComponent(majorLabel))
+                    .addComponent(dropButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(stuInfoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(levelLabel)
                     .addComponent(ageLabel))
                 .addGap(18, 18, 18)
-                .addComponent(coursesScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE))
+                .addComponent(coursesScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jTabbedPane1.addTab("Student Info", jPanel1);
+        stuTabs.addTab("Student Info", stuInfoTab);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 755, Short.MAX_VALUE)
+        corIDLabel.setText("ID");
+
+        corNameLabel.setText("Name");
+
+        corTimeLabel.setText("Time");
+
+        corRoomLabel.setText("Location");
+
+        corInstructorLabel.setText("Instructor");
+
+        corSizeLabel.setText("Size Limit");
+
+        corSearch.setText("Search");
+        corSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                corSearchActionPerformed(evt);
+            }
+        });
+
+        corTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Name", "Time", "Location", "Instructor", "Size Limit"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        corScroll.setViewportView(corTable);
+
+        javax.swing.GroupLayout courseTabLayout = new javax.swing.GroupLayout(courseTab);
+        courseTab.setLayout(courseTabLayout);
+        courseTabLayout.setHorizontalGroup(
+            courseTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(corScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 754, Short.MAX_VALUE)
+            .addGroup(courseTabLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(courseTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, courseTabLayout.createSequentialGroup()
+                        .addComponent(corNameLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(corName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, courseTabLayout.createSequentialGroup()
+                        .addComponent(corTimeLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(corTime, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, courseTabLayout.createSequentialGroup()
+                        .addComponent(corRoomLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(corRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, courseTabLayout.createSequentialGroup()
+                        .addComponent(corInstructorLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(corInstructor, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, courseTabLayout.createSequentialGroup()
+                        .addComponent(corSizeLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(corSize, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(corSearch, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, courseTabLayout.createSequentialGroup()
+                        .addComponent(corIDLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(corID, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 427, Short.MAX_VALUE)
+        courseTabLayout.setVerticalGroup(
+            courseTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(courseTabLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(courseTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(corIDLabel)
+                    .addComponent(corID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(courseTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(corNameLabel)
+                    .addComponent(corName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(courseTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(corTimeLabel)
+                    .addComponent(corTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(courseTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(corRoomLabel)
+                    .addComponent(corRoom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(courseTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(corInstructorLabel)
+                    .addComponent(corInstructor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(courseTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(corSizeLabel)
+                    .addComponent(corSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(corSearch)
+                .addGap(18, 18, 18)
+                .addComponent(corScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Course Search", jPanel2);
+        stuTabs.addTab("Course Search", courseTab);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 763, Short.MAX_VALUE)
+            .addComponent(stuTabs, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(stuTabs)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void corSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_corSearchActionPerformed
     
     public String getDBUser () {
         return this.DBUser;
@@ -195,13 +325,29 @@ public class Student extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ageLabel;
+    private javax.swing.JTextField corID;
+    private javax.swing.JLabel corIDLabel;
+    private javax.swing.JTextField corInstructor;
+    private javax.swing.JLabel corInstructorLabel;
+    private javax.swing.JTextField corName;
+    private javax.swing.JLabel corNameLabel;
+    private javax.swing.JTextField corRoom;
+    private javax.swing.JLabel corRoomLabel;
+    private javax.swing.JScrollPane corScroll;
+    private javax.swing.JButton corSearch;
+    private javax.swing.JTextField corSize;
+    private javax.swing.JLabel corSizeLabel;
+    private javax.swing.JTable corTable;
+    private javax.swing.JTextField corTime;
+    private javax.swing.JLabel corTimeLabel;
+    private javax.swing.JPanel courseTab;
     private javax.swing.JScrollPane coursesScroll;
     private javax.swing.JTable coursesTable;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JButton dropButton;
     private javax.swing.JLabel levelLabel;
     private javax.swing.JLabel majorLabel;
     private javax.swing.JLabel nameLabel;
+    private javax.swing.JPanel stuInfoTab;
+    private javax.swing.JTabbedPane stuTabs;
     // End of variables declaration//GEN-END:variables
 }
