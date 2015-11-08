@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.regex.*;
 
 public class Database {
-    public Connection connect(String server, String port, String db, String user, String pass) throws Exception{
+    public Connection connect(String server, String port, String db, String user, String pass) {
         Connection con = null;
         try {
             // initialize the JDBC driver
@@ -31,7 +31,7 @@ public class Database {
         return con;
     }
 
-    public boolean setupDB(Connection con){
+    public boolean setupSchema(Connection con){
         // drop table queries
         String clearStudent = "DROP TABLE Student";
         String clearDepartment = "DROP TABLE Department";
@@ -83,6 +83,25 @@ public class Database {
                 "depid INTEGER REFERENCES Department (did)," +
                 "CONSTRAINT staff_pk PRIMARY KEY (sid)" +
                 ")";
+
+        // remove any existing tables
+        runDrop(con,clearStaff);
+        runDrop(con,clearEnrolled);
+        runDrop(con,clearCourses);
+        runDrop(con,clearFaculty);
+        runDrop(con,clearDepartment);
+        runDrop(con,clearStudent);
+        // create tables
+        runDefineManip(con,StudentSchema);
+        runDefineManip(con,DepartmentSchema);
+        runDefineManip(con,FacultySchema);
+        runDefineManip(con,CoursesSchema);
+        runDefineManip(con,EnrolledSchema);
+        runDefineManip(con,StaffSchema);
+        return true;
+    }
+
+    public boolean enterData (Connection con) {
         // insert data queries
         String StudentData = "INSERT ALL" +
                 " INTO Student VALUES (1,'Kimberley Roach','IST','freshman',18)" +
@@ -156,20 +175,6 @@ public class Database {
                 " INTO Staff VALUES (9,'Vince Hanley',9)" +
                 " INTO Staff VALUES (10,'Cynthia Coel',7)" +
                 " SELECT * FROM dual";
-        // remove any existing tables
-        runDrop(con,clearStaff);
-        runDrop(con,clearEnrolled);
-        runDrop(con,clearCourses);
-        runDrop(con,clearFaculty);
-        runDrop(con,clearDepartment);
-        runDrop(con,clearStudent);
-        // create tables
-        runDefineManip(con,StudentSchema);
-        runDefineManip(con,DepartmentSchema);
-        runDefineManip(con,FacultySchema);
-        runDefineManip(con,CoursesSchema);
-        runDefineManip(con,EnrolledSchema);
-        runDefineManip(con,StaffSchema);
         // enter data
         runDefineManip(con,StudentData);
         runDefineManip(con,DepartmentData);
@@ -179,7 +184,6 @@ public class Database {
         runDefineManip(con,StaffData);
         return true;
     }
-
     public boolean ignoreDropError (Integer sqlerror){
         if (sqlerror == null){
             System.out.println("No SQL Error given!");

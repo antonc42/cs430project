@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+import java.sql.Connection;
+
 /**
  *
  * @author anton
@@ -168,17 +170,25 @@ public class Setup extends javax.swing.JFrame {
 
         //JOptionPane.showMessageDialog(rootPane, "User: "+dbuser+"\nPass: "+dbpw);
         // put db login check here
+        String server = "131.230.133.11";
+        String port ="1521";
+        String dbname = "cs";
+        Database db = new Database();
+        Connection con = db.connect(server, port, dbname, dbUserText.getText(), String.valueOf(dbPwField.getPassword()));
+
         if (schemaCheck.isSelected()) {
-            
+            db.setupSchema(con);
         }
         if (sampleCheck.isSelected()) {
-            
+            db.enterData(con);
         }
+        /*
         this.setVisible(false);
         Login loginbox = new Login();
         loginbox.setVisible(true);
         loginbox.setDBUser(dbUserText.getText());
         loginbox.setDBPw(String.valueOf(dbPwField.getPassword()));
+        */
     }//GEN-LAST:event_loginButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

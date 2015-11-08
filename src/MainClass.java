@@ -7,10 +7,7 @@ import java.io.*;
 public class MainClass {
     public static void main(String[] args){
     /*
-        String server = "131.230.133.11";
-        String port ="1521";
-        String dbname = "cs";
-        Database db = new Database();
+
 
         String queryString = "SELECT * FROM Student";
         Console console = System.console();
