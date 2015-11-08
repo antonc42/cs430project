@@ -1,5 +1,8 @@
 
 import javax.swing.JOptionPane;
+import javax.xml.crypto.Data;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -13,8 +16,7 @@ import javax.swing.JOptionPane;
  */
 public class Login extends javax.swing.JFrame {
 
-    private String DBUser;
-    private String DBPw;
+    private Connection con;
     /**
      * Creates new form GUI
      */
@@ -108,6 +110,11 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        try {
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         System.exit(0);
     }//GEN-LAST:event_cancelButtonActionPerformed
 
@@ -117,38 +124,30 @@ public class Login extends javax.swing.JFrame {
         // put db login check here
         
         this.setVisible(false);
-        
-        
-        if (!userName.getText().equals("anton")) {
+
+        Database db = new Database();
+        if (db.isFacStaff(con,userName.getText())) {
             FacultyStaff fs = new FacultyStaff();
             fs.setVisible(true);
-            fs.setDBUser(getDBUser());
-            fs.setDBPw(getDBPw());
+            fs.setConnection(con);
         }
-        else if (userName.getText().equals("anton")) {
+        else if (db.isStu(con,userName.getText())) {
             Student student = new Student();
             student.setVisible(true);
-            student.setDBUser(getDBUser());
-            student.setDBPw(getDBPw());
+            student.setConnection(con);
         }
+        //maybe make an else to popup warning?
         
     }//GEN-LAST:event_loginButtonActionPerformed
-    
-    public String getDBUser () {
-        return this.DBUser;
+
+    public Connection getConnection () {
+        return this.con;
     }
     
-    public void setDBUser (String value) {
-        this.DBUser = value;
+    public void setConnection (Connection passedcon) {
+        this.con = passedcon;
     }
-    
-    public String getDBPw () {
-        return this.DBPw;
-    }
-    
-    public void setDBPw (String value) {
-        this.DBPw = value;
-    }
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;

@@ -1,5 +1,6 @@
 
 import javax.swing.WindowConstants;
+import java.sql.Connection;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -13,10 +14,9 @@ import javax.swing.WindowConstants;
  */
 public class FacultyStaff extends javax.swing.JFrame {
 
-    private String DBUser;
-    private String DBPw;
+    private Connection con;
     /**
-     * Creates new form MainWindow
+     * Creates new form
      */
     public FacultyStaff() {
         try {
@@ -826,21 +826,13 @@ public class FacultyStaff extends javax.swing.JFrame {
     private void stuClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stuClearActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_stuClearActionPerformed
-   
-    public String getDBUser () {
-        return this.DBUser;
+
+    public Connection getConnection () {
+        return this.con;
     }
-    
-    public void setDBUser (String value) {
-        this.DBUser = value;
-    }
-    
-    public String getDBPw () {
-        return this.DBPw;
-    }
-    
-    public void setDBPw (String value) {
-        this.DBPw = value;
+
+    public void setConnection (Connection passedcon) {
+        this.con = passedcon;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

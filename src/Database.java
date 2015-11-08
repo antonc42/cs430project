@@ -3,6 +3,8 @@
  * Class for interacting with database
  */
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.regex.*;
 
 public class Database {
@@ -241,6 +243,94 @@ public class Database {
         catch (Exception ex){
             System.out.println("SQLException: "+ex);
             return false;
+        }
+    }
+
+    public boolean isFacStaff (Connection con, String userid){
+        if (userid == null){
+            System.err.println("No Statement given!");
+            return false;
+        }
+        try {
+            String query = "(SELECT fid FROM Faculty) UNION (SELECT sid from Staff)";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()){
+                Integer id = rs.getInt(1);
+                if (id.toString().equals(userid)) {
+                    rs.close();
+                    st.close();
+                    return true;
+                }
+            }
+            return false;
+        }
+        catch (Exception ex){
+            System.out.println("SQLException: "+ex);
+            return false;
+        }
+    }
+
+    public boolean isStu (Connection con, String userid){
+        if (userid == null){
+            System.err.println("No Statement given!");
+            return false;
+        }
+        try {
+            String query = "SELECT sid FROM Student";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()){
+                Integer id = rs.getInt(1);
+                if (id.toString().equals(userid)) {
+                    rs.close();
+                    st.close();
+                    return true;
+                }
+            }
+            return false;
+        }
+        catch (Exception ex){
+            System.out.println("SQLException: "+ex);
+            return false;
+        }
+    }
+
+    /*private Object[][] append (Object[][] obj, Object[] newrow) {
+        ArrayList<Object[]> temp = new ArrayList<Object[]>();
+        temp = Arrays.asList(obj);
+
+        temp.add(newrow);
+        return
+    }*/
+
+    public Object[][] searchStu (Connection con, Integer sid, String sname, String major, String s_level, Integer age){
+        Object[][] obj = null;
+        String searchsid = "%";
+        String searchage = "%";
+        if (sid != null) {
+            searchsid = sid.toString();
+        }
+        if (age != null) {
+            searchage = age.toString();
+        }
+        try {
+            String query = "SELECT sid,sname,major,s_level,age FROM Student WHERE sid='"+searchsid+"' AND sname='"+sname+"' AND major='"+major+"' AND s_level='"+s_level+"' AND age='"+searchage+"'";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()){
+                Integer Rsid = rs.getInt(1);
+                String Rsname = rs.getString(2);
+                String Rmajor = rs.getString(3);
+                String Rs_level = rs.getString(4);
+                String Rage = rs.getString(5);
+                Object[] row = {Rsid.toString(),Rsname,Rmajor,Rs_level,Rage.toString()};
+            }
+            return obj;
+        }
+        catch (Exception ex){
+            System.out.println("SQLException: "+ex);
+            return obj;
         }
     }
 }

@@ -2,6 +2,7 @@
 import javax.swing.JTable;
 import javax.swing.table.*;
 import java.awt.Component;
+import java.sql.Connection;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,8 +16,7 @@ import java.awt.Component;
  */
 public class Student extends javax.swing.JFrame {
 
-    private String DBUser;
-    private String DBPw;
+    private Connection con;
     
     /**
      * Creates new form Student
@@ -306,21 +306,13 @@ public class Student extends javax.swing.JFrame {
     private void corSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corSearchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_corSearchActionPerformed
-    
-    public String getDBUser () {
-        return this.DBUser;
+
+    public Connection getConnection () {
+        return this.con;
     }
-    
-    public void setDBUser (String value) {
-        this.DBUser = value;
-    }
-    
-    public String getDBPw () {
-        return this.DBPw;
-    }
-    
-    public void setDBPw (String value) {
-        this.DBPw = value;
+
+    public void setConnection (Connection passedcon) {
+        this.con = passedcon;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

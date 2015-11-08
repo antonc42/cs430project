@@ -182,13 +182,10 @@ public class Setup extends javax.swing.JFrame {
         if (sampleCheck.isSelected()) {
             db.enterData(con);
         }
-        /*
         this.setVisible(false);
         Login loginbox = new Login();
         loginbox.setVisible(true);
-        loginbox.setDBUser(dbUserText.getText());
-        loginbox.setDBPw(String.valueOf(dbPwField.getPassword()));
-        */
+        loginbox.setConnection(con);
     }//GEN-LAST:event_loginButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
