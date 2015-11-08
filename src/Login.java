@@ -47,7 +47,7 @@ public class Login extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        userLabel.setText("Username:");
+        userLabel.setText("User ID:");
 
         userPw.setText("Password:");
 
@@ -78,8 +78,8 @@ public class Login extends javax.swing.JFrame {
                         .addComponent(cancelButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(userPw)
-                            .addComponent(userLabel))
+                            .addComponent(userLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(userPw, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(userName)

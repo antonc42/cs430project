@@ -50,6 +50,7 @@ public class FacultyStaff extends javax.swing.JFrame {
         stuAgeLabel = new javax.swing.JLabel();
         stuAge = new javax.swing.JTextField();
         stuSearch = new javax.swing.JButton();
+        stuClear = new javax.swing.JButton();
         stuScroll = new javax.swing.JScrollPane();
         stuTable = new javax.swing.JTable();
         facultyTab = new javax.swing.JPanel();
@@ -60,6 +61,7 @@ public class FacultyStaff extends javax.swing.JFrame {
         facDepLabel = new javax.swing.JLabel();
         facDep = new javax.swing.JTextField();
         facSearch = new javax.swing.JButton();
+        facClear = new javax.swing.JButton();
         facScroll = new javax.swing.JScrollPane();
         facTable = new javax.swing.JTable();
         staffTab = new javax.swing.JPanel();
@@ -70,6 +72,7 @@ public class FacultyStaff extends javax.swing.JFrame {
         staDepLabel = new javax.swing.JLabel();
         staDep = new javax.swing.JTextField();
         staSearch = new javax.swing.JButton();
+        staClear = new javax.swing.JButton();
         staScroll = new javax.swing.JScrollPane();
         staTable = new javax.swing.JTable();
         deptTab = new javax.swing.JPanel();
@@ -78,6 +81,7 @@ public class FacultyStaff extends javax.swing.JFrame {
         depNameLabel = new javax.swing.JLabel();
         depName = new javax.swing.JTextField();
         depSearch = new javax.swing.JButton();
+        depClear = new javax.swing.JButton();
         depScroll = new javax.swing.JScrollPane();
         depTable = new javax.swing.JTable();
         courseTab = new javax.swing.JPanel();
@@ -94,6 +98,7 @@ public class FacultyStaff extends javax.swing.JFrame {
         corSizeLabel = new javax.swing.JLabel();
         corSize = new javax.swing.JTextField();
         corSearch = new javax.swing.JButton();
+        corClear = new javax.swing.JButton();
         corScroll = new javax.swing.JScrollPane();
         corTable = new javax.swing.JTable();
         enrlTab = new javax.swing.JPanel();
@@ -110,6 +115,7 @@ public class FacultyStaff extends javax.swing.JFrame {
         enrlSearch = new javax.swing.JButton();
         enrlScroll = new javax.swing.JScrollPane();
         enrlTable = new javax.swing.JTable();
+        enrlClear = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -131,6 +137,13 @@ public class FacultyStaff extends javax.swing.JFrame {
         stuSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 stuSearchActionPerformed(evt);
+            }
+        });
+
+        stuClear.setText("Clear");
+        stuClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stuClearActionPerformed(evt);
             }
         });
 
@@ -163,18 +176,18 @@ public class FacultyStaff extends javax.swing.JFrame {
         studentTab.setLayout(studentTabLayout);
         studentTabLayout.setHorizontalGroup(
             studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(stuScroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 719, Short.MAX_VALUE)
+            .addComponent(stuScroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
             .addGroup(studentTabLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(studentTabLayout.createSequentialGroup()
-                            .addComponent(stuAgeLabel)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(stuAge, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, studentTabLayout.createSequentialGroup()
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(stuSearch)))
+                    .addGroup(studentTabLayout.createSequentialGroup()
+                        .addComponent(stuSearch)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(stuClear))
+                    .addGroup(studentTabLayout.createSequentialGroup()
+                        .addComponent(stuAgeLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(stuAge, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(studentTabLayout.createSequentialGroup()
                         .addComponent(studIDLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -215,9 +228,11 @@ public class FacultyStaff extends javax.swing.JFrame {
                     .addComponent(stuAgeLabel)
                     .addComponent(stuAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(stuSearch)
+                .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(stuClear)
+                    .addComponent(stuSearch))
                 .addGap(18, 18, 18)
-                .addComponent(stuScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE))
+                .addComponent(stuScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE))
         );
 
         facstaffTab.addTab("Students", studentTab);
@@ -234,6 +249,13 @@ public class FacultyStaff extends javax.swing.JFrame {
         facSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 facSearchActionPerformed(evt);
+            }
+        });
+
+        facClear.setText("Clear");
+        facClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                facClearActionPerformed(evt);
             }
         });
 
@@ -266,11 +288,14 @@ public class FacultyStaff extends javax.swing.JFrame {
         facultyTab.setLayout(facultyTabLayout);
         facultyTabLayout.setHorizontalGroup(
             facultyTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(facScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 719, Short.MAX_VALUE)
+            .addComponent(facScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
             .addGroup(facultyTabLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(facultyTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(facSearch)
+                    .addGroup(facultyTabLayout.createSequentialGroup()
+                        .addComponent(facSearch)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(facClear))
                     .addGroup(facultyTabLayout.createSequentialGroup()
                         .addGroup(facultyTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(facNameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -301,9 +326,11 @@ public class FacultyStaff extends javax.swing.JFrame {
                     .addComponent(facDepLabel)
                     .addComponent(facDep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(facSearch)
+                .addGroup(facultyTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(facClear)
+                    .addComponent(facSearch))
                 .addGap(18, 18, 18)
-                .addComponent(facScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE))
+                .addComponent(facScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE))
         );
 
         facstaffTab.addTab("Faculty", facultyTab);
@@ -320,6 +347,13 @@ public class FacultyStaff extends javax.swing.JFrame {
         staSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 staSearchActionPerformed(evt);
+            }
+        });
+
+        staClear.setText("Clear");
+        staClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                staClearActionPerformed(evt);
             }
         });
 
@@ -352,11 +386,14 @@ public class FacultyStaff extends javax.swing.JFrame {
         staffTab.setLayout(staffTabLayout);
         staffTabLayout.setHorizontalGroup(
             staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(staScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 719, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, staffTabLayout.createSequentialGroup()
+            .addComponent(staScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+            .addGroup(staffTabLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(staSearch)
+                    .addGroup(staffTabLayout.createSequentialGroup()
+                        .addComponent(staSearch)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(staClear))
                     .addGroup(staffTabLayout.createSequentialGroup()
                         .addGroup(staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(staNameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -387,9 +424,11 @@ public class FacultyStaff extends javax.swing.JFrame {
                     .addComponent(staDepLabel)
                     .addComponent(staDep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(staSearch)
+                .addGroup(staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(staClear)
+                    .addComponent(staSearch))
                 .addGap(18, 18, 18)
-                .addComponent(staScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE))
+                .addComponent(staScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE))
         );
 
         facstaffTab.addTab("Staff", staffTab);
@@ -404,6 +443,13 @@ public class FacultyStaff extends javax.swing.JFrame {
         depSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 depSearchActionPerformed(evt);
+            }
+        });
+
+        depClear.setText("Clear");
+        depClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                depClearActionPerformed(evt);
             }
         });
 
@@ -429,7 +475,7 @@ public class FacultyStaff extends javax.swing.JFrame {
         deptTab.setLayout(deptTabLayout);
         deptTabLayout.setHorizontalGroup(
             deptTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(depScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 719, Short.MAX_VALUE)
+            .addComponent(depScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
             .addGroup(deptTabLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(deptTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -437,11 +483,14 @@ public class FacultyStaff extends javax.swing.JFrame {
                         .addComponent(depIDLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(depID, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(depSearch)
                     .addGroup(deptTabLayout.createSequentialGroup()
                         .addComponent(depNameLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(depName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(depName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(deptTabLayout.createSequentialGroup()
+                        .addComponent(depSearch)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(depClear)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         deptTabLayout.setVerticalGroup(
@@ -456,9 +505,11 @@ public class FacultyStaff extends javax.swing.JFrame {
                     .addComponent(depNameLabel)
                     .addComponent(depName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(depSearch)
+                .addGroup(deptTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(depSearch)
+                    .addComponent(depClear))
                 .addGap(18, 18, 18)
-                .addComponent(depScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE))
+                .addComponent(depScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE))
         );
 
         facstaffTab.addTab("Departments", deptTab);
@@ -481,6 +532,13 @@ public class FacultyStaff extends javax.swing.JFrame {
         corSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 corSearchActionPerformed(evt);
+            }
+        });
+
+        corClear.setText("Clear");
+        corClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                corClearActionPerformed(evt);
             }
         });
 
@@ -513,7 +571,7 @@ public class FacultyStaff extends javax.swing.JFrame {
         courseTab.setLayout(courseTabLayout);
         courseTabLayout.setHorizontalGroup(
             courseTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(corScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 719, Short.MAX_VALUE)
+            .addComponent(corScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
             .addGroup(courseTabLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(courseTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -537,11 +595,14 @@ public class FacultyStaff extends javax.swing.JFrame {
                         .addComponent(corSizeLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(corSize, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(corSearch, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, courseTabLayout.createSequentialGroup()
                         .addComponent(corIDLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(corID, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(corID, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, courseTabLayout.createSequentialGroup()
+                        .addComponent(corSearch)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(corClear)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         courseTabLayout.setVerticalGroup(
@@ -572,9 +633,11 @@ public class FacultyStaff extends javax.swing.JFrame {
                     .addComponent(corSizeLabel)
                     .addComponent(corSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(corSearch)
+                .addGroup(courseTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(corClear)
+                    .addComponent(corSearch))
                 .addGap(18, 18, 18)
-                .addComponent(corScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE))
+                .addComponent(corScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE))
         );
 
         facstaffTab.addTab("Courses", courseTab);
@@ -623,14 +686,20 @@ public class FacultyStaff extends javax.swing.JFrame {
         });
         enrlScroll.setViewportView(enrlTable);
 
+        enrlClear.setText("Clear");
+        enrlClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enrlClearActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout enrlTabLayout = new javax.swing.GroupLayout(enrlTab);
         enrlTab.setLayout(enrlTabLayout);
         enrlTabLayout.setHorizontalGroup(
             enrlTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(enrlTabLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(enrlTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(enrlSearch)
+                .addGroup(enrlTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(enrlTabLayout.createSequentialGroup()
                         .addGroup(enrlTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(enrlCourseLabel, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -644,9 +713,13 @@ public class FacultyStaff extends javax.swing.JFrame {
                             .addComponent(enrlExam2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(enrlStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(enrlCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(enrlExam1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(enrlExam1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, enrlTabLayout.createSequentialGroup()
+                        .addComponent(enrlSearch)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(enrlClear)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(enrlScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 719, Short.MAX_VALUE)
+            .addComponent(enrlScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
         );
         enrlTabLayout.setVerticalGroup(
             enrlTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -672,9 +745,11 @@ public class FacultyStaff extends javax.swing.JFrame {
                     .addComponent(enrlFinalLabel)
                     .addComponent(enrlFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(enrlSearch)
+                .addGroup(enrlTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(enrlSearch)
+                    .addComponent(enrlClear))
                 .addGap(18, 18, 18)
-                .addComponent(enrlScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE))
+                .addComponent(enrlScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE))
         );
 
         facstaffTab.addTab("Enrollment", enrlTab);
@@ -727,6 +802,30 @@ public class FacultyStaff extends javax.swing.JFrame {
     private void enrlSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrlSearchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_enrlSearchActionPerformed
+
+    private void enrlClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrlClearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_enrlClearActionPerformed
+
+    private void corClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corClearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_corClearActionPerformed
+
+    private void depClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depClearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_depClearActionPerformed
+
+    private void staClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staClearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_staClearActionPerformed
+
+    private void facClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facClearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_facClearActionPerformed
+
+    private void stuClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stuClearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_stuClearActionPerformed
    
     public String getDBUser () {
         return this.DBUser;
@@ -745,6 +844,7 @@ public class FacultyStaff extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton corClear;
     private javax.swing.JTextField corID;
     private javax.swing.JLabel corIDLabel;
     private javax.swing.JTextField corInstructor;
@@ -761,6 +861,7 @@ public class FacultyStaff extends javax.swing.JFrame {
     private javax.swing.JTextField corTime;
     private javax.swing.JLabel corTimeLabel;
     private javax.swing.JPanel courseTab;
+    private javax.swing.JButton depClear;
     private javax.swing.JTextField depID;
     private javax.swing.JLabel depIDLabel;
     private javax.swing.JTextField depName;
@@ -769,6 +870,7 @@ public class FacultyStaff extends javax.swing.JFrame {
     private javax.swing.JButton depSearch;
     private javax.swing.JTable depTable;
     private javax.swing.JPanel deptTab;
+    private javax.swing.JButton enrlClear;
     private javax.swing.JTextField enrlCourse;
     private javax.swing.JLabel enrlCourseLabel;
     private javax.swing.JTextField enrlExam1;
@@ -783,6 +885,7 @@ public class FacultyStaff extends javax.swing.JFrame {
     private javax.swing.JLabel enrlStudentLabel;
     private javax.swing.JPanel enrlTab;
     private javax.swing.JTable enrlTable;
+    private javax.swing.JButton facClear;
     private javax.swing.JTextField facDep;
     private javax.swing.JLabel facDepLabel;
     private javax.swing.JTextField facID;
@@ -794,6 +897,7 @@ public class FacultyStaff extends javax.swing.JFrame {
     private javax.swing.JTable facTable;
     private javax.swing.JTabbedPane facstaffTab;
     private javax.swing.JPanel facultyTab;
+    private javax.swing.JButton staClear;
     private javax.swing.JTextField staDep;
     private javax.swing.JLabel staDepLabel;
     private javax.swing.JTextField staID;
@@ -806,6 +910,7 @@ public class FacultyStaff extends javax.swing.JFrame {
     private javax.swing.JPanel staffTab;
     private javax.swing.JTextField stuAge;
     private javax.swing.JLabel stuAgeLabel;
+    private javax.swing.JButton stuClear;
     private javax.swing.JComboBox stuLevel;
     private javax.swing.JLabel stuLevelLabel;
     private javax.swing.JTextField stuMajor;
