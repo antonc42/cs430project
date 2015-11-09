@@ -296,16 +296,9 @@ public class Database {
         }
     }
 
-    /*private Object[][] append (Object[][] obj, Object[] newrow) {
-        ArrayList<Object[]> temp = new ArrayList<Object[]>();
-        temp = Arrays.asList(obj);
-
-        temp.add(newrow);
-        return
-    }*/
-
     public Object[][] searchStu (Connection con, Integer sid, String sname, String major, String s_level, Integer age){
         Object[][] obj = null;
+        ArrayList<Object[]> temp = null;
         String searchsid = "%";
         String searchage = "%";
         if (sid != null) {
@@ -315,7 +308,8 @@ public class Database {
             searchage = age.toString();
         }
         try {
-            String query = "SELECT sid,sname,major,s_level,age FROM Student WHERE sid='"+searchsid+"' AND sname='"+sname+"' AND major='"+major+"' AND s_level='"+s_level+"' AND age='"+searchage+"'";
+            String query = "SELECT sid,sname,major,s_level,age FROM Student WHERE sid='"+searchsid+"' AND " +
+                    "sname='"+sname+"' AND major='"+major+"' AND s_level='"+s_level+"' AND age='"+searchage+"'";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()){
@@ -323,9 +317,198 @@ public class Database {
                 String Rsname = rs.getString(2);
                 String Rmajor = rs.getString(3);
                 String Rs_level = rs.getString(4);
-                String Rage = rs.getString(5);
+                Integer Rage = rs.getInt(5);
                 Object[] row = {Rsid.toString(),Rsname,Rmajor,Rs_level,Rage.toString()};
+                temp.add(row);
             }
+            obj = new Object[temp.size()][];
+            temp.toArray(obj);
+            rs.close();
+            st.close();
+            return obj;
+        }
+        catch (Exception ex){
+            System.out.println("SQLException: "+ex);
+            return obj;
+        }
+    }
+
+    public Object[][] searchDep (Connection con, Integer did, String dname){
+        Object[][] obj = null;
+        ArrayList<Object[]> temp = null;
+        String searchdid = "%";
+        if (did != null) {
+            searchdid = did.toString();
+        }
+        try {
+            String query = "SELECT did,dname FROM Department WHERE did='"+searchdid+"' AND dname='"+dname+"'";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()){
+                Integer Rdid = rs.getInt(1);
+                String Rdname = rs.getString(2);
+                Object[] row = {Rdid.toString(),Rdname};
+                temp.add(row);
+            }
+            obj = new Object[temp.size()][];
+            temp.toArray(obj);
+            rs.close();
+            st.close();
+            return obj;
+        }
+        catch (Exception ex){
+            System.out.println("SQLException: "+ex);
+            return obj;
+        }
+    }
+
+    public Object[][] searchFac (Connection con, Integer fid, String fname, Integer deptid){
+        Object[][] obj = null;
+        ArrayList<Object[]> temp = null;
+        String searchfid = "%";
+        String searchdid = "%";
+        if (fid != null) {
+            searchfid = fid.toString();
+        }
+        if (deptid != null) {
+            searchdid = deptid.toString();
+        }
+        try {
+            String query = "SELECT fid,fname,deptid FROM Faculty WHERE fid='"+searchfid+"' AND fname='"+fname+"' AND " +
+                    "deptid='"+searchdid+"'";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()){
+                Integer Rfid = rs.getInt(1);
+                String Rfname = rs.getString(2);
+                Integer Rdeptid = rs.getInt(3);
+                Object[] row = {Rfid.toString(),Rfname,Rdeptid.toString()};
+                temp.add(row);
+            }
+            obj = new Object[temp.size()][];
+            temp.toArray(obj);
+            rs.close();
+            st.close();
+            return obj;
+        }
+        catch (Exception ex){
+            System.out.println("SQLException: "+ex);
+            return obj;
+        }
+    }
+
+    public Object[][] searchCor (Connection con, String cid, String cname, String meets_at, String room, Integer fid,
+                                 Integer limit){
+        Object[][] obj = null;
+        ArrayList<Object[]> temp = null;
+        String searchfid = "%";
+        String searchlim = "%";
+        if (fid != null) {
+            searchfid = fid.toString();
+        }
+        if (limit != null) {
+            searchlim = limit.toString();
+        }
+        try {
+            String query = "SELECT cid,cname,meets_at,room,fid,limit FROM Courses WHERE cid='"+searchfid+"' AND " +
+                    "cname='"+cname+"' AND meets_at='"+meets_at+"' AND room='"+room+"' AND fid='"+fid+"' AND " +
+                    "limit='"+searchlim+"'";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()){
+                String Rcid = rs.getString(1);
+                String Rcname = rs.getString(2);
+                String Rmeets = rs.getString(3);
+                String Rroom = rs.getString(4);
+                Integer Rfid = rs.getInt(5);
+                Integer Rlim = rs.getInt(6);
+                Object[] row = {Rcid,Rcname,Rmeets,Rroom,Rfid.toString(),Rlim.toString()};
+                temp.add(row);
+            }
+            obj = new Object[temp.size()][];
+            temp.toArray(obj);
+            rs.close();
+            st.close();
+            return obj;
+        }
+        catch (Exception ex){
+            System.out.println("SQLException: "+ex);
+            return obj;
+        }
+    }
+
+    public Object[][] searchEnrl (Connection con, Integer sid, String cid, Integer exam1, Integer exam2, Integer finalg){
+        Object[][] obj = null;
+        ArrayList<Object[]> temp = null;
+        String searchsid = "%";
+        String searchexam1 = "%";
+        String searchexam2 = "%";
+        String searchfinal = "%";
+        if (sid != null) {
+            searchsid = sid.toString();
+        }
+        if (exam1 != null) {
+            searchexam1 = exam1.toString();
+        }
+        if (exam2 != null) {
+            searchexam2 = exam2.toString();
+        }
+        if (finalg != null) {
+            searchfinal= finalg.toString();
+        }
+        try {
+            String query = "SELECT sid,cid,exam1,exam2,final FROM Enrolled WHERE sid='"+searchsid+"' AND " +
+                    "cid='"+cid+"' AND exam1='"+searchexam1+"' AND exam2='"+searchexam2+"' AND final='"+searchfinal+"'";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()){
+                Integer Rsid = rs.getInt(1);
+                String Rcid = rs.getString(2);
+                Integer Rexam1 = rs.getInt(3);
+                Integer Rexam2 = rs.getInt(4);
+                Integer Rfinal = rs.getInt(5);
+                Object[] row = {Rsid.toString(),Rcid,Rexam1.toString(),Rexam2.toString(),Rfinal.toString()};
+                temp.add(row);
+            }
+            obj = new Object[temp.size()][];
+            temp.toArray(obj);
+            rs.close();
+            st.close();
+            return obj;
+        }
+        catch (Exception ex){
+            System.out.println("SQLException: "+ex);
+            return obj;
+        }
+    }
+
+    public Object[][] searchSta (Connection con, Integer sid, String sname, Integer deptid){
+        Object[][] obj = null;
+        ArrayList<Object[]> temp = null;
+        String searchsid = "%";
+        String searchdid = "%";
+        if (sid != null) {
+            searchsid = sid.toString();
+        }
+        if (deptid != null) {
+            searchdid = deptid.toString();
+        }
+        try {
+            String query = "SELECT sid,sname,deptid FROM Staff WHERE sid='"+searchsid+"' AND " +
+                    "sname='"+sname+"' AND deptid='"+searchdid+"'";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()){
+                Integer Rsid = rs.getInt(1);
+                String Rsname = rs.getString(2);
+                Integer Rdid = rs.getInt(3);
+                Object[] row = {Rsid.toString(),Rsname,Rdid.toString()};
+                temp.add(row);
+            }
+            obj = new Object[temp.size()][];
+            temp.toArray(obj);
+            rs.close();
+            st.close();
             return obj;
         }
         catch (Exception ex){
