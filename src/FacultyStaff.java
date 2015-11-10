@@ -790,12 +790,7 @@ public class FacultyStaff extends javax.swing.JFrame {
 //        popup.setRows(rows);
 //        popup.populateTable();
 //        popup.setVisible(true);
-        Database db = new Database();
-        Object[][] all = db.searchStu(con);
-        DefaultTableModel stuModel = (DefaultTableModel) stuTable.getModel();
-        for (Object[] row : all) {
-            stuModel.addRow(row);
-        }
+
 
 
     }//GEN-LAST:event_stuSearchActionPerformed
@@ -853,6 +848,14 @@ public class FacultyStaff extends javax.swing.JFrame {
     private void facstaffTabStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_facstaffTabStateChanged
         JTabbedPane temp = (JTabbedPane) evt.getSource();
         int index = temp.getSelectedIndex();
+        Database db = new Database();
+        if (index == 0) {
+            Object[][] allstu = db.searchStu(con);
+            DefaultTableModel stuModel = (DefaultTableModel) stuTable.getModel();
+            for (Object[] sturow : allstu) {
+                stuModel.addRow(sturow);
+            }
+        }
     }//GEN-LAST:event_facstaffTabStateChanged
 
     public Connection getConnection () {
