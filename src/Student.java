@@ -89,6 +89,12 @@ public class Student extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(700, 500));
 
+        stuInfoTab.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                stuInfoTabFocusGained(evt);
+            }
+        });
+
         nameLabel.setText("Name:");
 
         majorLabel.setText("Major:");
@@ -174,6 +180,12 @@ public class Student extends javax.swing.JFrame {
         );
 
         stuTabs.addTab("Student Info", stuInfoTab);
+
+        courseTab.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                courseTabFocusGained(evt);
+            }
+        });
 
         corIDLabel.setText("ID");
 
@@ -306,6 +318,14 @@ public class Student extends javax.swing.JFrame {
     private void corSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corSearchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_corSearchActionPerformed
+
+    private void stuInfoTabFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_stuInfoTabFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_stuInfoTabFocusGained
+
+    private void courseTabFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_courseTabFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_courseTabFocusGained
 
     public Connection getConnection () {
         return this.con;

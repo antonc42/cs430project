@@ -122,6 +122,11 @@ public class FacultyStaff extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         studentTab.setPreferredSize(new java.awt.Dimension(700, 500));
+        studentTab.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                studentTabFocusGained(evt);
+            }
+        });
 
         studIDLabel.setText("ID");
 
@@ -240,6 +245,11 @@ public class FacultyStaff extends javax.swing.JFrame {
         facstaffTab.addTab("Students", studentTab);
 
         facultyTab.setPreferredSize(new java.awt.Dimension(700, 50));
+        facultyTab.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                facultyTabFocusGained(evt);
+            }
+        });
 
         facIDLabel.setText("ID");
 
@@ -338,6 +348,11 @@ public class FacultyStaff extends javax.swing.JFrame {
         facstaffTab.addTab("Faculty", facultyTab);
 
         staffTab.setPreferredSize(new java.awt.Dimension(700, 500));
+        staffTab.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                staffTabFocusGained(evt);
+            }
+        });
 
         staIDLabel.setText("ID");
 
@@ -436,6 +451,11 @@ public class FacultyStaff extends javax.swing.JFrame {
         facstaffTab.addTab("Staff", staffTab);
 
         deptTab.setPreferredSize(new java.awt.Dimension(700, 500));
+        deptTab.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                deptTabFocusGained(evt);
+            }
+        });
 
         depIDLabel.setText("ID");
 
@@ -517,6 +537,11 @@ public class FacultyStaff extends javax.swing.JFrame {
         facstaffTab.addTab("Departments", deptTab);
 
         courseTab.setPreferredSize(new java.awt.Dimension(700, 500));
+        courseTab.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                courseTabFocusGained(evt);
+            }
+        });
 
         corIDLabel.setText("ID");
 
@@ -645,6 +670,11 @@ public class FacultyStaff extends javax.swing.JFrame {
         facstaffTab.addTab("Courses", courseTab);
 
         enrlTab.setPreferredSize(new java.awt.Dimension(700, 500));
+        enrlTab.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                enrlTabFocusGained(evt);
+            }
+        });
 
         enrlCourseLabel.setText("Course");
 
@@ -842,6 +872,30 @@ public class FacultyStaff extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_stuClearActionPerformed
+
+    private void studentTabFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_studentTabFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_studentTabFocusGained
+
+    private void facultyTabFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_facultyTabFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_facultyTabFocusGained
+
+    private void staffTabFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_staffTabFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_staffTabFocusGained
+
+    private void deptTabFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_deptTabFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deptTabFocusGained
+
+    private void courseTabFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_courseTabFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_courseTabFocusGained
+
+    private void enrlTabFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_enrlTabFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_enrlTabFocusGained
 
     public Connection getConnection () {
         return this.con;
