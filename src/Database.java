@@ -130,28 +130,28 @@ public class Database {
                 " INTO Department VALUES (10,'Chemistry')" +
                 " SELECT * FROM dual";
         String FacultyData = "INSERT ALL" +
-                " INTO Faculty VALUES (1,'Anna Whinery',1)" +
-                " INTO Faculty VALUES (2,'Royale Purcell',2)" +
-                " INTO Faculty VALUES (3,'Alysha Watkins',3)" +
-                " INTO Faculty VALUES (4,'Meghan Wilmer',4)" +
-                " INTO Faculty VALUES (5,'Nina Turner',5)" +
-                " INTO Faculty VALUES (6,'Fredrick Mottershead',6)" +
-                " INTO Faculty VALUES (7,'Angus Aitken',10)" +
-                " INTO Faculty VALUES (8,'Andrew Turnbull',1)" +
-                " INTO Faculty VALUES (9,'Lenore Proudfoot',2)" +
-                " INTO Faculty VALUES (10,'Beatrice Phillips',3)" +
+                " INTO Faculty VALUES (11,'Anna Whinery',1)" +
+                " INTO Faculty VALUES (12,'Royale Purcell',2)" +
+                " INTO Faculty VALUES (13,'Alysha Watkins',3)" +
+                " INTO Faculty VALUES (14,'Meghan Wilmer',4)" +
+                " INTO Faculty VALUES (15,'Nina Turner',5)" +
+                " INTO Faculty VALUES (16,'Fredrick Mottershead',6)" +
+                " INTO Faculty VALUES (17,'Angus Aitken',10)" +
+                " INTO Faculty VALUES (18,'Andrew Turnbull',1)" +
+                " INTO Faculty VALUES (19,'Lenore Proudfoot',2)" +
+                " INTO Faculty VALUES (20,'Beatrice Phillips',3)" +
                 " SELECT * FROM dual";
         String CoursesData = "INSERT ALL" +
-                " INTO Courses VALUES ('CS430','Databases','TTh 2-3:15pm','Faner 1111',1,30)" +
-                " INTO Courses VALUES ('IST225','Networking','MWF 9-9:50am','ASA 125',2,35)" +
-                " INTO Courses VALUES ('ISAT415','Advanced Networking','TWTh 10-10:50am','ASA 220',3,100)" +
-                " INTO Courses VALUES ('CS101','Intro to Computer Science','TTh 1-2:15pm','Lindegren 5',4,50)" +
-                " INTO Courses VALUES ('CP101','Intro to Films','MWF 10-10:50am','Parkinson 101',5,200)" +
-                " INTO Courses VALUES ('ENG222','Creative Writing','MWF 11-11:50am','Wham 315',6,32)" +
-                " INTO Courses VALUES ('CP330','Film as Literary Art','MW 2-4pm','Engineering D128',7,30)" +
-                " INTO Courses VALUES ('MAT108','College Algebra','TTh 4-5:15pm','Neckers 229',8,34)" +
-                " INTO Courses VALUES ('MAT125','Technical Math','MWF 12-12:50pm','Lawson 185',9,15)" +
-                " INTO Courses VALUES ('UC101','University Experience','MWF 1-1:50pm','Morris 601',10,27)" +
+                " INTO Courses VALUES ('CS430','Databases','TTh 2-3:15pm','Faner 1111',11,30)" +
+                " INTO Courses VALUES ('IST225','Networking','MWF 9-9:50am','ASA 125',12,35)" +
+                " INTO Courses VALUES ('ISAT415','Advanced Networking','TWTh 10-10:50am','ASA 220',13,100)" +
+                " INTO Courses VALUES ('CS101','Intro to Computer Science','TTh 1-2:15pm','Lindegren 5',14,50)" +
+                " INTO Courses VALUES ('CP101','Intro to Films','MWF 10-10:50am','Parkinson 101',15,200)" +
+                " INTO Courses VALUES ('ENG222','Creative Writing','MWF 11-11:50am','Wham 315',16,32)" +
+                " INTO Courses VALUES ('CP330','Film as Literary Art','MW 2-4pm','Engineering D128',17,30)" +
+                " INTO Courses VALUES ('MAT108','College Algebra','TTh 4-5:15pm','Neckers 229',18,34)" +
+                " INTO Courses VALUES ('MAT125','Technical Math','MWF 12-12:50pm','Lawson 185',19,15)" +
+                " INTO Courses VALUES ('UC101','University Experience','MWF 1-1:50pm','Morris 601',20,27)" +
                 " SELECT * FROM dual";
         String EnrolledData = "INSERT ALL" +
                 " INTO Enrolled VALUES (1,'CS430',90,85,97)" +
@@ -166,16 +166,16 @@ public class Database {
                 " INTO Enrolled VALUES (10,'UC101',90,97,95)" +
                 " SELECT * FROM dual";
         String StaffData = "INSERT ALL" +
-                " INTO Staff VALUES (1,'Hubert Davidson',7)" +
-                " INTO Staff VALUES (2,'Iona Overton',7)" +
-                " INTO Staff VALUES (3,'Raphael Tifft',7)" +
-                " INTO Staff VALUES (4,'Anneka Irvine',8)" +
-                " INTO Staff VALUES (5,'Carley Revie',9)" +
-                " INTO Staff VALUES (6,'Aric Samson',8)" +
-                " INTO Staff VALUES (7,'Charnette Gardyner',7)" +
-                " INTO Staff VALUES (8,'Reynold Stacy',8)" +
-                " INTO Staff VALUES (9,'Vince Hanley',9)" +
-                " INTO Staff VALUES (10,'Cynthia Coel',7)" +
+                " INTO Staff VALUES (21,'Hubert Davidson',7)" +
+                " INTO Staff VALUES (22,'Iona Overton',7)" +
+                " INTO Staff VALUES (23,'Raphael Tifft',7)" +
+                " INTO Staff VALUES (24,'Anneka Irvine',8)" +
+                " INTO Staff VALUES (25,'Carley Revie',9)" +
+                " INTO Staff VALUES (26,'Aric Samson',8)" +
+                " INTO Staff VALUES (27,'Charnette Gardyner',7)" +
+                " INTO Staff VALUES (28,'Reynold Stacy',8)" +
+                " INTO Staff VALUES (29,'Vince Hanley',9)" +
+                " INTO Staff VALUES (30,'Cynthia Coel',7)" +
                 " SELECT * FROM dual";
         // enter data
         runDefineManip(con,StudentData);
@@ -293,6 +293,34 @@ public class Database {
         catch (Exception ex){
             System.out.println("SQLException: "+ex);
             return false;
+        }
+    }
+
+    public Object[][] searchStu (Connection con){
+        Object[][] obj = null;
+        ArrayList<Object[]> temp = new ArrayList<Object[]>();
+        try {
+            String query = "SELECT sid,sname,major,s_level,age FROM Student";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()){
+                Integer Rsid = rs.getInt(1);
+                String Rsname = rs.getString(2);
+                String Rmajor = rs.getString(3);
+                String Rs_level = rs.getString(4);
+                Integer Rage = rs.getInt(5);
+                Object[] row = {Rsid.toString(),Rsname,Rmajor,Rs_level,Rage.toString()};
+                temp.add(row);
+            }
+            obj = new Object[temp.size()][];
+            temp.toArray(obj);
+            rs.close();
+            st.close();
+            return obj;
+        }
+        catch (Exception ex){
+            System.out.println("SQLException: "+ex);
+            return obj;
         }
     }
 

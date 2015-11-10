@@ -1,5 +1,7 @@
 
 import javax.swing.WindowConstants;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.sql.Connection;
 
 /*
@@ -781,6 +783,14 @@ public class FacultyStaff extends javax.swing.JFrame {
 //        popup.setRows(rows);
 //        popup.populateTable();
 //        popup.setVisible(true);
+        Database db = new Database();
+        Object[][] all = db.searchStu(con);
+        DefaultTableModel stuModel = (DefaultTableModel) stuTable.getModel();
+        for (Object[] row : all) {
+            stuModel.addRow(row);
+        }
+
+
     }//GEN-LAST:event_stuSearchActionPerformed
 
     private void facSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facSearchActionPerformed
@@ -825,6 +835,12 @@ public class FacultyStaff extends javax.swing.JFrame {
 
     private void stuClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stuClearActionPerformed
         // TODO add your handling code here:
+        DefaultTableModel stuModel = (DefaultTableModel) stuTable.getModel();
+        int rowcount = stuModel.getRowCount();
+        for (int idx = 0; idx < rowcount; idx++) {
+            stuModel.removeRow(0);
+        }
+
     }//GEN-LAST:event_stuClearActionPerformed
 
     public Connection getConnection () {
