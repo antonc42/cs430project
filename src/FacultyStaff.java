@@ -31,6 +31,17 @@ public class FacultyStaff extends javax.swing.JFrame {
         initComponents();
     }
 
+    public FacultyStaff(Connection passedcon) {
+        setConnection(passedcon);
+        try {
+            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        initComponents();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -790,9 +801,32 @@ public class FacultyStaff extends javax.swing.JFrame {
 //        popup.setRows(rows);
 //        popup.populateTable();
 //        popup.setVisible(true);
-
-
-
+        Database db = new Database();
+        Integer sid = -1;
+        String sname = "-1";
+        String major = "-1";
+        String s_level = "-1";
+        Integer age = -1;
+        if (!studID.getText().isEmpty()) {
+            sid = Integer.parseInt(studID.getText());
+        }
+        if (!stuName.getText().isEmpty()) {
+            sname = stuName.getText();
+        }
+        if (!stuMajor.getText().isEmpty()) {
+            major = stuMajor.getText();
+        }
+        if (!String.valueOf(stuLevel.getSelectedItem()).isEmpty()) {
+            s_level = String.valueOf(stuLevel.getSelectedItem()).toLowerCase();
+        }
+        if (!stuAge.getText().isEmpty()) {
+            age = Integer.parseInt(stuAge.getText());
+        }
+        Object[][] result = db.searchStu(con,sid,sname,major,s_level,age);
+        DefaultTableModel stuModel = (DefaultTableModel) stuTable.getModel();
+        for (Object[] sturow : result) {
+            stuModel.addRow(sturow);
+        }
     }//GEN-LAST:event_stuSearchActionPerformed
 
     private void facSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facSearchActionPerformed

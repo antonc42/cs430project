@@ -326,18 +326,27 @@ public class Database {
 
     public Object[][] searchStu (Connection con, Integer sid, String sname, String major, String s_level, Integer age){
         Object[][] obj = null;
-        ArrayList<Object[]> temp = null;
-        String searchsid = "%";
-        String searchage = "%";
-        if (sid != null) {
-            searchsid = sid.toString();
-        }
-        if (age != null) {
-            searchage = age.toString();
-        }
+        ArrayList<Object[]> temp = new ArrayList<Object[]>();
         try {
-            String query = "SELECT sid,sname,major,s_level,age FROM Student WHERE sid='"+searchsid+"' AND " +
-                    "sname='"+sname+"' AND major='"+major+"' AND s_level='"+s_level+"' AND age='"+searchage+"'";
+            String buildquery = "SELECT sid,sname,major,s_level,age FROM Student WHERE ";
+            if (sid != null && sid != -1) {
+                buildquery += "sid='"+sid+"' AND ";
+            }
+            if (sname != null && !sname.equals("-1")) {
+                buildquery += "sname='"+sname+"' AND ";
+            }
+            if (major != null && !major.equals("-1")) {
+                buildquery += "major='"+major+"' AND ";
+            }
+            if (s_level != null && !s_level.equals("-1")) {
+                buildquery += "s_level='"+s_level+"' AND ";
+            }
+            if (age != null && age != -1) {
+                buildquery += "age='"+age+"' AND ";
+            }
+            Pattern lastand = Pattern.compile(" AND \\Z");
+            Matcher m = lastand.matcher(buildquery);
+            String query = m.replaceAll("");
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()){

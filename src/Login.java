@@ -127,8 +127,8 @@ public class Login extends javax.swing.JFrame {
 
         Database db = new Database();
         if (db.isFacStaff(con,userName.getText())) {
-            FacultyStaff fs = new FacultyStaff();
-            fs.setConnection(con);
+            FacultyStaff fs = new FacultyStaff(con);
+            //fs.setConnection(con);
             fs.setVisible(true);
         }
         else if (db.isStu(con,userName.getText())) {
