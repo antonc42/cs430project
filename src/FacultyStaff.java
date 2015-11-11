@@ -1,9 +1,8 @@
 
-import javax.swing.WindowConstants;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.sql.Connection;
-import javax.swing.JTabbedPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -823,10 +822,8 @@ public class FacultyStaff extends javax.swing.JFrame {
             age = Integer.parseInt(stuAge.getText());
         }
         Object[][] result = db.searchStu(con,sid,sname,major,s_level,age);
-        DefaultTableModel stuModel = (DefaultTableModel) stuTable.getModel();
-        for (Object[] sturow : result) {
-            stuModel.addRow(sturow);
-        }
+        cleartable(stuTable);
+        addtoTable(stuTable,result);
     }//GEN-LAST:event_stuSearchActionPerformed
 
     private void facSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facSearchActionPerformed
@@ -870,12 +867,15 @@ public class FacultyStaff extends javax.swing.JFrame {
     }//GEN-LAST:event_facClearActionPerformed
 
     private void stuClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stuClearActionPerformed
-        // TODO add your handling code here:
-        DefaultTableModel stuModel = (DefaultTableModel) stuTable.getModel();
-        int rowcount = stuModel.getRowCount();
-        for (int idx = 0; idx < rowcount; idx++) {
-            stuModel.removeRow(0);
-        }
+        cleartable(stuTable);
+        studID.setText("");
+        stuName.setText("");
+        stuMajor.setText("");
+        stuLevel.setSelectedIndex(0);
+        stuAge.setText("");
+        Database db = new Database();
+        Object[][] allstu = db.searchStu(con);
+        addtoTable(stuTable,allstu);
 
     }//GEN-LAST:event_stuClearActionPerformed
 
@@ -885,12 +885,24 @@ public class FacultyStaff extends javax.swing.JFrame {
         Database db = new Database();
         if (index == 0) {
             Object[][] allstu = db.searchStu(con);
-            DefaultTableModel stuModel = (DefaultTableModel) stuTable.getModel();
-            for (Object[] sturow : allstu) {
-                stuModel.addRow(sturow);
-            }
+            addtoTable(stuTable,allstu);
         }
     }//GEN-LAST:event_facstaffTabStateChanged
+
+    private void cleartable (JTable table) {
+        DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+        int rowcount = tableModel.getRowCount();
+        for (int idx = 0; idx < rowcount; idx++) {
+            tableModel.removeRow(0);
+        }
+    }
+
+    public void addtoTable (JTable table, Object[][] data) {
+        DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+        for (Object[] row : data) {
+            tableModel.addRow(row);
+        }
+    }
 
     public Connection getConnection () {
         return this.con;
