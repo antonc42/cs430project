@@ -4,6 +4,11 @@
  * and open the template in the editor.
  */
 
+import javax.swing.*;
+import java.awt.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 
 /**
@@ -16,37 +21,12 @@ public class Setup extends javax.swing.JFrame {
      * Creates new form Setup
      */
     public Setup() {
-        
-        /* Set the Nimbus look and feel */
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        /*
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Setup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Setup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Setup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Setup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        */
-        
         try {
             javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
             }
         catch (Exception e) {
             e.printStackTrace();
             }
-        
         initComponents();
     }
 
@@ -175,12 +155,24 @@ public class Setup extends javax.swing.JFrame {
         String dbname = "cs";
         Database db = new Database();
         Connection con = db.connect(server, port, dbname, dbUserText.getText(), String.valueOf(dbPwField.getPassword()));
-
         if (schemaCheck.isSelected()) {
             db.setupSchema(con);
         }
         if (sampleCheck.isSelected()) {
             db.enterData(con);
+        }
+        if (saveCheck.isSelected()) {
+            try {
+                String filename = System.getProperty("user.home");
+                filename += File.separator + ".cs430dbconfig";
+                PrintWriter config = new PrintWriter(filename);
+                config.println(dbUserText.getText());
+                config.println(String.valueOf(dbPwField.getPassword()));
+                config.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
         }
         this.setVisible(false);
         Login loginbox = new Login();
