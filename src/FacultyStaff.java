@@ -885,6 +885,7 @@ public class FacultyStaff extends javax.swing.JFrame {
         Database db = new Database();
         if (index == 0) {
             Object[][] allstu = db.searchStu(con);
+            cleartable(stuTable);
             addtoTable(stuTable,allstu);
         }
     }//GEN-LAST:event_facstaffTabStateChanged
@@ -899,8 +900,10 @@ public class FacultyStaff extends javax.swing.JFrame {
 
     public void addtoTable (JTable table, Object[][] data) {
         DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-        for (Object[] row : data) {
-            tableModel.addRow(row);
+        if (data != null) {
+            for (Object[] row : data) {
+                tableModel.addRow(row);
+            }
         }
     }
 

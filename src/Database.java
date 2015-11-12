@@ -326,6 +326,13 @@ public class Database {
     public Object[][] searchStu (Connection con, Integer sid, String sname, String major, String s_level, Integer age){
         Object[][] obj = null;
         ArrayList<Object[]> temp = new ArrayList<Object[]>();
+        // if nothing was passed in, don't try to build the sql expression - it will just throw a sql exception
+        // because of the dangling "WHEN"
+        if ((sid ==null || sid == -1) && (sname == null || sname.equals("-1")) &&
+                (major == null || major.equals("-1")) && (s_level == null || s_level.equals("-1")) &&
+                (age == null || age == -1)) {
+            return obj;
+        }
         try {
             String buildquery = "SELECT sid,sname,major,s_level,age FROM Student WHERE ";
             if (sid != null && sid != -1) {
