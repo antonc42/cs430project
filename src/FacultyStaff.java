@@ -3,6 +3,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.sql.Connection;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -790,6 +792,22 @@ public class FacultyStaff extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void addStuTableListener () {
+        stuTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        stuTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent e) {
+                if (e.getValueIsAdjusting()) return;
+                ListSelectionModel lsm = (ListSelectionModel) e.getSource();
+                if (lsm.isSelectionEmpty()) {
+                    System.out.println("No rows are selected.");
+                } else {
+                    Integer selectedRow = lsm.getMinSelectionIndex();
+
+                }
+            }
+        });
+    }
 
     private void stuSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stuSearchActionPerformed
 //        Results popup = new Results();
