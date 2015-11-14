@@ -68,6 +68,8 @@
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
+                              <Component id="stuNew" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="stuSearch" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="stuClear" min="-2" max="-2" attributes="0"/>
@@ -132,6 +134,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="stuClear" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="stuSearch" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="stuNew" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="stuScroll" pref="264" max="32767" attributes="0"/>
@@ -179,6 +182,14 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="stuAge">
+            </Component>
+            <Component class="javax.swing.JButton" name="stuNew">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="New"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="stuNewActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="stuSearch">
               <Properties>
@@ -274,6 +285,8 @@
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
+                              <Component id="facNew" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="facSearch" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="facClear" min="-2" max="-2" attributes="0"/>
@@ -321,6 +334,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="facClear" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="facSearch" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="facNew" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="facScroll" pref="330" max="32767" attributes="0"/>
@@ -349,6 +363,14 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="facDep">
+            </Component>
+            <Component class="javax.swing.JButton" name="facNew">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="New"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="facNewActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="facSearch">
               <Properties>
@@ -432,6 +454,8 @@
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
+                              <Component id="staNew" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="staSearch" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="staClear" min="-2" max="-2" attributes="0"/>
@@ -479,6 +503,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="staClear" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="staSearch" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="staNew" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="staScroll" pref="330" max="32767" attributes="0"/>
@@ -507,6 +532,14 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="staDep">
+            </Component>
+            <Component class="javax.swing.JButton" name="staNew">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="New"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="staNewActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="staSearch">
               <Properties>
@@ -600,6 +633,8 @@
                               <Component id="depName" min="-2" pref="200" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
+                              <Component id="depNew" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="depSearch" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="depClear" min="-2" max="-2" attributes="0"/>
@@ -626,6 +661,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="depSearch" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="depClear" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="depNew" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="depScroll" pref="363" max="32767" attributes="0"/>
@@ -647,6 +683,14 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="depName">
+            </Component>
+            <Component class="javax.swing.JButton" name="depNew">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="New"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="depNewActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="depSearch">
               <Properties>
@@ -754,6 +798,8 @@
                               <Component id="corID" min="-2" pref="200" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
+                              <Component id="corNew" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="corSearch" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="corClear" min="-2" max="-2" attributes="0"/>
@@ -800,6 +846,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="corClear" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="corSearch" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="corNew" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="corScroll" pref="231" max="32767" attributes="0"/>
@@ -849,6 +896,14 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="corSize">
+            </Component>
+            <Component class="javax.swing.JButton" name="corNew">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="New"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="corNewActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="corSearch">
               <Properties>
@@ -966,6 +1021,8 @@
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
+                              <Component id="enrlNew" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="enrlSearch" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="enrlClear" min="-2" max="-2" attributes="0"/>
@@ -1008,6 +1065,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="enrlSearch" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="enrlClear" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="enrlNew" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="enrlScroll" pref="264" max="32767" attributes="0"/>
@@ -1051,12 +1109,28 @@
             </Component>
             <Component class="javax.swing.JTextField" name="enrlFinal">
             </Component>
+            <Component class="javax.swing.JButton" name="enrlNew">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="New"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="enrlNewActionPerformed"/>
+              </Events>
+            </Component>
             <Component class="javax.swing.JButton" name="enrlSearch">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Search"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="enrlSearchActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="enrlClear">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Clear"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="enrlClearActionPerformed"/>
               </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="enrlScroll">
@@ -1113,14 +1187,6 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="enrlClear">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Clear"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="enrlClearActionPerformed"/>
-              </Events>
-            </Component>
           </SubComponents>
         </Container>
       </SubComponents>
