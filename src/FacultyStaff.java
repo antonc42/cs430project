@@ -2,6 +2,8 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import java.awt.event.ActionEvent;
+import java.beans.PropertyChangeListener;
 import java.sql.Connection;
 import java.util.Hashtable;
 import javax.swing.event.ListSelectionEvent;
@@ -20,6 +22,9 @@ import javax.swing.event.ListSelectionListener;
 public class FacultyStaff extends javax.swing.JFrame {
 
     private Connection con;
+    private boolean staffPermission = false;
+    private boolean stuSearchAction = true;
+
     /**
      * Creates new form
      */
@@ -31,7 +36,6 @@ public class FacultyStaff extends javax.swing.JFrame {
             e.printStackTrace();
             }
         initComponents();
-        addStuTableListener();
     }
 
     public FacultyStaff(Connection passedcon) {
@@ -43,7 +47,20 @@ public class FacultyStaff extends javax.swing.JFrame {
             e.printStackTrace();
         }
         initComponents();
-        addStuTableListener();
+    }
+    public FacultyStaff(Connection passedcon, boolean staffPermission) {
+        setConnection(passedcon);
+        setStaffPermission(staffPermission);
+        try {
+            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        initComponents();
+        if (staffPermission) {
+            addStuTableListener();
+        }
     }
 
     /**
@@ -816,20 +833,14 @@ public class FacultyStaff extends javax.swing.JFrame {
                     stuMajor.setText(colhash.get("Major").toString());
                     stuLevel.setSelectedItem(colhash.get("Level"));
                     stuAge.setText(colhash.get("Age").toString());
+                    stuSearch.setText("Edit");
+                    stuSearchAction = false;
                 }
             }
         });
     }
 
     private void stuSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stuSearchActionPerformed
-//        Results popup = new Results();
-//        popup.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
-//        String[] cols = {"Test"};
-//        Object[][] rows = {{"Test"}};
-//        popup.setCols(cols);
-//        popup.setRows(rows);
-//        popup.populateTable();
-//        popup.setVisible(true);
         Database db = new Database();
         Integer sid = -1;
         String sname = "-1";
@@ -851,9 +862,22 @@ public class FacultyStaff extends javax.swing.JFrame {
         if (!stuAge.getText().isEmpty()) {
             age = Integer.parseInt(stuAge.getText());
         }
-        Object[][] result = db.searchStu(con,sid,sname,major,s_level,age);
-        cleartable(stuTable);
-        addtoTable(stuTable,result);
+        // do search action
+        if (stuSearchAction) {
+            Object[][] result = db.searchStu(con, sid, sname, major, s_level, age);
+            cleartable(stuTable);
+            addtoTable(stuTable, result);
+        }
+        // do edit action
+        else if (!stuSearchAction && staffPermission){
+            db.editStu(con, sid, sname, major, s_level, age);
+            clearStuForm();
+            stuSearch.setText("Search");
+            stuSearchAction = true;
+            Object[][] allstu = db.searchStu(con);
+            cleartable(stuTable);
+            addtoTable(stuTable,allstu);
+        }
     }//GEN-LAST:event_stuSearchActionPerformed
 
     private void facSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facSearchActionPerformed
@@ -898,11 +922,9 @@ public class FacultyStaff extends javax.swing.JFrame {
 
     private void stuClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stuClearActionPerformed
         cleartable(stuTable);
-        studID.setText("");
-        stuName.setText("");
-        stuMajor.setText("");
-        stuLevel.setSelectedIndex(0);
-        stuAge.setText("");
+        clearStuForm();
+        stuSearch.setText("Search");
+        stuSearchAction = true;
         Database db = new Database();
         Object[][] allstu = db.searchStu(con);
         addtoTable(stuTable,allstu);
@@ -921,6 +943,7 @@ public class FacultyStaff extends javax.swing.JFrame {
     }//GEN-LAST:event_facstaffTabStateChanged
 
     private void cleartable (JTable table) {
+        table.clearSelection();
         DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
         int rowcount = tableModel.getRowCount();
         for (int idx = 0; idx < rowcount; idx++) {
@@ -929,12 +952,21 @@ public class FacultyStaff extends javax.swing.JFrame {
     }
 
     public void addtoTable (JTable table, Object[][] data) {
+        table.clearSelection();
         DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
         if (data != null) {
             for (Object[] row : data) {
                 tableModel.addRow(row);
             }
         }
+    }
+
+    public void clearStuForm () {
+        studID.setText("");
+        stuName.setText("");
+        stuMajor.setText("");
+        stuLevel.setSelectedIndex(0);
+        stuAge.setText("");
     }
 
     public Connection getConnection () {
@@ -944,7 +976,16 @@ public class FacultyStaff extends javax.swing.JFrame {
     public void setConnection (Connection passedcon) {
         this.con = passedcon;
     }
-    
+
+    public boolean isStaffPermission() {
+        return staffPermission;
+    }
+
+    public void setStaffPermission(boolean staffPermission) {
+        this.staffPermission = staffPermission;
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton corClear;
     private javax.swing.JTextField corID;

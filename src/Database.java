@@ -245,13 +245,38 @@ public class Database {
         }
     }
 
-    public boolean isFacStaff (Connection con, String userid){
+    public boolean isFac (Connection con, String userid){
         if (userid == null){
             System.err.println("No Statement given!");
             return false;
         }
         try {
-            String query = "(SELECT fid FROM Faculty) UNION (SELECT sid from Staff)";
+            String query = "SELECT fid FROM Faculty";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()){
+                Integer id = rs.getInt(1);
+                if (id.toString().equals(userid)) {
+                    rs.close();
+                    st.close();
+                    return true;
+                }
+            }
+            return false;
+        }
+        catch (Exception ex){
+            System.out.println("SQLException: "+ex);
+            return false;
+        }
+    }
+
+    public boolean isStaff (Connection con, String userid){
+        if (userid == null){
+            System.err.println("No Statement given!");
+            return false;
+        }
+        try {
+            String query = "SELECT sid from Staff";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()){
@@ -373,6 +398,115 @@ public class Database {
         catch (Exception ex){
             System.out.println("SQLException: "+ex);
             return obj;
+        }
+    }
+
+    public void newStu (Connection con, Integer sid, String sname, String major, String s_level, Integer age) {
+        // if nothing was passed in, do nothing
+        if ((sid ==null || sid == -1) && (sname == null || sname.equals("-1")) &&
+                (major == null || major.equals("-1")) && (s_level == null || s_level.equals("-1")) &&
+                (age == null || age == -1)) {
+            return;
+        }
+        try {
+            String buildquery = "INSERT INTO Student ";
+            ArrayList<String> cols = new ArrayList<String>();
+            ArrayList<String> vals = new ArrayList<String>();
+            if (sid != null && sid != -1) {
+                cols.add("sid");
+                vals.add(sid.toString());
+            }
+            else {
+                // cannot enter row without primary key
+                return;
+            }
+            if (sname != null && !sname.equals("-1")) {
+                cols.add("sname");
+                vals.add(sname);
+            }
+            if (major != null && !major.equals("-1")) {
+                cols.add("major");
+                vals.add(major);
+            }
+            if (s_level != null && !s_level.equals("-1")) {
+                cols.add("s_level");
+                vals.add(s_level);
+            }
+            else {
+                // cannot enter row without level due to constraint
+                return;
+            }
+            if (age != null && age != -1) {
+                cols.add("age");
+                vals.add(age.toString());
+            }
+            buildquery += "(";
+            for (String c : cols) {
+                buildquery += c + ",";
+            }
+            if (buildquery.endsWith(",")) {
+                buildquery.substring(0,buildquery.length() - 1);
+            }
+            buildquery += ") VALUES (";
+            for (String v : vals) {
+                buildquery += "'" + v + "',";
+            }
+            if (buildquery.endsWith(",")) {
+                buildquery = buildquery.substring(0,buildquery.length() - 1);
+            }
+            buildquery += ")";
+            Statement st = con.createStatement();
+            st.executeUpdate(buildquery);
+            st.close();
+            return;
+        }
+        catch (Exception ex){
+            System.out.println("SQLException: "+ex);
+            return;
+        }
+    }
+
+    public void editStu (Connection con, Integer sid, String sname, String major, String s_level, Integer age) {
+        // if nothing was passed in, do nothing
+        if ((sid ==null || sid == -1) && (sname == null || sname.equals("-1")) &&
+                (major == null || major.equals("-1")) && (s_level == null || s_level.equals("-1")) &&
+                (age == null || age == -1)) {
+            return;
+        }
+        try {
+            String buildquery = "UPDATE Student SET ";
+            ArrayList<String> cols = new ArrayList<String>();
+            ArrayList<String> vals = new ArrayList<String>();
+            if (sid == null || sid == -1) {
+                // cannot edit row without primary key
+                return;
+            }
+            if (sname != null && !sname.equals("-1")) {
+                buildquery += "sname='"+sname+"',";
+            }
+            if (major != null && !major.equals("-1")) {
+                buildquery += "major='"+major+"',";
+            }
+            // cannot have empty s_level due to constraint
+            if (s_level != null && !s_level.equals("-1") && !s_level.isEmpty()) {
+                buildquery += "s_level='"+s_level+"',";
+            }
+            if (age != null && age != -1) {
+                buildquery += "age='"+age+"',";
+            }
+            // remove trailing comma
+            if (buildquery.endsWith(",")) {
+                buildquery = buildquery.substring(0,buildquery.length() - 1);
+            }
+            buildquery += " WHERE sid="+sid;
+            Statement st = con.createStatement();
+            st.executeUpdate(buildquery);
+            st.close();
+            return;
+        }
+        catch (Exception ex){
+            System.out.println("SQLException: "+ex);
+            return;
         }
     }
 
