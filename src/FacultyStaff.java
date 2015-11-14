@@ -895,6 +895,7 @@ public class FacultyStaff extends javax.swing.JFrame {
                         colhash.put(colname,colcontent);
                     }
                     studID.setText(colhash.get("ID").toString());
+                    studID.setEnabled(false);
                     stuName.setText(colhash.get("Name").toString());
                     stuMajor.setText(colhash.get("Major").toString());
                     stuLevel.setSelectedItem(colhash.get("Level"));
@@ -938,6 +939,7 @@ public class FacultyStaff extends javax.swing.JFrame {
         else if (!stuSearchAction && staffPermission){
             db.editStu(con, sid, sname, major, s_level, age);
             clearStuForm();
+            studID.setEnabled(true);
             stuSearch.setText("Search");
             stuSearchAction = true;
             Object[][] allstu = db.searchStu(con);
@@ -989,6 +991,7 @@ public class FacultyStaff extends javax.swing.JFrame {
     private void stuClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stuClearActionPerformed
         cleartable(stuTable);
         clearStuForm();
+        studID.setEnabled(true);
         stuSearch.setText("Search");
         stuSearchAction = true;
         Database db = new Database();
