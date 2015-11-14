@@ -3,6 +3,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.sql.Connection;
+import java.util.Hashtable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -30,6 +31,7 @@ public class FacultyStaff extends javax.swing.JFrame {
             e.printStackTrace();
             }
         initComponents();
+        addStuTableListener();
     }
 
     public FacultyStaff(Connection passedcon) {
@@ -41,6 +43,7 @@ public class FacultyStaff extends javax.swing.JFrame {
             e.printStackTrace();
         }
         initComponents();
+        addStuTableListener();
     }
 
     /**
@@ -799,11 +802,20 @@ public class FacultyStaff extends javax.swing.JFrame {
             public void valueChanged(ListSelectionEvent e) {
                 if (e.getValueIsAdjusting()) return;
                 ListSelectionModel lsm = (ListSelectionModel) e.getSource();
-                if (lsm.isSelectionEmpty()) {
-                    System.out.println("No rows are selected.");
-                } else {
+                if (!lsm.isSelectionEmpty()) {
                     Integer selectedRow = lsm.getMinSelectionIndex();
-
+                    Integer numcols = stuTable.getColumnCount();
+                    Hashtable<String,Object> colhash = new Hashtable<String, Object>();
+                    for (int col=0; col < numcols; col++) {
+                        String colname = stuTable.getColumnName(col);
+                        Object colcontent = stuTable.getValueAt(selectedRow,col);
+                        colhash.put(colname,colcontent);
+                    }
+                    studID.setText(colhash.get("ID").toString());
+                    stuName.setText(colhash.get("Name").toString());
+                    stuMajor.setText(colhash.get("Major").toString());
+                    stuLevel.setSelectedItem(colhash.get("Level"));
+                    stuAge.setText(colhash.get("Age").toString());
                 }
             }
         });
