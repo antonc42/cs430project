@@ -324,7 +324,7 @@ public class Database {
         Object[][] obj = null;
         ArrayList<Object[]> temp = new ArrayList<Object[]>();
         try {
-            String query = "SELECT sid,sname,major,s_level,age FROM Student";
+            String query = "SELECT sid,sname,major,s_level,age FROM Student ORDER BY sid";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()){
@@ -378,6 +378,7 @@ public class Database {
             Pattern lastand = Pattern.compile(" AND \\Z");
             Matcher m = lastand.matcher(buildquery);
             String query = m.replaceAll("");
+            query += "ORDER BY sid";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()){
@@ -398,6 +399,48 @@ public class Database {
         catch (Exception ex){
             System.out.println("SQLException: "+ex);
             return obj;
+        }
+    }
+
+    public void editStu (Connection con, Integer sid, String sname, String major, String s_level, Integer age) {
+        // if nothing was passed in, do nothing
+        if ((sid ==null || sid == -1) && (sname == null || sname.equals("-1")) &&
+                (major == null || major.equals("-1")) && (s_level == null || s_level.equals("-1")) &&
+                (age == null || age == -1)) {
+            return;
+        }
+        try {
+            String buildquery = "UPDATE Student SET ";
+            if (sid == null || sid == -1) {
+                // cannot edit row without primary key
+                return;
+            }
+            if (sname != null && !sname.equals("-1")) {
+                buildquery += "sname='"+sname+"',";
+            }
+            if (major != null && !major.equals("-1")) {
+                buildquery += "major='"+major+"',";
+            }
+            // cannot have empty s_level due to constraint
+            if (s_level != null && !s_level.equals("-1") && !s_level.isEmpty()) {
+                buildquery += "s_level='"+s_level+"',";
+            }
+            if (age != null && age != -1) {
+                buildquery += "age='"+age+"',";
+            }
+            // remove trailing comma
+            if (buildquery.endsWith(",")) {
+                buildquery = buildquery.substring(0,buildquery.length() - 1);
+            }
+            buildquery += " WHERE sid="+sid;
+            Statement st = con.createStatement();
+            st.executeUpdate(buildquery);
+            st.close();
+            return;
+        }
+        catch (Exception ex){
+            System.out.println("SQLException: "+ex);
+            return;
         }
     }
 
@@ -445,7 +488,7 @@ public class Database {
                 buildquery += c + ",";
             }
             if (buildquery.endsWith(",")) {
-                buildquery.substring(0,buildquery.length() - 1);
+                buildquery = buildquery.substring(0,buildquery.length() - 1);
             }
             buildquery += ") VALUES (";
             for (String v : vals) {
@@ -466,46 +509,20 @@ public class Database {
         }
     }
 
-    public void editStu (Connection con, Integer sid, String sname, String major, String s_level, Integer age) {
-        // if nothing was passed in, do nothing
-        if ((sid ==null || sid == -1) && (sname == null || sname.equals("-1")) &&
-                (major == null || major.equals("-1")) && (s_level == null || s_level.equals("-1")) &&
-                (age == null || age == -1)) {
+    public void delStu (Connection con, Integer sid) {
+        // cannot do anything without id
+        if (sid ==null || sid == -1) {
             return;
         }
         try {
-            String buildquery = "UPDATE Student SET ";
-            ArrayList<String> cols = new ArrayList<String>();
-            ArrayList<String> vals = new ArrayList<String>();
-            if (sid == null || sid == -1) {
-                // cannot edit row without primary key
-                return;
-            }
-            if (sname != null && !sname.equals("-1")) {
-                buildquery += "sname='"+sname+"',";
-            }
-            if (major != null && !major.equals("-1")) {
-                buildquery += "major='"+major+"',";
-            }
-            // cannot have empty s_level due to constraint
-            if (s_level != null && !s_level.equals("-1") && !s_level.isEmpty()) {
-                buildquery += "s_level='"+s_level+"',";
-            }
-            if (age != null && age != -1) {
-                buildquery += "age='"+age+"',";
-            }
-            // remove trailing comma
-            if (buildquery.endsWith(",")) {
-                buildquery = buildquery.substring(0,buildquery.length() - 1);
-            }
-            buildquery += " WHERE sid="+sid;
+            String query = "DELETE FROM Student WHERE sid=" + sid;
             Statement st = con.createStatement();
-            st.executeUpdate(buildquery);
+            st.executeUpdate(query);
             st.close();
             return;
         }
-        catch (Exception ex){
-            System.out.println("SQLException: "+ex);
+        catch (Exception ex) {
+            System.out.println("SQLException: " + ex);
             return;
         }
     }
