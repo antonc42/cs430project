@@ -153,7 +153,7 @@ public class FacultyStaff extends javax.swing.JFrame {
 
         stuLevelLabel.setText("Level");
 
-        stuLevel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "","Freshman", "Sophomore", "Junior", "Senior", "Master", "PhD" }));
+        stuLevel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "","freshman", "sophomore", "junior", "senior", "master", "phd" }));
 
         stuAgeLabel.setText("Age");
 
