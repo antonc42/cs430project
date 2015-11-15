@@ -26,6 +26,8 @@ public class FacultyStaff extends javax.swing.JFrame {
     private boolean facNewAction = true;
     private boolean staSearchAction = true;
     private boolean staNewAction = true;
+    private boolean depSearchAction = true;
+    private boolean depNewAction = true;
 
     /**
      * Creates new form
@@ -962,6 +964,33 @@ public class FacultyStaff extends javax.swing.JFrame {
         });
     }
 
+    private void addDepTableListener() {
+        depTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        depTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent e) {
+                if (e.getValueIsAdjusting()) return;
+                ListSelectionModel lsm = (ListSelectionModel) e.getSource();
+                if (!lsm.isSelectionEmpty()) {
+                    Integer selectedRow = lsm.getMinSelectionIndex();
+                    Integer numcols = depTable.getColumnCount();
+                    Hashtable<String,Object> colhash = new Hashtable<String, Object>();
+                    for (int col=0; col < numcols; col++) {
+                        String colname = depTable.getColumnName(col);
+                        Object colcontent = depTable.getValueAt(selectedRow,col);
+                        colhash.put(colname,colcontent);
+                    }
+                    depID.setText(colhash.get("ID").toString());
+                    depID.setEnabled(false);
+                    depName.setText(colhash.get("Name").toString());
+                    depNew.setText("Delete");
+                    depNewAction = false;
+                    depSearch.setText("Edit");
+                    depSearchAction = false;
+                }
+            }
+        });
+    }
+
     private void disableNewButtons() {
         stuNew.setVisible(false);
         corNew.setVisible(false);
@@ -979,6 +1008,15 @@ public class FacultyStaff extends javax.swing.JFrame {
         for (Object dep : deps) {
             facDep.addItem(dep);
             staDep.addItem(dep);
+        }
+    }
+
+    private void clearComboBoxes() {
+        while (facDep.getItemCount() > 1) {
+            facDep.removeItemAt(1);
+        }
+        while (staDep.getItemCount() > 1) {
+            staDep.removeItemAt(1);
         }
     }
 
@@ -1260,25 +1298,126 @@ public class FacultyStaff extends javax.swing.JFrame {
 
     private void staClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staClearActionPerformed
         cleartable(staTable);
-        clearFacForm();
+        clearStaForm();
         staID.setEnabled(true);
         staNew.setText("New");
         staNewAction = true;
         staSearch.setText("Search");
         staSearchAction = true;
         Database db = new Database();
-        Object[][] allsta = db.searchFac(con);
+        Object[][] allsta = db.searchSta(con);
         addtoTable(staTable,allsta);
     }//GEN-LAST:event_staClearActionPerformed
 
-    //
+    // department buttons
+    private void depNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depNewActionPerformed
+        Database db = new Database();
+        Integer did = -1;
+        String dname = "-1";
+        if (!depID.getText().isEmpty()) {
+            did = Integer.parseInt(depID.getText());
+        }
+        if (!depName.getText().isEmpty()) {
+            dname = depName.getText();
+        }
+        // do new action
+        if (depNewAction && staffPermission) {
+            db.newDep(con, did, dname);
+            clearDepForm();
+            depID.setEnabled(true);
+            depNew.setText("New");
+            depNewAction = true;
+            depSearch.setText("Search");
+            depSearchAction = true;
+            Object[][] alldep = db.searchDep(con);
+            cleartable(depTable);
+            addtoTable(depTable,alldep);
+            // clear and repopulate combo boxes with new department list
+            clearComboBoxes();
+            populateComboBoxes();
+        }
+        // do delete action
+        else if (!depNewAction && staffPermission){
+            db.delDep(con, did);
+            clearDepForm();
+            depID.setEnabled(true);
+            depNew.setText("New");
+            depNewAction = true;
+            depSearch.setText("Search");
+            depSearchAction = true;
+            Object[][] alldep = db.searchDep(con);
+            cleartable(depTable);
+            addtoTable(depTable,alldep);
+            // clear and repopulate combo boxes with new department list
+            clearComboBoxes();
+            populateComboBoxes();
+        }
+    }//GEN-LAST:event_depNewActionPerformed
+
     private void depSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depSearchActionPerformed
-        // TODO add your handling code here:
+        Database db = new Database();
+        Integer did = -1;
+        String dname = "-1";
+        if (!depID.getText().isEmpty()) {
+            did = Integer.parseInt(depID.getText());
+        }
+        if (!depName.getText().isEmpty()) {
+            dname = depName.getText();
+        }
+        // do search action
+        if (depSearchAction) {
+            Object[][] result = db.searchDep(con, did, dname);
+            cleartable(depTable);
+            addtoTable(depTable, result);
+        }
+        // do edit action
+        else if (!depSearchAction && staffPermission){
+            db.editDep(con, did, dname);
+            clearDepForm();
+            depID.setEnabled(true);
+            depNew.setText("New");
+            depNewAction = true;
+            depSearch.setText("Search");
+            depSearchAction = true;
+            Object[][] alldep = db.searchDep(con);
+            cleartable(depTable);
+            addtoTable(depTable,alldep);
+            // clear and repopulate combo boxes with new department list
+            clearComboBoxes();
+            populateComboBoxes();
+        }
     }//GEN-LAST:event_depSearchActionPerformed
+
+    private void depClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depClearActionPerformed
+        cleartable(depTable);
+        clearDepForm();
+        depID.setEnabled(true);
+        depNew.setText("New");
+        depNewAction = true;
+        depSearch.setText("Search");
+        depSearchAction = true;
+        Database db = new Database();
+        Object[][] alldep = db.searchDep(con);
+        addtoTable(depTable,alldep);
+    }//GEN-LAST:event_depClearActionPerformed
+
+    // courses buttons
+    private void corNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corNewActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_corNewActionPerformed
 
     private void corSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corSearchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_corSearchActionPerformed
+
+    private void corClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corClearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_corClearActionPerformed
+
+    // enrolled buttons
+    private void enrlNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrlNewActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_enrlNewActionPerformed
 
     private void enrlSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrlSearchActionPerformed
         // TODO add your handling code here:
@@ -1287,26 +1426,6 @@ public class FacultyStaff extends javax.swing.JFrame {
     private void enrlClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrlClearActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_enrlClearActionPerformed
-
-    private void corClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corClearActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_corClearActionPerformed
-
-    private void depClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depClearActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_depClearActionPerformed
-
-    private void depNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depNewActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_depNewActionPerformed
-
-    private void corNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corNewActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_corNewActionPerformed
-
-    private void enrlNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrlNewActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_enrlNewActionPerformed
 
     // populate tables when tab selected
     private void facstaffTabStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_facstaffTabStateChanged
@@ -1385,6 +1504,11 @@ public class FacultyStaff extends javax.swing.JFrame {
         staDep.setSelectedItem("");
     }
 
+    public void clearDepForm () {
+        depID.setText("");
+        depName.setText("");
+    }
+
     public Connection getConnection () {
         return this.con;
     }
@@ -1403,6 +1527,7 @@ public class FacultyStaff extends javax.swing.JFrame {
             addStuTableListener();
             addFacTableListener();
             addStaTableListener();
+            addDepTableListener();
         }
         else {
             disableNewButtons();

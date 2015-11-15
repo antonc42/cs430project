@@ -361,6 +361,7 @@ public class Database {
         }
     }
 
+    // student table
     public Object[][] searchStu (Connection con){
         Object[][] obj = null;
         ArrayList<Object[]> temp = new ArrayList<Object[]>();
@@ -568,6 +569,7 @@ public class Database {
         }
     }
 
+    // faculty table
     public Object[][] searchFac (Connection con){
         Object[][] obj = null;
         ArrayList<Object[]> temp = new ArrayList<Object[]>();
@@ -749,6 +751,7 @@ public class Database {
         }
     }
 
+    // staff table
     public Object[][] searchSta (Connection con){
         Object[][] obj = null;
         ArrayList<Object[]> temp = new ArrayList<Object[]>();
@@ -930,6 +933,7 @@ public class Database {
         }
     }
 
+    // department table
     public Object[][] searchDep (Connection con){
         Object[][] obj = null;
         ArrayList<Object[]> temp = new ArrayList<Object[]>();
@@ -957,13 +961,24 @@ public class Database {
 
     public Object[][] searchDep (Connection con, Integer did, String dname){
         Object[][] obj = null;
-        ArrayList<Object[]> temp = null;
-        String searchdid = "%";
-        if (did != null) {
-            searchdid = did.toString();
+        ArrayList<Object[]> temp = new ArrayList<Object[]>();
+        // if nothing was passed in, don't try to build the sql expression - it will just throw a sql exception
+        // because of the dangling "WHEN"
+        if ((did ==null || did == -1) && (dname == null || dname.equals("-1"))) {
+            return obj;
         }
         try {
-            String query = "SELECT did,dname FROM Department WHERE did='"+searchdid+"' AND dname='"+dname+"'";
+            String buildquery = "SELECT did,dname FROM Department WHERE ";
+            if (did != null && did != -1) {
+                buildquery += "did='"+did+"' AND ";
+            }
+            if (dname != null && !dname.equals("-1")) {
+                buildquery += "dname='"+dname+"' AND ";
+            }
+            Pattern lastand = Pattern.compile(" AND \\Z");
+            Matcher m = lastand.matcher(buildquery);
+            String query = m.replaceAll("");
+            query += "ORDER BY did";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()){
@@ -984,6 +999,102 @@ public class Database {
         }
     }
 
+    public void editDep (Connection con, Integer did, String dname) {
+        // if nothing was passed in, do nothing
+        if ((did ==null || did == -1) && (dname == null || dname.equals("-1"))) {
+            return;
+        }
+        try {
+            String buildquery = "UPDATE Department SET ";
+            if (did == null || did == -1) {
+                // cannot edit row without primary key
+                return;
+            }
+            if (dname != null && !dname.equals("-1")) {
+                buildquery += "dname='"+dname+"',";
+            }
+            // remove trailing comma
+            if (buildquery.endsWith(",")) {
+                buildquery = buildquery.substring(0,buildquery.length() - 1);
+            }
+            buildquery += " WHERE did="+did;
+            Statement st = con.createStatement();
+            st.executeUpdate(buildquery);
+            st.close();
+            return;
+        }
+        catch (Exception ex){
+            System.out.println("SQLException: "+ex);
+            return;
+        }
+    }
+
+    public void newDep (Connection con, Integer did, String dname) {
+        // if nothing was passed in, do nothing
+        if ((did ==null || did == -1) && (dname == null || dname.equals("-1"))) {
+            return;
+        }
+        try {
+            String buildquery = "INSERT INTO Department ";
+            ArrayList<String> cols = new ArrayList<String>();
+            ArrayList<String> vals = new ArrayList<String>();
+            if (did != null && did != -1) {
+                cols.add("did");
+                vals.add(did.toString());
+            }
+            else {
+                // cannot enter row without primary key
+                return;
+            }
+            if (dname != null && !dname.equals("-1")) {
+                cols.add("dname");
+                vals.add(dname);
+            }
+            buildquery += "(";
+            for (String c : cols) {
+                buildquery += c + ",";
+            }
+            if (buildquery.endsWith(",")) {
+                buildquery = buildquery.substring(0,buildquery.length() - 1);
+            }
+            buildquery += ") VALUES (";
+            for (String v : vals) {
+                buildquery += "'" + v + "',";
+            }
+            if (buildquery.endsWith(",")) {
+                buildquery = buildquery.substring(0,buildquery.length() - 1);
+            }
+            buildquery += ")";
+            Statement st = con.createStatement();
+            st.executeUpdate(buildquery);
+            st.close();
+            return;
+        }
+        catch (Exception ex){
+            System.out.println("SQLException: "+ex);
+            return;
+        }
+    }
+
+    public void delDep (Connection con, Integer did) {
+        // cannot do anything without id
+        if (did ==null || did == -1) {
+            return;
+        }
+        try {
+            String query = "DELETE FROM Department WHERE did=" + did;
+            Statement st = con.createStatement();
+            st.executeUpdate(query);
+            st.close();
+            return;
+        }
+        catch (Exception ex) {
+            System.out.println("SQLException: " + ex);
+            return;
+        }
+    }
+
+    // courses table
     public Object[][] searchCor (Connection con){
         Object[][] obj = null;
         ArrayList<Object[]> temp = new ArrayList<Object[]>();
@@ -1052,7 +1163,7 @@ public class Database {
             return obj;
         }
     }
-
+    // enrolled table
     public Object[][] searchEnrl (Connection con){
         Object[][] obj = null;
         ArrayList<Object[]> temp = new ArrayList<Object[]>();
