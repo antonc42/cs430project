@@ -898,7 +898,12 @@
                 <Property name="text" type="java.lang.String" value="Instructor"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="corInstructor">
+            <Component class="javax.swing.JComboBox" name="corInstructor">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.DefaultComboBoxModel(new String[] { &quot;&quot; })" type="code"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="corSizeLabel">
               <Properties>

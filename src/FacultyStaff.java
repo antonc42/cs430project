@@ -128,7 +128,7 @@ public class FacultyStaff extends javax.swing.JFrame {
         corRoomLabel = new javax.swing.JLabel();
         corRoom = new javax.swing.JTextField();
         corInstructorLabel = new javax.swing.JLabel();
-        corInstructor = new javax.swing.JTextField();
+        corInstructor = new javax.swing.JComboBox();
         corSizeLabel = new javax.swing.JLabel();
         corSize = new javax.swing.JTextField();
         corNew = new javax.swing.JButton();
@@ -611,6 +611,8 @@ public class FacultyStaff extends javax.swing.JFrame {
         corRoomLabel.setText("Location");
 
         corInstructorLabel.setText("Instructor");
+
+        corInstructor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "" }));
 
         corSizeLabel.setText("Size Limit");
 
@@ -1539,7 +1541,7 @@ public class FacultyStaff extends javax.swing.JFrame {
     private javax.swing.JButton corClear;
     private javax.swing.JTextField corID;
     private javax.swing.JLabel corIDLabel;
-    private javax.swing.JTextField corInstructor;
+    private javax.swing.JComboBox corInstructor;
     private javax.swing.JLabel corInstructorLabel;
     private javax.swing.JTextField corName;
     private javax.swing.JLabel corNameLabel;
