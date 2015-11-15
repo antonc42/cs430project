@@ -775,27 +775,37 @@ public class Database {
         }
     }
 
-    public Object[][] searchSta (Connection con, Integer sid, String sname, Integer deptid){
+    public Object[][] searchSta (Connection con, Integer sid, String sname, String dname){
         Object[][] obj = null;
-        ArrayList<Object[]> temp = null;
-        String searchsid = "%";
-        String searchdid = "%";
-        if (sid != null) {
-            searchsid = sid.toString();
-        }
-        if (deptid != null) {
-            searchdid = deptid.toString();
+        ArrayList<Object[]> temp = new ArrayList<Object[]>();
+        // if nothing was passed in, don't try to build the sql expression - it will just throw a sql exception
+        // because of the dangling "WHEN"
+        if ((sid ==null || sid == -1) && (sname == null || sname.equals("-1")) &&
+                (dname == null || dname.equals("-1"))) {
+            return obj;
         }
         try {
-            String query = "SELECT sid,sname,deptid FROM Staff WHERE sid='"+searchsid+"' AND " +
-                    "sname='"+sname+"' AND deptid='"+searchdid+"'";
+            String buildquery = "SELECT sid,sname,dname FROM Staff JOIN Department ON Staff.deptid=Department.did WHERE ";
+            if (sid != null && sid != -1) {
+                buildquery += "sid='"+sid+"' AND ";
+            }
+            if (sname != null && !sname.equals("-1")) {
+                buildquery += "sname='"+sname+"' AND ";
+            }
+            if (dname != null && !dname.equals("-1")) {
+                buildquery += "dname='"+dname+"' AND ";
+            }
+            Pattern lastand = Pattern.compile(" AND \\Z");
+            Matcher m = lastand.matcher(buildquery);
+            String query = m.replaceAll("");
+            query += "ORDER BY sid";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()){
                 Integer Rsid = rs.getInt(1);
                 String Rsname = rs.getString(2);
-                Integer Rdid = rs.getInt(3);
-                Object[] row = {Rsid.toString(),Rsname,Rdid.toString()};
+                String Rdname = rs.getString(3);
+                Object[] row = {Rsid.toString(),Rsname,Rdname};
                 temp.add(row);
             }
             obj = new Object[temp.size()][];
@@ -807,6 +817,116 @@ public class Database {
         catch (Exception ex){
             System.out.println("SQLException: "+ex);
             return obj;
+        }
+    }
+
+    public void editSta (Connection con, Integer sid, String sname, String dname) {
+        // if nothing was passed in, do nothing
+        if ((sid ==null || sid == -1) && (sname == null || sname.equals("-1")) &&
+                (dname == null || dname.equals("-1"))) {
+            return;
+        }
+        try {
+            String buildquery = "UPDATE Staff SET ";
+            if (sid == null || sid == -1) {
+                // cannot edit row without primary key
+                return;
+            }
+            if (sname != null && !sname.equals("-1")) {
+                buildquery += "sname='"+sname+"',";
+            }
+            if (dname != null && !dname.equals("-1") && !dname.isEmpty()) {
+                Integer deptid = findDepID(con,dname);
+                if (deptid != null) {
+                    buildquery += "deptid='" + deptid + "',";
+                }
+            }
+            // remove trailing comma
+            if (buildquery.endsWith(",")) {
+                buildquery = buildquery.substring(0,buildquery.length() - 1);
+            }
+            buildquery += " WHERE sid="+sid;
+            Statement st = con.createStatement();
+            st.executeUpdate(buildquery);
+            st.close();
+            return;
+        }
+        catch (Exception ex){
+            System.out.println("SQLException: "+ex);
+            return;
+        }
+    }
+
+    public void newSta (Connection con, Integer sid, String sname, String dname) {
+        // if nothing was passed in, do nothing
+        if ((sid ==null || sid == -1) && (sname == null || sname.equals("-1")) &&
+                (dname == null || dname.equals("-1"))) {
+            return;
+        }
+        try {
+            String buildquery = "INSERT INTO Staff ";
+            ArrayList<String> cols = new ArrayList<String>();
+            ArrayList<String> vals = new ArrayList<String>();
+            if (sid != null && sid != -1) {
+                cols.add("sid");
+                vals.add(sid.toString());
+            }
+            else {
+                // cannot enter row without primary key
+                return;
+            }
+            if (sname != null && !sname.equals("-1")) {
+                cols.add("sname");
+                vals.add(sname);
+            }
+            if (dname != null && !dname.equals("-1")) {
+                Integer deptid = findDepID(con,dname);
+                if (deptid != null) {
+                    cols.add("deptid");
+                    vals.add(deptid.toString());
+                }
+            }
+            buildquery += "(";
+            for (String c : cols) {
+                buildquery += c + ",";
+            }
+            if (buildquery.endsWith(",")) {
+                buildquery = buildquery.substring(0,buildquery.length() - 1);
+            }
+            buildquery += ") VALUES (";
+            for (String v : vals) {
+                buildquery += "'" + v + "',";
+            }
+            if (buildquery.endsWith(",")) {
+                buildquery = buildquery.substring(0,buildquery.length() - 1);
+            }
+            buildquery += ")";
+            Statement st = con.createStatement();
+            st.executeUpdate(buildquery);
+            st.close();
+            return;
+        }
+        catch (Exception ex){
+            System.out.println("SQLException: "+ex);
+            return;
+        }
+    }
+
+    public void delSta (Connection con, Integer sid) {
+        // cannot do anything without id
+        if (sid ==null || sid == -1) {
+            return;
+        }
+        try {
+            String query = "DELETE FROM Staff WHERE sid=" + sid;
+            Statement st = con.createStatement();
+            st.executeUpdate(query);
+            st.close();
+            return;
+        }
+        catch (Exception ex) {
+            System.out.println("SQLException: " + ex);
+            return;
         }
     }
 

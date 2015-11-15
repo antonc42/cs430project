@@ -24,6 +24,8 @@ public class FacultyStaff extends javax.swing.JFrame {
     private boolean stuNewAction = true;
     private boolean facSearchAction = true;
     private boolean facNewAction = true;
+    private boolean staSearchAction = true;
+    private boolean staNewAction = true;
 
     /**
      * Creates new form
@@ -932,6 +934,34 @@ public class FacultyStaff extends javax.swing.JFrame {
         });
     }
 
+    private void addStaTableListener() {
+        staTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        staTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent e) {
+                if (e.getValueIsAdjusting()) return;
+                ListSelectionModel lsm = (ListSelectionModel) e.getSource();
+                if (!lsm.isSelectionEmpty()) {
+                    Integer selectedRow = lsm.getMinSelectionIndex();
+                    Integer numcols = staTable.getColumnCount();
+                    Hashtable<String,Object> colhash = new Hashtable<String, Object>();
+                    for (int col=0; col < numcols; col++) {
+                        String colname = staTable.getColumnName(col);
+                        Object colcontent = staTable.getValueAt(selectedRow,col);
+                        colhash.put(colname,colcontent);
+                    }
+                    staID.setText(colhash.get("ID").toString());
+                    staID.setEnabled(false);
+                    staName.setText(colhash.get("Name").toString());
+                    staDep.setSelectedItem(colhash.get("Department").toString());
+                    staNew.setText("Delete");
+                    staNewAction = false;
+                    staSearch.setText("Edit");
+                    staSearchAction = false;
+                }
+            }
+        });
+    }
+
     private void disableNewButtons() {
         stuNew.setVisible(false);
         corNew.setVisible(false);
@@ -948,6 +978,7 @@ public class FacultyStaff extends javax.swing.JFrame {
         Object[] deps = db.getDepList(con);
         for (Object dep : deps) {
             facDep.addItem(dep);
+            staDep.addItem(dep);
         }
     }
 
@@ -1151,15 +1182,93 @@ public class FacultyStaff extends javax.swing.JFrame {
 
     // staff buttons
     private void staNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staNewActionPerformed
-        // TODO add your handling code here:
+        Database db = new Database();
+        Integer sid = -1;
+        String sname = "-1";
+        String dname = "-1";
+        if (!staID.getText().isEmpty()) {
+            sid = Integer.parseInt(staID.getText());
+        }
+        if (!staName.getText().isEmpty()) {
+            sname = staName.getText();
+        }
+        if (!staDep.getSelectedItem().toString().isEmpty()) {
+            dname = staDep.getSelectedItem().toString();
+        }
+        // do new action
+        if (staNewAction && staffPermission) {
+            db.newSta(con, sid, sname, dname);
+            clearStaForm();
+            staID.setEnabled(true);
+            staNew.setText("New");
+            staNewAction = true;
+            staSearch.setText("Search");
+            staSearchAction = true;
+            Object[][] allsta = db.searchSta(con);
+            cleartable(staTable);
+            addtoTable(staTable,allsta);
+        }
+        // do delete action
+        else if (!staNewAction && staffPermission){
+            db.delSta(con, sid);
+            clearStaForm();
+            staID.setEnabled(true);
+            staNew.setText("New");
+            staNewAction = true;
+            staSearch.setText("Search");
+            staSearchAction = true;
+            Object[][] allsta = db.searchSta(con);
+            cleartable(staTable);
+            addtoTable(staTable,allsta);
+        }
     }//GEN-LAST:event_staNewActionPerformed
 
     private void staSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staSearchActionPerformed
-        // TODO add your handling code here:
+        Database db = new Database();
+        Integer sid = -1;
+        String sname = "-1";
+        String dname = "-1";
+        if (!staID.getText().isEmpty()) {
+            sid = Integer.parseInt(staID.getText());
+        }
+        if (!staName.getText().isEmpty()) {
+            sname = staName.getText();
+        }
+        if (!staDep.getSelectedItem().toString().isEmpty()) {
+            dname = staDep.getSelectedItem().toString();
+        }
+        // do search action
+        if (staSearchAction) {
+            Object[][] result = db.searchSta(con, sid, sname, dname);
+            cleartable(staTable);
+            addtoTable(staTable, result);
+        }
+        // do edit action
+        else if (!staSearchAction && staffPermission){
+            db.editSta(con, sid, sname, dname);
+            clearStaForm();
+            staID.setEnabled(true);
+            staNew.setText("New");
+            staNewAction = true;
+            staSearch.setText("Search");
+            staSearchAction = true;
+            Object[][] allsta = db.searchSta(con);
+            cleartable(staTable);
+            addtoTable(staTable,allsta);
+        }
     }//GEN-LAST:event_staSearchActionPerformed
 
     private void staClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staClearActionPerformed
-        // TODO add your handling code here:
+        cleartable(staTable);
+        clearFacForm();
+        staID.setEnabled(true);
+        staNew.setText("New");
+        staNewAction = true;
+        staSearch.setText("Search");
+        staSearchAction = true;
+        Database db = new Database();
+        Object[][] allsta = db.searchFac(con);
+        addtoTable(staTable,allsta);
     }//GEN-LAST:event_staClearActionPerformed
 
     //
@@ -1270,6 +1379,12 @@ public class FacultyStaff extends javax.swing.JFrame {
         facDep.setSelectedItem("");
     }
 
+    public void clearStaForm () {
+        staID.setText("");
+        staName.setText("");
+        staDep.setSelectedItem("");
+    }
+
     public Connection getConnection () {
         return this.con;
     }
@@ -1287,6 +1402,7 @@ public class FacultyStaff extends javax.swing.JFrame {
         if (staffPermission) {
             addStuTableListener();
             addFacTableListener();
+            addStaTableListener();
         }
         else {
             disableNewButtons();
