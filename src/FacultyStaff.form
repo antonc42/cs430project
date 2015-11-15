@@ -326,9 +326,9 @@
                           <Component id="facName" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="facDepLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="facDep" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="facDep" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="facDepLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -472,8 +472,8 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="staDep" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                                  <Component id="staName" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                  <Component id="staName" alignment="0" pref="200" max="32767" attributes="0"/>
+                                  <Component id="staDep" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
@@ -501,8 +501,8 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="staDepLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="staDep" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="staDepLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -536,7 +536,12 @@
                 <Property name="text" type="java.lang.String" value="Department"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="staDep">
+            <Component class="javax.swing.JComboBox" name="staDep">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.DefaultComboBoxModel(new String[] { &quot;&quot; })" type="code"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="staNew">
               <Properties>

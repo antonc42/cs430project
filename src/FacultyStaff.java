@@ -98,7 +98,7 @@ public class FacultyStaff extends javax.swing.JFrame {
         staNameLabel = new javax.swing.JLabel();
         staName = new javax.swing.JTextField();
         staDepLabel = new javax.swing.JLabel();
-        staDep = new javax.swing.JTextField();
+        staDep = new javax.swing.JComboBox();
         staNew = new javax.swing.JButton();
         staSearch = new javax.swing.JButton();
         staClear = new javax.swing.JButton();
@@ -220,67 +220,67 @@ public class FacultyStaff extends javax.swing.JFrame {
         javax.swing.GroupLayout studentTabLayout = new javax.swing.GroupLayout(studentTab);
         studentTab.setLayout(studentTabLayout);
         studentTabLayout.setHorizontalGroup(
-                studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(stuScroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
-                        .addGroup(studentTabLayout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(studentTabLayout.createSequentialGroup()
-                                                .addComponent(stuNew)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(stuSearch)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(stuClear))
-                                        .addGroup(studentTabLayout.createSequentialGroup()
-                                                .addComponent(stuAgeLabel)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(stuAge, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(studentTabLayout.createSequentialGroup()
-                                                .addComponent(stuIDLabel)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(stuID, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(studentTabLayout.createSequentialGroup()
-                                                .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(stuNameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addComponent(stuMajorLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addComponent(stuLevelLabel, javax.swing.GroupLayout.Alignment.TRAILING))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(stuMajor, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(stuLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(stuName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(stuScroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+            .addGroup(studentTabLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(studentTabLayout.createSequentialGroup()
+                        .addComponent(stuNew)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(stuSearch)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(stuClear))
+                    .addGroup(studentTabLayout.createSequentialGroup()
+                        .addComponent(stuAgeLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(stuAge, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(studentTabLayout.createSequentialGroup()
+                        .addComponent(stuIDLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(stuID, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(studentTabLayout.createSequentialGroup()
+                        .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(stuNameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(stuMajorLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(stuLevelLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(stuMajor, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(stuLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(stuName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         studentTabLayout.setVerticalGroup(
-                studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(studentTabLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(stuIDLabel)
-                                        .addComponent(stuID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(stuNameLabel)
-                                        .addComponent(stuName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(stuMajorLabel)
-                                        .addComponent(stuMajor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(stuLevelLabel)
-                                        .addComponent(stuLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(stuAgeLabel)
-                                        .addComponent(stuAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(stuClear)
-                                        .addComponent(stuSearch)
-                                        .addComponent(stuNew))
-                                .addGap(18, 18, 18)
-                                .addComponent(stuScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE))
+            studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(studentTabLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(stuIDLabel)
+                    .addComponent(stuID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(stuNameLabel)
+                    .addComponent(stuName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(stuMajorLabel)
+                    .addComponent(stuMajor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(stuLevelLabel)
+                    .addComponent(stuLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(stuAgeLabel)
+                    .addComponent(stuAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(stuClear)
+                    .addComponent(stuSearch)
+                    .addComponent(stuNew))
+                .addGap(18, 18, 18)
+                .addComponent(stuScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE))
         );
 
         facstaffTab.addTab("Students", studentTab);
@@ -293,7 +293,7 @@ public class FacultyStaff extends javax.swing.JFrame {
 
         facDepLabel.setText("Department");
 
-        facDep.setModel(new javax.swing.DefaultComboBoxModel(new String[]{""}));
+        facDep.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "" }));
 
         facNew.setText("New");
         facNew.addActionListener(new java.awt.event.ActionListener() {
@@ -381,9 +381,9 @@ public class FacultyStaff extends javax.swing.JFrame {
                     .addComponent(facNameLabel)
                     .addComponent(facName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(facultyTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(facDepLabel)
-                    .addComponent(facDep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(facultyTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(facDep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(facDepLabel))
                 .addGap(18, 18, 18)
                 .addGroup(facultyTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(facClear)
@@ -402,6 +402,8 @@ public class FacultyStaff extends javax.swing.JFrame {
         staNameLabel.setText("Name");
 
         staDepLabel.setText("Department");
+
+        staDep.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "" }));
 
         staNew.setText("New");
         staNew.addActionListener(new java.awt.event.ActionListener() {
@@ -469,8 +471,8 @@ public class FacultyStaff extends javax.swing.JFrame {
                             .addComponent(staDepLabel, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(staDep, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(staName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(staName, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(staDep, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(staffTabLayout.createSequentialGroup()
                         .addComponent(staIDLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -490,8 +492,8 @@ public class FacultyStaff extends javax.swing.JFrame {
                     .addComponent(staName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(staDepLabel)
-                    .addComponent(staDep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(staDep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(staDepLabel))
                 .addGap(18, 18, 18)
                 .addGroup(staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(staClear)
@@ -1351,7 +1353,7 @@ public class FacultyStaff extends javax.swing.JFrame {
     private javax.swing.JTabbedPane facstaffTab;
     private javax.swing.JPanel facultyTab;
     private javax.swing.JButton staClear;
-    private javax.swing.JTextField staDep;
+    private javax.swing.JComboBox staDep;
     private javax.swing.JLabel staDepLabel;
     private javax.swing.JTextField staID;
     private javax.swing.JLabel staIDLabel;
