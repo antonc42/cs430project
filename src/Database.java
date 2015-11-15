@@ -321,6 +321,46 @@ public class Database {
         }
     }
 
+    public Integer findDepID (Connection con, String dname) {
+        try {
+            String depquery = "SELECT did FROM Department WHERE dname=?";
+            PreparedStatement ps = con.prepareStatement(depquery);
+            ps.setString(1,dname);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Integer Rdid = rs.getInt(1);
+                rs.close();
+                ps.close();
+                return Rdid;
+            }
+        } catch (SQLException e) {
+            System.out.println("SQL Exception: "+e);
+            return null;
+        }
+        return null;
+    }
+
+    public Object[] getDepList (Connection con) {
+        Object[] deps = null;
+        ArrayList<Object> list = new ArrayList<Object>();
+        try {
+            String query = "SELECT dname FROM Department ORDER BY dname";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                list.add(rs.getString(1));
+            }
+            deps = new Object[list.size()];
+            list.toArray(deps);
+            rs.close();
+            st.close();
+            return deps;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return deps;
+        }
+    }
+
     public Object[][] searchStu (Connection con){
         Object[][] obj = null;
         ArrayList<Object[]> temp = new ArrayList<Object[]>();
@@ -596,6 +636,43 @@ public class Database {
         catch (Exception ex){
             System.out.println("SQLException: "+ex);
             return obj;
+        }
+    }
+
+    public void editFac (Connection con, Integer fid, String fname, String dname) {
+        // if nothing was passed in, do nothing
+        if ((fid ==null || fid == -1) && (fname == null || fname.equals("-1")) &&
+                (dname == null || dname.equals("-1"))) {
+            return;
+        }
+        try {
+            String buildquery = "UPDATE Faculty SET ";
+            if (fid == null || fid == -1) {
+                // cannot edit row without primary key
+                return;
+            }
+            if (fname != null && !fname.equals("-1")) {
+                buildquery += "fname='"+fname+"',";
+            }
+            if (dname != null && !dname.equals("-1") && !dname.isEmpty()) {
+                Integer deptid = findDepID(con,dname);
+                if (deptid != null) {
+                    buildquery += "deptid='" + deptid + "',";
+                }
+            }
+            // remove trailing comma
+            if (buildquery.endsWith(",")) {
+                buildquery = buildquery.substring(0,buildquery.length() - 1);
+            }
+            buildquery += " WHERE fid="+fid;
+            Statement st = con.createStatement();
+            st.executeUpdate(buildquery);
+            st.close();
+            return;
+        }
+        catch (Exception ex){
+            System.out.println("SQLException: "+ex);
+            return;
         }
     }
 

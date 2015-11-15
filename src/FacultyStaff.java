@@ -28,16 +28,6 @@ public class FacultyStaff extends javax.swing.JFrame {
     /**
      * Creates new form
      */
-    public FacultyStaff() {
-        try {
-            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
-            }
-        catch (Exception e) {
-            e.printStackTrace();
-            }
-        initComponents();
-    }
-
     public FacultyStaff(Connection passedcon) {
         setConnection(passedcon);
         try {
@@ -47,8 +37,10 @@ public class FacultyStaff extends javax.swing.JFrame {
             e.printStackTrace();
         }
         initComponents();
+        populateComboBoxes();
         disableNewButtons();
     }
+
     public FacultyStaff(Connection passedcon, boolean staffPermission) {
         setConnection(passedcon);
         try {
@@ -58,6 +50,7 @@ public class FacultyStaff extends javax.swing.JFrame {
             e.printStackTrace();
         }
         initComponents();
+        populateComboBoxes();
         setStaffPermission(staffPermission);
     }
 
@@ -227,67 +220,67 @@ public class FacultyStaff extends javax.swing.JFrame {
         javax.swing.GroupLayout studentTabLayout = new javax.swing.GroupLayout(studentTab);
         studentTab.setLayout(studentTabLayout);
         studentTabLayout.setHorizontalGroup(
-            studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(stuScroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
-            .addGroup(studentTabLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(studentTabLayout.createSequentialGroup()
-                        .addComponent(stuNew)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(stuSearch)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(stuClear))
-                    .addGroup(studentTabLayout.createSequentialGroup()
-                        .addComponent(stuAgeLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(stuAge, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(studentTabLayout.createSequentialGroup()
-                        .addComponent(stuIDLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(stuID, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(studentTabLayout.createSequentialGroup()
-                        .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(stuNameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(stuMajorLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(stuLevelLabel, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(stuMajor, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(stuLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(stuName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(stuScroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+                        .addGroup(studentTabLayout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(studentTabLayout.createSequentialGroup()
+                                                .addComponent(stuNew)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(stuSearch)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(stuClear))
+                                        .addGroup(studentTabLayout.createSequentialGroup()
+                                                .addComponent(stuAgeLabel)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(stuAge, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(studentTabLayout.createSequentialGroup()
+                                                .addComponent(stuIDLabel)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(stuID, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(studentTabLayout.createSequentialGroup()
+                                                .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(stuNameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(stuMajorLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(stuLevelLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(stuMajor, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(stuLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(stuName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         studentTabLayout.setVerticalGroup(
-            studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(studentTabLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(stuIDLabel)
-                    .addComponent(stuID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(stuNameLabel)
-                    .addComponent(stuName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(stuMajorLabel)
-                    .addComponent(stuMajor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(stuLevelLabel)
-                    .addComponent(stuLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(stuAgeLabel)
-                    .addComponent(stuAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(stuClear)
-                    .addComponent(stuSearch)
-                    .addComponent(stuNew))
-                .addGap(18, 18, 18)
-                .addComponent(stuScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE))
+                studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(studentTabLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(stuIDLabel)
+                                        .addComponent(stuID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(stuNameLabel)
+                                        .addComponent(stuName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(stuMajorLabel)
+                                        .addComponent(stuMajor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(stuLevelLabel)
+                                        .addComponent(stuLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(stuAgeLabel)
+                                        .addComponent(stuAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(stuClear)
+                                        .addComponent(stuSearch)
+                                        .addComponent(stuNew))
+                                .addGap(18, 18, 18)
+                                .addComponent(stuScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE))
         );
 
         facstaffTab.addTab("Students", studentTab);
@@ -300,7 +293,7 @@ public class FacultyStaff extends javax.swing.JFrame {
 
         facDepLabel.setText("Department");
 
-        facDep.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "" }));
+        facDep.setModel(new javax.swing.DefaultComboBoxModel(new String[]{""}));
 
         facNew.setText("New");
         facNew.addActionListener(new java.awt.event.ActionListener() {
@@ -948,6 +941,14 @@ public class FacultyStaff extends javax.swing.JFrame {
         this.repaint();
     }
 
+    private void populateComboBoxes() {
+        Database db = new Database();
+        Object[] deps = db.getDepList(con);
+        for (Object dep : deps) {
+            facDep.addItem(dep);
+        }
+    }
+
     // student buttons
     private void stuNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stuNewActionPerformed
         Database db = new Database();
@@ -1056,6 +1057,10 @@ public class FacultyStaff extends javax.swing.JFrame {
     }//GEN-LAST:event_stuClearActionPerformed
 
     // faculty buttons
+    private void facNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facNewActionPerformed
+
+    }//GEN-LAST:event_facNewActionPerformed
+
     private void facSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facSearchActionPerformed
         Database db = new Database();
         Integer fid = -1;
@@ -1078,7 +1083,7 @@ public class FacultyStaff extends javax.swing.JFrame {
         }
         // do edit action
         else if (!facSearchAction && staffPermission){
-            //db.editFac(con, fid, fname, dname);
+            db.editFac(con, fid, fname, dname);
             clearFacForm();
             facID.setEnabled(true);
             facNew.setText("New");
@@ -1104,10 +1109,7 @@ public class FacultyStaff extends javax.swing.JFrame {
         addtoTable(facTable,allfac);
     }//GEN-LAST:event_facClearActionPerformed
 
-    private void facNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facNewActionPerformed
-
-    }//GEN-LAST:event_facNewActionPerformed
-
+    //
     private void depSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depSearchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_depSearchActionPerformed
@@ -1140,6 +1142,23 @@ public class FacultyStaff extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_staClearActionPerformed
 
+    private void staNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staNewActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_staNewActionPerformed
+
+    private void depNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depNewActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_depNewActionPerformed
+
+    private void corNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corNewActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_corNewActionPerformed
+
+    private void enrlNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrlNewActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_enrlNewActionPerformed
+
+    // populate tables when tab selected
     private void facstaffTabStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_facstaffTabStateChanged
         JTabbedPane temp = (JTabbedPane) evt.getSource();
         int index = temp.getSelectedIndex();
@@ -1153,6 +1172,7 @@ public class FacultyStaff extends javax.swing.JFrame {
             Object[][] allfac = db.searchFac(con);
             cleartable(facTable);
             addtoTable(facTable,allfac);
+
         }
         else if (index == 2) {
             Object[][] allsta = db.searchSta(con);
@@ -1175,22 +1195,6 @@ public class FacultyStaff extends javax.swing.JFrame {
             addtoTable(enrlTable,allenrl);
         }
     }//GEN-LAST:event_facstaffTabStateChanged
-
-    private void staNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staNewActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_staNewActionPerformed
-
-    private void depNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depNewActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_depNewActionPerformed
-
-    private void corNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corNewActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_corNewActionPerformed
-
-    private void enrlNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrlNewActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_enrlNewActionPerformed
 
     private void cleartable (JTable table) {
         table.clearSelection();
