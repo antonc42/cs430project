@@ -340,11 +340,51 @@ public class Database {
         return null;
     }
 
+    public Integer findFacID (Connection con, String fname) {
+        try {
+            String depquery = "SELECT fid FROM Faculty WHERE fname=?";
+            PreparedStatement ps = con.prepareStatement(depquery);
+            ps.setString(1,fname);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Integer Rfid = rs.getInt(1);
+                rs.close();
+                ps.close();
+                return Rfid;
+            }
+        } catch (SQLException e) {
+            System.out.println("SQL Exception: "+e);
+            return null;
+        }
+        return null;
+    }
+
     public Object[] getDepList (Connection con) {
         Object[] deps = null;
         ArrayList<Object> list = new ArrayList<Object>();
         try {
             String query = "SELECT dname FROM Department ORDER BY dname";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                list.add(rs.getString(1));
+            }
+            deps = new Object[list.size()];
+            list.toArray(deps);
+            rs.close();
+            st.close();
+            return deps;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return deps;
+        }
+    }
+
+    public Object[] getFacList (Connection con) {
+        Object[] deps = null;
+        ArrayList<Object> list = new ArrayList<Object>();
+        try {
+            String query = "SELECT fname FROM Faculty ORDER BY fname";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
@@ -457,9 +497,11 @@ public class Database {
                 // cannot edit row without primary key
                 return;
             }
-            if (sname != null && !sname.equals("-1")) {
+            if (sname != null && !sname.equals("-1") && !sname.isEmpty()) {
                 buildquery += "sname='"+sname+"',";
             }
+            // name cannot be empty
+            else { return; }
             if (major != null && !major.equals("-1")) {
                 buildquery += "major='"+major+"',";
             }
@@ -505,10 +547,12 @@ public class Database {
                 // cannot enter row without primary key
                 return;
             }
-            if (sname != null && !sname.equals("-1")) {
+            if (sname != null && !sname.equals("-1") && !sname.isEmpty()) {
                 cols.add("sname");
                 vals.add(sname);
             }
+            // name cannot be empty
+            else { return; }
             if (major != null && !major.equals("-1")) {
                 cols.add("major");
                 vals.add(major);
@@ -653,9 +697,11 @@ public class Database {
                 // cannot edit row without primary key
                 return;
             }
-            if (fname != null && !fname.equals("-1")) {
+            if (fname != null && !fname.equals("-1") && !fname.isEmpty()) {
                 buildquery += "fname='"+fname+"',";
             }
+            // name cannot be empty
+            else { return; }
             if (dname != null && !dname.equals("-1") && !dname.isEmpty()) {
                 Integer deptid = findDepID(con,dname);
                 if (deptid != null) {
@@ -696,17 +742,23 @@ public class Database {
                 // cannot enter row without primary key
                 return;
             }
-            if (fname != null && !fname.equals("-1")) {
+            if (fname != null && !fname.equals("-1") && !fname.isEmpty()) {
                 cols.add("fname");
                 vals.add(fname);
             }
-            if (dname != null && !dname.equals("-1")) {
+            // name cannot be empty
+            else { return; }
+            if (dname != null && !dname.equals("-1") && !dname.isEmpty()) {
                 Integer deptid = findDepID(con,dname);
                 if (deptid != null) {
                     cols.add("deptid");
                     vals.add(deptid.toString());
                 }
+                // cannot have invalid department
+                else { return; }
             }
+            // cannot have empty department
+            else { return; }
             buildquery += "(";
             for (String c : cols) {
                 buildquery += c + ",";
@@ -835,15 +887,21 @@ public class Database {
                 // cannot edit row without primary key
                 return;
             }
-            if (sname != null && !sname.equals("-1")) {
+            if (sname != null && !sname.equals("-1") && !sname.isEmpty()) {
                 buildquery += "sname='"+sname+"',";
             }
+            // name cannot be empty
+            else { return; }
             if (dname != null && !dname.equals("-1") && !dname.isEmpty()) {
                 Integer deptid = findDepID(con,dname);
                 if (deptid != null) {
                     buildquery += "deptid='" + deptid + "',";
                 }
+                // department cannot be invalid
+                else { return; }
             }
+            // department cannot be empty
+            else { return; }
             // remove trailing comma
             if (buildquery.endsWith(",")) {
                 buildquery = buildquery.substring(0,buildquery.length() - 1);
@@ -878,17 +936,23 @@ public class Database {
                 // cannot enter row without primary key
                 return;
             }
-            if (sname != null && !sname.equals("-1")) {
+            if (sname != null && !sname.equals("-1") && ! sname.isEmpty()) {
                 cols.add("sname");
                 vals.add(sname);
             }
-            if (dname != null && !dname.equals("-1")) {
+            // name cannot be empty
+            else { return; }
+            if (dname != null && !dname.equals("-1") && !dname.isEmpty()) {
                 Integer deptid = findDepID(con,dname);
                 if (deptid != null) {
                     cols.add("deptid");
                     vals.add(deptid.toString());
                 }
+                // department cannot be invalid
+                else { return; }
             }
+            // departement cannot be empty
+            else { return; }
             buildquery += "(";
             for (String c : cols) {
                 buildquery += c + ",";
@@ -1010,9 +1074,11 @@ public class Database {
                 // cannot edit row without primary key
                 return;
             }
-            if (dname != null && !dname.equals("-1")) {
+            if (dname != null && !dname.equals("-1") && !dname.isEmpty()) {
                 buildquery += "dname='"+dname+"',";
             }
+            // name cannot be empty
+            else { return; }
             // remove trailing comma
             if (buildquery.endsWith(",")) {
                 buildquery = buildquery.substring(0,buildquery.length() - 1);
@@ -1046,10 +1112,12 @@ public class Database {
                 // cannot enter row without primary key
                 return;
             }
-            if (dname != null && !dname.equals("-1")) {
+            if (dname != null && !dname.equals("-1") && !dname.isEmpty()) {
                 cols.add("dname");
                 vals.add(dname);
             }
+            // name cannot be empty
+            else { return; }
             buildquery += "(";
             for (String c : cols) {
                 buildquery += c + ",";
@@ -1124,32 +1192,52 @@ public class Database {
         }
     }
 
-    public Object[][] searchCor (Connection con, String cid, String cname, String meets_at, String room, Integer fid,
+    public Object[][] searchCor (Connection con, String cid, String cname, String meets_at, String room, String fname,
                                  Integer limit){
         Object[][] obj = null;
-        ArrayList<Object[]> temp = null;
-        String searchfid = "%";
-        String searchlim = "%";
-        if (fid != null) {
-            searchfid = fid.toString();
-        }
-        if (limit != null) {
-            searchlim = limit.toString();
+        ArrayList<Object[]> temp = new ArrayList<Object[]>();
+        // if nothing was passed in, don't try to build the sql expression - it will just throw a sql exception
+        // because of the dangling "WHEN"
+        if ((cid ==null || cid.equals("-1")) && (cname == null || cname.equals("-1")) && (meets_at == null ||
+                meets_at.equals("-1")) && (room == null || room.equals("-1")) && (fname == null ||
+                fname.equals("-1")) && (limit == null || limit ==-1)) {
+            return obj;
         }
         try {
-            String query = "SELECT cid,cname,meets_at,room,fid,limit FROM Courses WHERE cid='"+searchfid+"' AND " +
-                    "cname='"+cname+"' AND meets_at='"+meets_at+"' AND room='"+room+"' AND fid='"+fid+"' AND " +
-                    "limit='"+searchlim+"'";
+            String buildquery = "SELECT cid,cname,meets_at,room,fname,limit FROM Courses JOIN Faculty ON Courses.fid=Faculty.fid WHERE ";
+            if (cid != null && !cid.equals("-1")) {
+                buildquery += "cid='"+cid+"' AND ";
+            }
+            if (cname != null && !cname.equals("-1")) {
+                buildquery += "cname='"+cname+"' AND ";
+            }
+            if (meets_at != null && !meets_at.equals("-1")) {
+                buildquery += "meets_at='"+meets_at+"' AND ";
+            }
+            if (room != null && !room.equals("-1")) {
+                buildquery += "room='"+room+"' AND ";
+            }
+            if (fname != null && !fname.equals("-1")) {
+                buildquery += "fname='"+fname+"' AND ";
+            }
+            if (limit != null && limit !=-1) {
+                buildquery += "limit="+limit+" AND ";
+            }
+            Pattern lastand = Pattern.compile(" AND \\Z");
+            Matcher m = lastand.matcher(buildquery);
+            String query = m.replaceAll("");
+            query += "ORDER BY cid";
+            System.out.println(query);
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()){
                 String Rcid = rs.getString(1);
                 String Rcname = rs.getString(2);
-                String Rmeets = rs.getString(3);
+                String Rmeets_at = rs.getString(3);
                 String Rroom = rs.getString(4);
-                Integer Rfid = rs.getInt(5);
-                Integer Rlim = rs.getInt(6);
-                Object[] row = {Rcid,Rcname,Rmeets,Rroom,Rfid.toString(),Rlim.toString()};
+                String Rfname = rs.getString(5);
+                Integer Rlimit = rs.getInt(6);
+                Object[] row = {Rcid.toString(),Rcname,Rmeets_at,Rroom,Rfname,Rlimit.toString()};
                 temp.add(row);
             }
             obj = new Object[temp.size()][];
@@ -1163,6 +1251,149 @@ public class Database {
             return obj;
         }
     }
+
+    public void editCor (Connection con, String cid, String cname, String meets_at, String room, String fname,
+                         Integer limit) {
+        // if nothing was passed in, do nothing
+        if ((cid ==null || cid.equals("-1")) && (cname == null || cname.equals("-1")) && (meets_at == null ||
+                meets_at.equals("-1")) && (room == null || room.equals("-1")) && (fname == null ||
+                fname.equals("-1")) && (limit == null || limit ==-1)) {
+            return;
+        }
+        try {
+            String buildquery = "UPDATE Courses SET ";
+            if (cid != null && !cid.equals("-1")) {
+                buildquery += "cid='"+cid+"',";
+            }
+            if (cname != null && !cname.equals("-1")) {
+                buildquery += "cname='"+cname+"',";
+            }
+            if (meets_at != null && !meets_at.equals("-1")) {
+                buildquery += "meets_at='"+meets_at+"',";
+            }
+            if (room != null && !room.equals("-1")) {
+                buildquery += "room='"+room+"',";
+            }
+            if (fname != null && !fname.equals("-1") && !fname.isEmpty()) {
+                Integer fid = findFacID(con, fname);
+                if (fid != null) {
+                    buildquery += "fid='" + fid + "',";
+                }
+                // faculty cannot be invalid
+                else { return; }
+            }
+            // faculty cannot be empty
+            else { return; }
+            if (limit != null && limit !=-1) {
+                buildquery += "limit='"+limit+"',";
+            }
+            // remove trailing comma
+            if (buildquery.endsWith(",")) {
+                buildquery = buildquery.substring(0,buildquery.length() - 1);
+            }
+            buildquery += " WHERE cid='"+cid+"'";
+            Statement st = con.createStatement();
+            st.executeUpdate(buildquery);
+            st.close();
+            return;
+        }
+        catch (Exception ex){
+            System.out.println("SQLException: "+ex);
+            return;
+        }
+    }
+
+    public void newCor (Connection con, String cid, String cname, String meets_at, String room, String fname,
+                        Integer limit) {
+        // if nothing was passed in, do nothing
+        if ((cid ==null || cid.equals("-1")) && (cname == null || cname.equals("-1")) && (meets_at == null ||
+                meets_at.equals("-1")) && (room == null || room.equals("-1")) && (fname == null ||
+                fname.equals("-1")) && (limit == null || limit ==-1)) {
+            return;
+        }
+        try {
+            String buildquery = "INSERT INTO Courses ";
+            ArrayList<String> cols = new ArrayList<String>();
+            ArrayList<String> vals = new ArrayList<String>();
+            if (cid != null && !cid.equals("-1")) {
+                cols.add("cid");
+                vals.add(cid);
+            }
+            else {
+                // cannot enter row without primary key
+                return;
+            }
+            if (cname != null && !cname.equals("-1")) {
+                cols.add("cname");
+                vals.add(cname);
+            }
+            if (meets_at != null && !meets_at.equals("-1")) {
+                cols.add("meets_at");
+                vals.add(meets_at);
+            }
+            if (room != null && !room.equals("-1")) {
+                cols.add("room");
+                vals.add(room);
+            }
+            if (fname != null && !fname.equals("-1") && !fname.isEmpty()) {
+                Integer fid = findFacID(con, fname);
+                if (fid != null) {
+                    cols.add("fid");
+                    vals.add(fid.toString());
+                }
+                // faculty cannot be invalid
+                else { return; }
+            }
+            // faculty cannot be empty
+            else { return; }
+            if (limit != null && limit != -1) {
+                cols.add("limit");
+                vals.add(limit.toString());
+            }
+            buildquery += "(";
+            for (String c : cols) {
+                buildquery += c + ",";
+            }
+            if (buildquery.endsWith(",")) {
+                buildquery = buildquery.substring(0,buildquery.length() - 1);
+            }
+            buildquery += ") VALUES (";
+            for (String v : vals) {
+                buildquery += "'" + v + "',";
+            }
+            if (buildquery.endsWith(",")) {
+                buildquery = buildquery.substring(0,buildquery.length() - 1);
+            }
+            buildquery += ")";
+            Statement st = con.createStatement();
+            st.executeUpdate(buildquery);
+            st.close();
+            return;
+        }
+        catch (Exception ex){
+            System.out.println("SQLException: "+ex);
+            return;
+        }
+    }
+
+    public void delCor (Connection con, String cid) {
+        // cannot do anything without id
+        if (cid ==null || cid.equals("-1")) {
+            return;
+        }
+        try {
+            String query = "DELETE FROM Courses WHERE cid='" + cid +"'";
+            Statement st = con.createStatement();
+            st.executeUpdate(query);
+            st.close();
+            return;
+        }
+        catch (Exception ex) {
+            System.out.println("SQLException: " + ex);
+            return;
+        }
+    }
+
     // enrolled table
     public Object[][] searchEnrl (Connection con){
         Object[][] obj = null;

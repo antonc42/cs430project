@@ -28,6 +28,8 @@ public class FacultyStaff extends javax.swing.JFrame {
     private boolean staNewAction = true;
     private boolean depSearchAction = true;
     private boolean depNewAction = true;
+    private boolean corSearchAction = true;
+    private boolean corNewAction = true;
 
     /**
      * Creates new form
@@ -557,45 +559,45 @@ public class FacultyStaff extends javax.swing.JFrame {
         javax.swing.GroupLayout deptTabLayout = new javax.swing.GroupLayout(deptTab);
         deptTab.setLayout(deptTabLayout);
         deptTabLayout.setHorizontalGroup(
-            deptTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(depScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
-            .addGroup(deptTabLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(deptTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(deptTabLayout.createSequentialGroup()
-                        .addComponent(depIDLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(depID, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(deptTabLayout.createSequentialGroup()
-                        .addComponent(depNameLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(depName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(deptTabLayout.createSequentialGroup()
-                        .addComponent(depNew)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(depSearch)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(depClear)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                deptTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(depScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+                        .addGroup(deptTabLayout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(deptTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(deptTabLayout.createSequentialGroup()
+                                                .addComponent(depIDLabel)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(depID, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(deptTabLayout.createSequentialGroup()
+                                                .addComponent(depNameLabel)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(depName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(deptTabLayout.createSequentialGroup()
+                                                .addComponent(depNew)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(depSearch)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(depClear)))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         deptTabLayout.setVerticalGroup(
-            deptTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(deptTabLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(deptTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(depIDLabel)
-                    .addComponent(depID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(deptTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(depNameLabel)
-                    .addComponent(depName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(deptTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(depSearch)
-                    .addComponent(depClear)
-                    .addComponent(depNew))
-                .addGap(18, 18, 18)
-                .addComponent(depScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE))
+                deptTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(deptTabLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(deptTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(depIDLabel)
+                                        .addComponent(depID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(deptTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(depNameLabel)
+                                        .addComponent(depName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(deptTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(depSearch)
+                                        .addComponent(depClear)
+                                        .addComponent(depNew))
+                                .addGap(18, 18, 18)
+                                .addComponent(depScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE))
         );
 
         facstaffTab.addTab("Departments", deptTab);
@@ -612,7 +614,7 @@ public class FacultyStaff extends javax.swing.JFrame {
 
         corInstructorLabel.setText("Instructor");
 
-        corInstructor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "" }));
+        corInstructor.setModel(new javax.swing.DefaultComboBoxModel(new String[]{""}));
 
         corSizeLabel.setText("Size Limit");
 
@@ -893,14 +895,28 @@ public class FacultyStaff extends javax.swing.JFrame {
                     for (int col=0; col < numcols; col++) {
                         String colname = stuTable.getColumnName(col);
                         Object colcontent = stuTable.getValueAt(selectedRow,col);
-                        colhash.put(colname,colcontent);
+                        if (colcontent != null) {
+                            colhash.put(colname, colcontent);
+                        }
                     }
+                    // id should never be null
                     stuID.setText(colhash.get("ID").toString());
                     stuID.setEnabled(false);
+                    // name should never be null
                     stuName.setText(colhash.get("Name").toString());
-                    stuMajor.setText(colhash.get("Major").toString());
+                    if (colhash.get("Major") != null) {
+                        stuMajor.setText(colhash.get("Major").toString());
+                    }
+                    else {
+                        stuMajor.setText("");
+                    }
                     stuLevel.setSelectedItem(colhash.get("Level"));
-                    stuAge.setText(colhash.get("Age").toString());
+                    if (colhash.get("Age") != null) {
+                        stuAge.setText(colhash.get("Age").toString());
+                    }
+                    else {
+                        stuAge.setText("");
+                    }
                     stuNew.setText("Delete");
                     stuNewAction = false;
                     stuSearch.setText("Edit");
@@ -923,11 +939,16 @@ public class FacultyStaff extends javax.swing.JFrame {
                     for (int col=0; col < numcols; col++) {
                         String colname = facTable.getColumnName(col);
                         Object colcontent = facTable.getValueAt(selectedRow,col);
-                        colhash.put(colname,colcontent);
+                        if (colcontent != null) {
+                            colhash.put(colname, colcontent);
+                        }
                     }
+                    // id should never be null
                     facID.setText(colhash.get("ID").toString());
                     facID.setEnabled(false);
+                    // name should never be null
                     facName.setText(colhash.get("Name").toString());
+                    // department should never be null
                     facDep.setSelectedItem(colhash.get("Department").toString());
                     facNew.setText("Delete");
                     facNewAction = false;
@@ -951,11 +972,16 @@ public class FacultyStaff extends javax.swing.JFrame {
                     for (int col=0; col < numcols; col++) {
                         String colname = staTable.getColumnName(col);
                         Object colcontent = staTable.getValueAt(selectedRow,col);
-                        colhash.put(colname,colcontent);
+                        if (colcontent != null) {
+                            colhash.put(colname, colcontent);
+                        }
                     }
+                    // id should never be null
                     staID.setText(colhash.get("ID").toString());
                     staID.setEnabled(false);
+                    // name should never be null
                     staName.setText(colhash.get("Name").toString());
+                    // department should never be null
                     staDep.setSelectedItem(colhash.get("Department").toString());
                     staNew.setText("Delete");
                     staNewAction = false;
@@ -979,10 +1005,14 @@ public class FacultyStaff extends javax.swing.JFrame {
                     for (int col=0; col < numcols; col++) {
                         String colname = depTable.getColumnName(col);
                         Object colcontent = depTable.getValueAt(selectedRow,col);
-                        colhash.put(colname,colcontent);
+                        if (colcontent != null) {
+                            colhash.put(colname, colcontent);
+                        }
                     }
+                    // id should never be null
                     depID.setText(colhash.get("ID").toString());
                     depID.setEnabled(false);
+                    // name should never be null
                     depName.setText(colhash.get("Name").toString());
                     depNew.setText("Delete");
                     depNewAction = false;
@@ -992,6 +1022,62 @@ public class FacultyStaff extends javax.swing.JFrame {
             }
         });
     }
+
+    private void addCorTableListener() {
+        corTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        corTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent e) {
+                if (e.getValueIsAdjusting()) return;
+                ListSelectionModel lsm = (ListSelectionModel) e.getSource();
+                if (!lsm.isSelectionEmpty()) {
+                    Integer selectedRow = lsm.getMinSelectionIndex();
+                    Integer numcols = corTable.getColumnCount();
+                    Hashtable<String,Object> colhash = new Hashtable<String, Object>();
+                    for (int col=0; col < numcols; col++) {
+                        String colname = corTable.getColumnName(col);
+                        Object colcontent = corTable.getValueAt(selectedRow,col);
+                        if (colcontent != null) {
+                            colhash.put(colname, colcontent);
+                        }
+                    }
+                    // id should never be null
+                    corID.setText(colhash.get("ID").toString());
+                    corID.setEnabled(false);
+                    if (colhash.get("Name") != null) {
+                        corName.setText(colhash.get("Name").toString());
+                    }
+                    else {
+                        corName.setText("");
+                    }
+                    if (colhash.get("Time") != null) {
+                        corTime.setText(colhash.get("Time").toString());
+                    }
+                    else {
+                        corTime.setText("");
+                    }
+                    if (colhash.get("Location") != null) {
+                        corRoom.setText(colhash.get("Location").toString());
+                    }
+                    else {
+                        corRoom.setText("");
+                    }
+                    // instructor should never be null
+                    corInstructor.setSelectedItem(colhash.get("Instructor").toString());
+                    if (colhash.get("Size Limit") != null) {
+                        corSize.setText(colhash.get("Size Limit").toString());
+                    }
+                    else {
+                        corSize.setText("0");
+                    }
+                    corNew.setText("Delete");
+                    corNewAction = false;
+                    corSearch.setText("Edit");
+                    corSearchAction = false;
+                }
+            }
+        });
+    }
+
 
     private void disableNewButtons() {
         stuNew.setVisible(false);
@@ -1011,6 +1097,10 @@ public class FacultyStaff extends javax.swing.JFrame {
             facDep.addItem(dep);
             staDep.addItem(dep);
         }
+        Object[] facs = db.getFacList(con);
+        for (Object fac : facs) {
+            corInstructor.addItem(fac);
+        }
     }
 
     private void clearComboBoxes() {
@@ -1019,6 +1109,9 @@ public class FacultyStaff extends javax.swing.JFrame {
         }
         while (staDep.getItemCount() > 1) {
             staDep.removeItemAt(1);
+        }
+        while (corInstructor.getItemCount() > 1) {
+            corInstructor.removeItemAt(1);
         }
     }
 
@@ -1156,6 +1249,9 @@ public class FacultyStaff extends javax.swing.JFrame {
             Object[][] allfac = db.searchFac(con);
             cleartable(facTable);
             addtoTable(facTable,allfac);
+            // clear and repopulate combo boxes with new faculty list
+            clearComboBoxes();
+            populateComboBoxes();
         }
         // do delete action
         else if (!facNewAction && staffPermission){
@@ -1169,6 +1265,9 @@ public class FacultyStaff extends javax.swing.JFrame {
             Object[][] allfac = db.searchFac(con);
             cleartable(facTable);
             addtoTable(facTable,allfac);
+            // clear and repopulate combo boxes with new faculty list
+            clearComboBoxes();
+            populateComboBoxes();
         }
     }//GEN-LAST:event_facNewActionPerformed
 
@@ -1204,6 +1303,9 @@ public class FacultyStaff extends javax.swing.JFrame {
             Object[][] allfac = db.searchFac(con);
             cleartable(facTable);
             addtoTable(facTable,allfac);
+            // clear and repopulate combo boxes with new faculty list
+            clearComboBoxes();
+            populateComboBoxes();
         }
     }//GEN-LAST:event_facSearchActionPerformed
 
@@ -1405,15 +1507,117 @@ public class FacultyStaff extends javax.swing.JFrame {
 
     // courses buttons
     private void corNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corNewActionPerformed
-        // TODO add your handling code here:
+        Database db = new Database();
+        String cid = "-1";
+        String cname = "-1";
+        String meets_at = "-1";
+        String room = "-1";
+        String fname = "-1";
+        Integer limit = -1;
+        if (!corID.getText().isEmpty()) {
+            cid = corID.getText();
+        }
+        if (!corName.getText().isEmpty()) {
+            cname = corName.getText();
+        }
+        if (!corTime.getText().isEmpty()) {
+            meets_at = corTime.getText();
+        }
+        if (!corRoom.getText().isEmpty()) {
+            room = corRoom.getText();
+        }
+        if (!corInstructor.getSelectedItem().toString().isEmpty()) {
+            fname = corInstructor.getSelectedItem().toString();
+        }
+        if (!corSize.getText().isEmpty()) {
+            limit = Integer.parseInt(corSize.getText());
+        }
+        // do new action
+        if (corNewAction && staffPermission) {
+            db.newCor(con, cid, cname, meets_at, room, fname, limit);
+            clearCorForm();
+            corID.setEnabled(true);
+            corNew.setText("New");
+            corNewAction = true;
+            corSearch.setText("Search");
+            corSearchAction = true;
+            Object[][] allcor = db.searchCor(con);
+            cleartable(corTable);
+            addtoTable(corTable,allcor);
+        }
+        // do delete action
+        else if (!corNewAction && staffPermission){
+            db.delCor(con, cid);
+            clearCorForm();
+            corID.setEnabled(true);
+            corNew.setText("New");
+            corNewAction = true;
+            corSearch.setText("Search");
+            corSearchAction = true;
+            Object[][] allcor = db.searchCor(con);
+            cleartable(corTable);
+            addtoTable(corTable,allcor);
+        }
     }//GEN-LAST:event_corNewActionPerformed
 
     private void corSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corSearchActionPerformed
-        // TODO add your handling code here:
+        Database db = new Database();
+        String cid = "-1";
+        String cname = "-1";
+        String meets_at = "-1";
+        String room = "-1";
+        String fname = "-1";
+        Integer limit = -1;
+        if (!corID.getText().isEmpty()) {
+            cid = corID.getText();
+        }
+        if (!corName.getText().isEmpty()) {
+            cname = corName.getText();
+        }
+        if (!corTime.getText().isEmpty()) {
+            meets_at = corTime.getText();
+        }
+        if (!corRoom.getText().isEmpty()) {
+            room = corRoom.getText();
+        }
+        if (!corInstructor.getSelectedItem().toString().isEmpty()) {
+            fname = corInstructor.getSelectedItem().toString();
+        }
+        if (!corSize.getText().isEmpty()) {
+            limit = Integer.parseInt(corSize.getText());
+        }
+        // do search action
+        if (corSearchAction) {
+            Object[][] result = db.searchCor(con, cid, cname, meets_at, room, fname, limit);
+            cleartable(corTable);
+            addtoTable(corTable, result);
+        }
+        // do edit action
+        else if (!corSearchAction && staffPermission){
+            db.editCor(con, cid, cname, meets_at, room, fname, limit);
+            clearCorForm();
+            corID.setEnabled(true);
+            corNew.setText("New");
+            corNewAction = true;
+            corSearch.setText("Search");
+            corSearchAction = true;
+            Object[][] allcor = db.searchCor(con);
+            cleartable(corTable);
+            addtoTable(corTable,allcor);
+        }
     }//GEN-LAST:event_corSearchActionPerformed
 
     private void corClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corClearActionPerformed
-        // TODO add your handling code here:
+        cleartable(corTable);
+        clearCorForm();
+        corID.setEnabled(true);
+        corNew.setText("New");
+        corNewAction = true;
+        corSearch.setText("Search");
+        corSearchAction = true;
+        Database db = new Database();
+        Object[][] allcor = db.searchCor(con);
+        addtoTable(corTable,allcor);
     }//GEN-LAST:event_corClearActionPerformed
 
     // enrolled buttons
@@ -1511,6 +1715,15 @@ public class FacultyStaff extends javax.swing.JFrame {
         depName.setText("");
     }
 
+    public void clearCorForm () {
+        corID.setText("");
+        corName.setText("");
+        corTime.setText("");
+        corRoom.setText("");
+        corInstructor.setSelectedItem("");
+        corSize.setText("");
+    }
+
     public Connection getConnection () {
         return this.con;
     }
@@ -1530,6 +1743,7 @@ public class FacultyStaff extends javax.swing.JFrame {
             addFacTableListener();
             addStaTableListener();
             addDepTableListener();
+            addCorTableListener();
         }
         else {
             disableNewButtons();
