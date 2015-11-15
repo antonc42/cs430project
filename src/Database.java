@@ -676,6 +676,79 @@ public class Database {
         }
     }
 
+    public void newFac (Connection con, Integer fid, String fname, String dname) {
+        // if nothing was passed in, do nothing
+        if ((fid ==null || fid == -1) && (fname == null || fname.equals("-1")) &&
+                (dname == null || dname.equals("-1"))) {
+            return;
+        }
+        try {
+            String buildquery = "INSERT INTO Faculty ";
+            ArrayList<String> cols = new ArrayList<String>();
+            ArrayList<String> vals = new ArrayList<String>();
+            if (fid != null && fid != -1) {
+                cols.add("fid");
+                vals.add(fid.toString());
+            }
+            else {
+                // cannot enter row without primary key
+                return;
+            }
+            if (fname != null && !fname.equals("-1")) {
+                cols.add("fname");
+                vals.add(fname);
+            }
+            if (dname != null && !dname.equals("-1")) {
+                Integer deptid = findDepID(con,dname);
+                if (deptid != null) {
+                    cols.add("deptid");
+                    vals.add(deptid.toString());
+                }
+            }
+            buildquery += "(";
+            for (String c : cols) {
+                buildquery += c + ",";
+            }
+            if (buildquery.endsWith(",")) {
+                buildquery = buildquery.substring(0,buildquery.length() - 1);
+            }
+            buildquery += ") VALUES (";
+            for (String v : vals) {
+                buildquery += "'" + v + "',";
+            }
+            if (buildquery.endsWith(",")) {
+                buildquery = buildquery.substring(0,buildquery.length() - 1);
+            }
+            buildquery += ")";
+            Statement st = con.createStatement();
+            st.executeUpdate(buildquery);
+            st.close();
+            return;
+        }
+        catch (Exception ex){
+            System.out.println("SQLException: "+ex);
+            return;
+        }
+    }
+
+    public void delFac (Connection con, Integer fid) {
+        // cannot do anything without id
+        if (fid ==null || fid == -1) {
+            return;
+        }
+        try {
+            String query = "DELETE FROM Faculty WHERE fid=" + fid;
+            Statement st = con.createStatement();
+            st.executeUpdate(query);
+            st.close();
+            return;
+        }
+        catch (Exception ex) {
+            System.out.println("SQLException: " + ex);
+            return;
+        }
+    }
+
     public Object[][] searchSta (Connection con){
         Object[][] obj = null;
         ArrayList<Object[]> temp = new ArrayList<Object[]>();

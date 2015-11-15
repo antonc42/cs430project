@@ -1058,7 +1058,45 @@ public class FacultyStaff extends javax.swing.JFrame {
 
     // faculty buttons
     private void facNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facNewActionPerformed
-
+        Database db = new Database();
+        Integer fid = -1;
+        String fname = "-1";
+        String dname = "-1";
+        if (!facID.getText().isEmpty()) {
+            fid = Integer.parseInt(facID.getText());
+        }
+        if (!facName.getText().isEmpty()) {
+            fname = facName.getText();
+        }
+        if (!facDep.getSelectedItem().toString().isEmpty()) {
+            dname = facDep.getSelectedItem().toString();
+        }
+        // do new action
+        if (facNewAction && staffPermission) {
+            db.newFac(con, fid, fname, dname);
+            clearFacForm();
+            facID.setEnabled(true);
+            facNew.setText("New");
+            facNewAction = true;
+            facSearch.setText("Search");
+            facSearchAction = true;
+            Object[][] allfac = db.searchFac(con);
+            cleartable(facTable);
+            addtoTable(facTable,allfac);
+        }
+        // do delete action
+        else if (!facNewAction && staffPermission){
+            db.delFac(con, fid);
+            clearFacForm();
+            facID.setEnabled(true);
+            facNew.setText("New");
+            facNewAction = true;
+            facSearch.setText("Search");
+            facSearchAction = true;
+            Object[][] allfac = db.searchFac(con);
+            cleartable(facTable);
+            addtoTable(facTable,allfac);
+        }
     }//GEN-LAST:event_facNewActionPerformed
 
     private void facSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facSearchActionPerformed
@@ -1109,14 +1147,23 @@ public class FacultyStaff extends javax.swing.JFrame {
         addtoTable(facTable,allfac);
     }//GEN-LAST:event_facClearActionPerformed
 
-    //
-    private void depSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depSearchActionPerformed
+    // staff buttons
+    private void staNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staNewActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_depSearchActionPerformed
+    }//GEN-LAST:event_staNewActionPerformed
 
     private void staSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staSearchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_staSearchActionPerformed
+
+    private void staClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staClearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_staClearActionPerformed
+
+    //
+    private void depSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_depSearchActionPerformed
 
     private void corSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corSearchActionPerformed
         // TODO add your handling code here:
@@ -1137,14 +1184,6 @@ public class FacultyStaff extends javax.swing.JFrame {
     private void depClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depClearActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_depClearActionPerformed
-
-    private void staClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staClearActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_staClearActionPerformed
-
-    private void staNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staNewActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_staNewActionPerformed
 
     private void depNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depNewActionPerformed
         // TODO add your handling code here:
