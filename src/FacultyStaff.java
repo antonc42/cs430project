@@ -72,7 +72,7 @@ public class FacultyStaff extends javax.swing.JFrame {
 
         facstaffTab = new javax.swing.JTabbedPane();
         studentTab = new javax.swing.JPanel();
-        studIDLabel = new javax.swing.JLabel();
+        stuIDLabel = new javax.swing.JLabel();
         stuID = new javax.swing.JTextField();
         stuNameLabel = new javax.swing.JLabel();
         stuName = new javax.swing.JTextField();
@@ -93,7 +93,7 @@ public class FacultyStaff extends javax.swing.JFrame {
         facNameLabel = new javax.swing.JLabel();
         facName = new javax.swing.JTextField();
         facDepLabel = new javax.swing.JLabel();
-        facDep = new javax.swing.JTextField();
+        facDep = new javax.swing.JComboBox();
         facNew = new javax.swing.JButton();
         facSearch = new javax.swing.JButton();
         facClear = new javax.swing.JButton();
@@ -166,7 +166,7 @@ public class FacultyStaff extends javax.swing.JFrame {
 
         studentTab.setPreferredSize(new java.awt.Dimension(700, 500));
 
-        studIDLabel.setText("ID");
+        stuIDLabel.setText("ID");
 
         stuNameLabel.setText("Name");
 
@@ -243,7 +243,7 @@ public class FacultyStaff extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(stuAge, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(studentTabLayout.createSequentialGroup()
-                        .addComponent(studIDLabel)
+                        .addComponent(stuIDLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(stuID, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(studentTabLayout.createSequentialGroup()
@@ -263,7 +263,7 @@ public class FacultyStaff extends javax.swing.JFrame {
             .addGroup(studentTabLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(studIDLabel)
+                    .addComponent(stuIDLabel)
                     .addComponent(stuID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -299,6 +299,8 @@ public class FacultyStaff extends javax.swing.JFrame {
         facNameLabel.setText("Name");
 
         facDepLabel.setText("Department");
+
+        facDep.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "" }));
 
         facNew.setText("New");
         facNew.addActionListener(new java.awt.event.ActionListener() {
@@ -366,8 +368,8 @@ public class FacultyStaff extends javax.swing.JFrame {
                             .addComponent(facDepLabel, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(facultyTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(facDep, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(facName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(facName, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(facDep, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(facultyTabLayout.createSequentialGroup()
                         .addComponent(facIDLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -386,7 +388,7 @@ public class FacultyStaff extends javax.swing.JFrame {
                     .addComponent(facNameLabel)
                     .addComponent(facName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(facultyTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(facultyTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(facDepLabel)
                     .addComponent(facDep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -925,7 +927,7 @@ public class FacultyStaff extends javax.swing.JFrame {
                     facID.setText(colhash.get("ID").toString());
                     facID.setEnabled(false);
                     facName.setText(colhash.get("Name").toString());
-                    facDep.setText(colhash.get("Department").toString());
+                    facDep.setSelectedItem(colhash.get("Department").toString());
                     facNew.setText("Delete");
                     facNewAction = false;
                     facSearch.setText("Edit");
@@ -1065,8 +1067,8 @@ public class FacultyStaff extends javax.swing.JFrame {
         if (!facName.getText().isEmpty()) {
             fname = facName.getText();
         }
-        if (!facDep.getText().isEmpty()) {
-            dname = facDep.getText();
+        if (!facDep.getSelectedItem().toString().isEmpty()) {
+            dname = facDep.getSelectedItem().toString();
         }
         // do search action
         if (facSearchAction) {
@@ -1220,7 +1222,7 @@ public class FacultyStaff extends javax.swing.JFrame {
     public void clearFacForm () {
         facID.setText("");
         facName.setText("");
-        facDep.setText("");
+        facDep.setSelectedItem("");
     }
 
     public Connection getConnection () {
@@ -1293,7 +1295,7 @@ public class FacultyStaff extends javax.swing.JFrame {
     private javax.swing.JPanel enrlTab;
     private javax.swing.JTable enrlTable;
     private javax.swing.JButton facClear;
-    private javax.swing.JTextField facDep;
+    private javax.swing.JComboBox facDep;
     private javax.swing.JLabel facDepLabel;
     private javax.swing.JTextField facID;
     private javax.swing.JLabel facIDLabel;
@@ -1320,6 +1322,8 @@ public class FacultyStaff extends javax.swing.JFrame {
     private javax.swing.JTextField stuAge;
     private javax.swing.JLabel stuAgeLabel;
     private javax.swing.JButton stuClear;
+    private javax.swing.JTextField stuID;
+    private javax.swing.JLabel stuIDLabel;
     private javax.swing.JComboBox stuLevel;
     private javax.swing.JLabel stuLevelLabel;
     private javax.swing.JTextField stuMajor;
@@ -1330,8 +1334,6 @@ public class FacultyStaff extends javax.swing.JFrame {
     private javax.swing.JScrollPane stuScroll;
     private javax.swing.JButton stuSearch;
     private javax.swing.JTable stuTable;
-    private javax.swing.JTextField stuID;
-    private javax.swing.JLabel studIDLabel;
     private javax.swing.JPanel studentTab;
     // End of variables declaration//GEN-END:variables
 }
