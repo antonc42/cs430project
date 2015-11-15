@@ -1025,6 +1025,31 @@ public class FacultyStaff extends javax.swing.JFrame {
             cleartable(stuTable);
             addtoTable(stuTable,allstu);
         }
+        else if (index == 1) {
+            Object[][] allfac = db.searchFac(con);
+            cleartable(facTable);
+            addtoTable(facTable,allfac);
+        }
+        else if (index == 2) {
+            Object[][] allsta = db.searchSta(con);
+            cleartable(staTable);
+            addtoTable(staTable,allsta);
+        }
+        else if (index == 3) {
+            Object[][] alldep = db.searchDep(con);
+            cleartable(depTable);
+            addtoTable(depTable,alldep);
+        }
+        else if (index == 4) {
+            Object[][] allcor = db.searchCor(con);
+            cleartable(corTable);
+            addtoTable(corTable,allcor);
+        }
+        else if (index == 5) {
+            Object[][] allenrl = db.searchEnrl(con);
+            cleartable(enrlTable);
+            addtoTable(enrlTable,allenrl);
+        }
     }//GEN-LAST:event_facstaffTabStateChanged
 
     private void stuNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stuNewActionPerformed

@@ -58,7 +58,7 @@ public class Database {
         String FacultySchema = "CREATE TABLE Faculty (" +
                 "fid INTEGER," +
                 "fname VARCHAR(100)," +
-                "depid INTEGER REFERENCES Department (did)," +
+                "deptid INTEGER REFERENCES Department (did)," +
                 "CONSTRAINT faculty_pk PRIMARY KEY (fid)" +
                 ")";
         String CoursesSchema = "CREATE TABLE Courses (" +
@@ -81,7 +81,7 @@ public class Database {
         String StaffSchema = "CREATE TABLE Staff (" +
                 "sid INTEGER," +
                 "sname VARCHAR(100)," +
-                "depid INTEGER REFERENCES Department (did)," +
+                "deptid INTEGER REFERENCES Department (did)," +
                 "CONSTRAINT staff_pk PRIMARY KEY (sid)" +
                 ")";
 
@@ -185,6 +185,7 @@ public class Database {
         runDefineManip(con,StaffData);
         return true;
     }
+
     public boolean ignoreDropError (Integer sqlerror){
         if (sqlerror == null){
             System.out.println("No SQL Error given!");
@@ -527,21 +528,18 @@ public class Database {
         }
     }
 
-    public Object[][] searchDep (Connection con, Integer did, String dname){
+    public Object[][] searchFac (Connection con){
         Object[][] obj = null;
-        ArrayList<Object[]> temp = null;
-        String searchdid = "%";
-        if (did != null) {
-            searchdid = did.toString();
-        }
+        ArrayList<Object[]> temp = new ArrayList<Object[]>();
         try {
-            String query = "SELECT did,dname FROM Department WHERE did='"+searchdid+"' AND dname='"+dname+"'";
+            String query = "SELECT fid,fname,dname FROM Faculty JOIN Department ON Faculty.deptid=Department.did ORDER BY fid";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()){
-                Integer Rdid = rs.getInt(1);
-                String Rdname = rs.getString(2);
-                Object[] row = {Rdid.toString(),Rdname};
+                Integer Rfid = rs.getInt(1);
+                String Rfname = rs.getString(2);
+                String Rdname = rs.getString(3);
+                Object[] row = {Rfid.toString(),Rfname,Rdname};
                 temp.add(row);
             }
             obj = new Object[temp.size()][];
@@ -591,6 +589,150 @@ public class Database {
         }
     }
 
+    public Object[][] searchSta (Connection con){
+        Object[][] obj = null;
+        ArrayList<Object[]> temp = new ArrayList<Object[]>();
+        try {
+            String query = "SELECT sid,sname,dname FROM Staff JOIN Department ON Staff.deptid=Department.did ORDER BY sid";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()){
+                Integer Rsid = rs.getInt(1);
+                String Rsname = rs.getString(2);
+                String Rdname = rs.getString(3);
+                Object[] row = {Rsid.toString(),Rsname,Rdname};
+                temp.add(row);
+            }
+            obj = new Object[temp.size()][];
+            temp.toArray(obj);
+            rs.close();
+            st.close();
+            return obj;
+        }
+        catch (Exception ex){
+            System.out.println("SQLException: "+ex);
+            return obj;
+        }
+    }
+
+    public Object[][] searchSta (Connection con, Integer sid, String sname, Integer deptid){
+        Object[][] obj = null;
+        ArrayList<Object[]> temp = null;
+        String searchsid = "%";
+        String searchdid = "%";
+        if (sid != null) {
+            searchsid = sid.toString();
+        }
+        if (deptid != null) {
+            searchdid = deptid.toString();
+        }
+        try {
+            String query = "SELECT sid,sname,deptid FROM Staff WHERE sid='"+searchsid+"' AND " +
+                    "sname='"+sname+"' AND deptid='"+searchdid+"'";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()){
+                Integer Rsid = rs.getInt(1);
+                String Rsname = rs.getString(2);
+                Integer Rdid = rs.getInt(3);
+                Object[] row = {Rsid.toString(),Rsname,Rdid.toString()};
+                temp.add(row);
+            }
+            obj = new Object[temp.size()][];
+            temp.toArray(obj);
+            rs.close();
+            st.close();
+            return obj;
+        }
+        catch (Exception ex){
+            System.out.println("SQLException: "+ex);
+            return obj;
+        }
+    }
+
+    public Object[][] searchDep (Connection con){
+        Object[][] obj = null;
+        ArrayList<Object[]> temp = new ArrayList<Object[]>();
+        try {
+            String query = "SELECT did,dname FROM Department ORDER BY did";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()){
+                Integer Rdid = rs.getInt(1);
+                String Rdname = rs.getString(2);
+                Object[] row = {Rdid.toString(),Rdname};
+                temp.add(row);
+            }
+            obj = new Object[temp.size()][];
+            temp.toArray(obj);
+            rs.close();
+            st.close();
+            return obj;
+        }
+        catch (Exception ex){
+            System.out.println("SQLException: "+ex);
+            return obj;
+        }
+    }
+
+    public Object[][] searchDep (Connection con, Integer did, String dname){
+        Object[][] obj = null;
+        ArrayList<Object[]> temp = null;
+        String searchdid = "%";
+        if (did != null) {
+            searchdid = did.toString();
+        }
+        try {
+            String query = "SELECT did,dname FROM Department WHERE did='"+searchdid+"' AND dname='"+dname+"'";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()){
+                Integer Rdid = rs.getInt(1);
+                String Rdname = rs.getString(2);
+                Object[] row = {Rdid.toString(),Rdname};
+                temp.add(row);
+            }
+            obj = new Object[temp.size()][];
+            temp.toArray(obj);
+            rs.close();
+            st.close();
+            return obj;
+        }
+        catch (Exception ex){
+            System.out.println("SQLException: "+ex);
+            return obj;
+        }
+    }
+
+    public Object[][] searchCor (Connection con){
+        Object[][] obj = null;
+        ArrayList<Object[]> temp = new ArrayList<Object[]>();
+        try {
+            String query = "SELECT cid,cname,meets_at,room,fname,limit FROM Courses JOIN Faculty ON Courses.fid=Faculty.fid ORDER BY cid";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()){
+                String Rcid = rs.getString(1);
+                String Rcname = rs.getString(2);
+                String Rmeets_at = rs.getString(3);
+                String Rroom = rs.getString(4);
+                String Rfname = rs.getString(5);
+                Integer Rlimit = rs.getInt(6);
+                Object[] row = {Rcid,Rcname,Rmeets_at,Rroom,Rfname,Rlimit.toString()};
+                temp.add(row);
+            }
+            obj = new Object[temp.size()][];
+            temp.toArray(obj);
+            rs.close();
+            st.close();
+            return obj;
+        }
+        catch (Exception ex){
+            System.out.println("SQLException: "+ex);
+            return obj;
+        }
+    }
+
     public Object[][] searchCor (Connection con, String cid, String cname, String meets_at, String room, Integer fid,
                                  Integer limit){
         Object[][] obj = null;
@@ -617,6 +759,34 @@ public class Database {
                 Integer Rfid = rs.getInt(5);
                 Integer Rlim = rs.getInt(6);
                 Object[] row = {Rcid,Rcname,Rmeets,Rroom,Rfid.toString(),Rlim.toString()};
+                temp.add(row);
+            }
+            obj = new Object[temp.size()][];
+            temp.toArray(obj);
+            rs.close();
+            st.close();
+            return obj;
+        }
+        catch (Exception ex){
+            System.out.println("SQLException: "+ex);
+            return obj;
+        }
+    }
+
+    public Object[][] searchEnrl (Connection con){
+        Object[][] obj = null;
+        ArrayList<Object[]> temp = new ArrayList<Object[]>();
+        try {
+            String query = "SELECT cid,sname,exam1,exam2,final FROM Enrolled JOIN Student ON Enrolled.sid=Student.sid ORDER BY cid,Enrolled.sid";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()){
+                String Rcid = rs.getString(1);
+                String Rsname = rs.getString(2);
+                Integer Rexam1 = rs.getInt(3);
+                Integer Rexam2 = rs.getInt(4);
+                Integer Rfinal = rs.getInt(5);
+                Object[] row = {Rcid,Rsname,Rexam1.toString(),Rexam2.toString(),Rfinal.toString()};
                 temp.add(row);
             }
             obj = new Object[temp.size()][];
@@ -676,38 +846,5 @@ public class Database {
         }
     }
 
-    public Object[][] searchSta (Connection con, Integer sid, String sname, Integer deptid){
-        Object[][] obj = null;
-        ArrayList<Object[]> temp = null;
-        String searchsid = "%";
-        String searchdid = "%";
-        if (sid != null) {
-            searchsid = sid.toString();
-        }
-        if (deptid != null) {
-            searchdid = deptid.toString();
-        }
-        try {
-            String query = "SELECT sid,sname,deptid FROM Staff WHERE sid='"+searchsid+"' AND " +
-                    "sname='"+sname+"' AND deptid='"+searchdid+"'";
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery(query);
-            while (rs.next()){
-                Integer Rsid = rs.getInt(1);
-                String Rsname = rs.getString(2);
-                Integer Rdid = rs.getInt(3);
-                Object[] row = {Rsid.toString(),Rsname,Rdid.toString()};
-                temp.add(row);
-            }
-            obj = new Object[temp.size()][];
-            temp.toArray(obj);
-            rs.close();
-            st.close();
-            return obj;
-        }
-        catch (Exception ex){
-            System.out.println("SQLException: "+ex);
-            return obj;
-        }
-    }
+
 }
