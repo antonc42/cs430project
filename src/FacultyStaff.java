@@ -1,9 +1,6 @@
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import java.awt.event.ActionEvent;
-import java.beans.PropertyChangeListener;
 import java.sql.Connection;
 import java.util.Hashtable;
 import javax.swing.event.ListSelectionEvent;
@@ -25,6 +22,8 @@ public class FacultyStaff extends javax.swing.JFrame {
     private boolean staffPermission = false;
     private boolean stuSearchAction = true;
     private boolean stuNewAction = true;
+    private boolean facSearchAction = true;
+    private boolean facNewAction = true;
 
     /**
      * Creates new form
@@ -74,7 +73,7 @@ public class FacultyStaff extends javax.swing.JFrame {
         facstaffTab = new javax.swing.JTabbedPane();
         studentTab = new javax.swing.JPanel();
         studIDLabel = new javax.swing.JLabel();
-        studID = new javax.swing.JTextField();
+        stuID = new javax.swing.JTextField();
         stuNameLabel = new javax.swing.JLabel();
         stuName = new javax.swing.JTextField();
         stuMajorLabel = new javax.swing.JLabel();
@@ -246,7 +245,7 @@ public class FacultyStaff extends javax.swing.JFrame {
                     .addGroup(studentTabLayout.createSequentialGroup()
                         .addComponent(studIDLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(studID, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(stuID, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(studentTabLayout.createSequentialGroup()
                         .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(stuNameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -265,7 +264,7 @@ public class FacultyStaff extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(studIDLabel)
-                    .addComponent(studID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(stuID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(studentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(stuNameLabel)
@@ -878,7 +877,7 @@ public class FacultyStaff extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addStuTableListener () {
+    private void addStuTableListener() {
         stuTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         stuTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
@@ -893,8 +892,8 @@ public class FacultyStaff extends javax.swing.JFrame {
                         Object colcontent = stuTable.getValueAt(selectedRow,col);
                         colhash.put(colname,colcontent);
                     }
-                    studID.setText(colhash.get("ID").toString());
-                    studID.setEnabled(false);
+                    stuID.setText(colhash.get("ID").toString());
+                    stuID.setEnabled(false);
                     stuName.setText(colhash.get("Name").toString());
                     stuMajor.setText(colhash.get("Major").toString());
                     stuLevel.setSelectedItem(colhash.get("Level"));
@@ -903,6 +902,34 @@ public class FacultyStaff extends javax.swing.JFrame {
                     stuNewAction = false;
                     stuSearch.setText("Edit");
                     stuSearchAction = false;
+                }
+            }
+        });
+    }
+
+    private void addFacTableListener() {
+        facTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        facTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent e) {
+                if (e.getValueIsAdjusting()) return;
+                ListSelectionModel lsm = (ListSelectionModel) e.getSource();
+                if (!lsm.isSelectionEmpty()) {
+                    Integer selectedRow = lsm.getMinSelectionIndex();
+                    Integer numcols = facTable.getColumnCount();
+                    Hashtable<String,Object> colhash = new Hashtable<String, Object>();
+                    for (int col=0; col < numcols; col++) {
+                        String colname = facTable.getColumnName(col);
+                        Object colcontent = facTable.getValueAt(selectedRow,col);
+                        colhash.put(colname,colcontent);
+                    }
+                    facID.setText(colhash.get("ID").toString());
+                    facID.setEnabled(false);
+                    facName.setText(colhash.get("Name").toString());
+                    facDep.setText(colhash.get("Department").toString());
+                    facNew.setText("Delete");
+                    facNewAction = false;
+                    facSearch.setText("Edit");
+                    facSearchAction = false;
                 }
             }
         });
@@ -919,6 +946,57 @@ public class FacultyStaff extends javax.swing.JFrame {
         this.repaint();
     }
 
+    // student buttons
+    private void stuNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stuNewActionPerformed
+        Database db = new Database();
+        Integer sid = -1;
+        String sname = "-1";
+        String major = "-1";
+        String s_level = "-1";
+        Integer age = -1;
+        if (!stuID.getText().isEmpty()) {
+            sid = Integer.parseInt(stuID.getText());
+        }
+        if (!stuName.getText().isEmpty()) {
+            sname = stuName.getText();
+        }
+        if (!stuMajor.getText().isEmpty()) {
+            major = stuMajor.getText();
+        }
+        if (!String.valueOf(stuLevel.getSelectedItem()).isEmpty()) {
+            s_level = String.valueOf(stuLevel.getSelectedItem()).toLowerCase();
+        }
+        if (!stuAge.getText().isEmpty()) {
+            age = Integer.parseInt(stuAge.getText());
+        }
+        // do new action
+        if (stuNewAction && staffPermission) {
+            db.newStu(con, sid, sname, major, s_level, age);
+            clearStuForm();
+            stuID.setEnabled(true);
+            stuNew.setText("New");
+            stuNewAction = true;
+            stuSearch.setText("Search");
+            stuSearchAction = true;
+            Object[][] allstu = db.searchStu(con);
+            cleartable(stuTable);
+            addtoTable(stuTable,allstu);
+        }
+        // do delete action
+        else if (!stuNewAction && staffPermission){
+            db.delStu(con, sid);
+            clearStuForm();
+            stuID.setEnabled(true);
+            stuNew.setText("New");
+            stuNewAction = true;
+            stuSearch.setText("Search");
+            stuSearchAction = true;
+            Object[][] allstu = db.searchStu(con);
+            cleartable(stuTable);
+            addtoTable(stuTable,allstu);
+        }
+    }//GEN-LAST:event_stuNewActionPerformed
+
     private void stuSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stuSearchActionPerformed
         Database db = new Database();
         Integer sid = -1;
@@ -926,8 +1004,8 @@ public class FacultyStaff extends javax.swing.JFrame {
         String major = "-1";
         String s_level = "-1";
         Integer age = -1;
-        if (!studID.getText().isEmpty()) {
-            sid = Integer.parseInt(studID.getText());
+        if (!stuID.getText().isEmpty()) {
+            sid = Integer.parseInt(stuID.getText());
         }
         if (!stuName.getText().isEmpty()) {
             sname = stuName.getText();
@@ -951,7 +1029,7 @@ public class FacultyStaff extends javax.swing.JFrame {
         else if (!stuSearchAction && staffPermission){
             db.editStu(con, sid, sname, major, s_level, age);
             clearStuForm();
-            studID.setEnabled(true);
+            stuID.setEnabled(true);
             stuNew.setText("New");
             stuNewAction = true;
             stuSearch.setText("Search");
@@ -962,9 +1040,71 @@ public class FacultyStaff extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_stuSearchActionPerformed
 
+    private void stuClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stuClearActionPerformed
+        cleartable(stuTable);
+        clearStuForm();
+        stuID.setEnabled(true);
+        stuNew.setText("New");
+        stuNewAction = true;
+        stuSearch.setText("Search");
+        stuSearchAction = true;
+        Database db = new Database();
+        Object[][] allstu = db.searchStu(con);
+        addtoTable(stuTable,allstu);
+    }//GEN-LAST:event_stuClearActionPerformed
+
+    // faculty buttons
     private void facSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facSearchActionPerformed
-        // TODO add your handling code here:
+        Database db = new Database();
+        Integer fid = -1;
+        String fname = "-1";
+        String dname = "-1";
+        if (!facID.getText().isEmpty()) {
+            fid = Integer.parseInt(facID.getText());
+        }
+        if (!facName.getText().isEmpty()) {
+            fname = facName.getText();
+        }
+        if (!facDep.getText().isEmpty()) {
+            dname = facDep.getText();
+        }
+        // do search action
+        if (facSearchAction) {
+            Object[][] result = db.searchFac(con, fid, fname, dname);
+            cleartable(facTable);
+            addtoTable(facTable, result);
+        }
+        // do edit action
+        else if (!facSearchAction && staffPermission){
+            //db.editFac(con, fid, fname, dname);
+            clearFacForm();
+            facID.setEnabled(true);
+            facNew.setText("New");
+            facNewAction = true;
+            facSearch.setText("Search");
+            facSearchAction = true;
+            Object[][] allfac = db.searchFac(con);
+            cleartable(facTable);
+            addtoTable(facTable,allfac);
+        }
     }//GEN-LAST:event_facSearchActionPerformed
+
+    private void facClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facClearActionPerformed
+        cleartable(facTable);
+        clearFacForm();
+        facID.setEnabled(true);
+        facNew.setText("New");
+        facNewAction = true;
+        facSearch.setText("Search");
+        facSearchAction = true;
+        Database db = new Database();
+        Object[][] allfac = db.searchFac(con);
+        addtoTable(facTable,allfac);
+    }//GEN-LAST:event_facClearActionPerformed
+
+    private void facNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facNewActionPerformed
+
+    }//GEN-LAST:event_facNewActionPerformed
 
     private void depSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depSearchActionPerformed
         // TODO add your handling code here:
@@ -997,24 +1137,6 @@ public class FacultyStaff extends javax.swing.JFrame {
     private void staClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staClearActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_staClearActionPerformed
-
-    private void facClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facClearActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_facClearActionPerformed
-
-    private void stuClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stuClearActionPerformed
-        cleartable(stuTable);
-        clearStuForm();
-        studID.setEnabled(true);
-        stuNew.setText("New");
-        stuNewAction = true;
-        stuSearch.setText("Search");
-        stuSearchAction = true;
-        Database db = new Database();
-        Object[][] allstu = db.searchStu(con);
-        addtoTable(stuTable,allstu);
-
-    }//GEN-LAST:event_stuClearActionPerformed
 
     private void facstaffTabStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_facstaffTabStateChanged
         JTabbedPane temp = (JTabbedPane) evt.getSource();
@@ -1052,60 +1174,6 @@ public class FacultyStaff extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_facstaffTabStateChanged
 
-    private void stuNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stuNewActionPerformed
-        Database db = new Database();
-        Integer sid = -1;
-        String sname = "-1";
-        String major = "-1";
-        String s_level = "-1";
-        Integer age = -1;
-        if (!studID.getText().isEmpty()) {
-            sid = Integer.parseInt(studID.getText());
-        }
-        if (!stuName.getText().isEmpty()) {
-            sname = stuName.getText();
-        }
-        if (!stuMajor.getText().isEmpty()) {
-            major = stuMajor.getText();
-        }
-        if (!String.valueOf(stuLevel.getSelectedItem()).isEmpty()) {
-            s_level = String.valueOf(stuLevel.getSelectedItem()).toLowerCase();
-        }
-        if (!stuAge.getText().isEmpty()) {
-            age = Integer.parseInt(stuAge.getText());
-        }
-        // do new action
-        if (stuNewAction && staffPermission) {
-            db.newStu(con, sid, sname, major, s_level, age);
-            clearStuForm();
-            studID.setEnabled(true);
-            stuNew.setText("New");
-            stuNewAction = true;
-            stuSearch.setText("Search");
-            stuSearchAction = true;
-            Object[][] allstu = db.searchStu(con);
-            cleartable(stuTable);
-            addtoTable(stuTable,allstu);
-        }
-        // do delete action
-        else if (!stuNewAction && staffPermission){
-            db.delStu(con, sid);
-            clearStuForm();
-            studID.setEnabled(true);
-            stuNew.setText("New");
-            stuNewAction = true;
-            stuSearch.setText("Search");
-            stuSearchAction = true;
-            Object[][] allstu = db.searchStu(con);
-            cleartable(stuTable);
-            addtoTable(stuTable,allstu);
-        }
-    }//GEN-LAST:event_stuNewActionPerformed
-
-    private void facNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facNewActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_facNewActionPerformed
-
     private void staNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staNewActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_staNewActionPerformed
@@ -1142,11 +1210,17 @@ public class FacultyStaff extends javax.swing.JFrame {
     }
 
     public void clearStuForm () {
-        studID.setText("");
+        stuID.setText("");
         stuName.setText("");
         stuMajor.setText("");
         stuLevel.setSelectedIndex(0);
         stuAge.setText("");
+    }
+
+    public void clearFacForm () {
+        facID.setText("");
+        facName.setText("");
+        facDep.setText("");
     }
 
     public Connection getConnection () {
@@ -1165,6 +1239,7 @@ public class FacultyStaff extends javax.swing.JFrame {
         this.staffPermission = staffPermission;
         if (staffPermission) {
             addStuTableListener();
+            addFacTableListener();
         }
         else {
             disableNewButtons();
@@ -1255,7 +1330,7 @@ public class FacultyStaff extends javax.swing.JFrame {
     private javax.swing.JScrollPane stuScroll;
     private javax.swing.JButton stuSearch;
     private javax.swing.JTable stuTable;
-    private javax.swing.JTextField studID;
+    private javax.swing.JTextField stuID;
     private javax.swing.JLabel studIDLabel;
     private javax.swing.JPanel studentTab;
     // End of variables declaration//GEN-END:variables

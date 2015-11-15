@@ -554,27 +554,37 @@ public class Database {
         }
     }
 
-    public Object[][] searchFac (Connection con, Integer fid, String fname, Integer deptid){
+    public Object[][] searchFac (Connection con, Integer fid, String fname, String dname){
         Object[][] obj = null;
-        ArrayList<Object[]> temp = null;
-        String searchfid = "%";
-        String searchdid = "%";
-        if (fid != null) {
-            searchfid = fid.toString();
-        }
-        if (deptid != null) {
-            searchdid = deptid.toString();
+        ArrayList<Object[]> temp = new ArrayList<Object[]>();
+        // if nothing was passed in, don't try to build the sql expression - it will just throw a sql exception
+        // because of the dangling "WHEN"
+        if ((fid ==null || fid == -1) && (fname == null || fname.equals("-1")) &&
+                (dname == null || dname.equals("-1"))) {
+            return obj;
         }
         try {
-            String query = "SELECT fid,fname,deptid FROM Faculty WHERE fid='"+searchfid+"' AND fname='"+fname+"' AND " +
-                    "deptid='"+searchdid+"'";
+            String buildquery = "SELECT fid,fname,dname FROM Faculty JOIN Department ON Faculty.deptid=Department.did WHERE ";
+            if (fid != null && fid != -1) {
+                buildquery += "fid='"+fid+"' AND ";
+            }
+            if (fname != null && !fname.equals("-1")) {
+                buildquery += "fname='"+fname+"' AND ";
+            }
+            if (dname != null && !dname.equals("-1")) {
+                buildquery += "dname='"+dname+"' AND ";
+            }
+            Pattern lastand = Pattern.compile(" AND \\Z");
+            Matcher m = lastand.matcher(buildquery);
+            String query = m.replaceAll("");
+            query += "ORDER BY fid";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()){
                 Integer Rfid = rs.getInt(1);
                 String Rfname = rs.getString(2);
-                Integer Rdeptid = rs.getInt(3);
-                Object[] row = {Rfid.toString(),Rfname,Rdeptid.toString()};
+                String Rdname = rs.getString(3);
+                Object[] row = {Rfid.toString(),Rfname,Rdname};
                 temp.add(row);
             }
             obj = new Object[temp.size()][];
