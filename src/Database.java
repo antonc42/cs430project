@@ -401,6 +401,48 @@ public class Database {
         }
     }
 
+    public Object[] getCorList (Connection con) {
+        Object[] deps = null;
+        ArrayList<Object> list = new ArrayList<Object>();
+        try {
+            String query = "SELECT cid FROM Courses ORDER BY cid";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                list.add(rs.getString(1));
+            }
+            deps = new Object[list.size()];
+            list.toArray(deps);
+            rs.close();
+            st.close();
+            return deps;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return deps;
+        }
+    }
+
+    public Object[] getStuList (Connection con) {
+        Object[] deps = null;
+        ArrayList<Object> list = new ArrayList<Object>();
+        try {
+            String query = "SELECT sname FROM Student ORDER BY sname";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                list.add(rs.getString(1));
+            }
+            deps = new Object[list.size()];
+            list.toArray(deps);
+            rs.close();
+            st.close();
+            return deps;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return deps;
+        }
+    }
+
     // student table
     public Object[][] searchStu (Connection con){
         Object[][] obj = null;
@@ -1423,7 +1465,7 @@ public class Database {
         }
     }
 
-    public Object[][] searchEnrl (Connection con, Integer sid, String cid, Integer exam1, Integer exam2, Integer finalg){
+    public Object[][] searchEnrl (Connection con, String cid, String sname, Integer exam1, Integer exam2, Integer finalg){
         Object[][] obj = null;
         ArrayList<Object[]> temp = null;
         String searchsid = "%";
@@ -1468,5 +1510,143 @@ public class Database {
         }
     }
 
+    public void editEnrl (Connection con, String cid, String sname, Integer exam1, Integer exam2, Integer finalg) {
+        // if nothing was passed in, do nothing
+        if ((cid ==null || cid.equals("-1")) && (cname == null || cname.equals("-1")) && (meets_at == null ||
+                meets_at.equals("-1")) && (room == null || room.equals("-1")) && (fname == null ||
+                fname.equals("-1")) && (limit == null || limit ==-1)) {
+            return;
+        }
+        try {
+            String buildquery = "UPDATE Courses SET ";
+            if (cid != null && !cid.equals("-1")) {
+                buildquery += "cid='"+cid+"',";
+            }
+            if (cname != null && !cname.equals("-1")) {
+                buildquery += "cname='"+cname+"',";
+            }
+            if (meets_at != null && !meets_at.equals("-1")) {
+                buildquery += "meets_at='"+meets_at+"',";
+            }
+            if (room != null && !room.equals("-1")) {
+                buildquery += "room='"+room+"',";
+            }
+            if (fname != null && !fname.equals("-1") && !fname.isEmpty()) {
+                Integer fid = findFacID(con, fname);
+                if (fid != null) {
+                    buildquery += "fid='" + fid + "',";
+                }
+                // faculty cannot be invalid
+                else { return; }
+            }
+            // faculty cannot be empty
+            else { return; }
+            if (limit != null && limit !=-1) {
+                buildquery += "limit='"+limit+"',";
+            }
+            // remove trailing comma
+            if (buildquery.endsWith(",")) {
+                buildquery = buildquery.substring(0,buildquery.length() - 1);
+            }
+            buildquery += " WHERE cid='"+cid+"'";
+            Statement st = con.createStatement();
+            st.executeUpdate(buildquery);
+            st.close();
+            return;
+        }
+        catch (Exception ex){
+            System.out.println("SQLException: "+ex);
+            return;
+        }
+    }
 
+    public void newEnrl (Connection con, String cid, String sname, Integer exam1, Integer exam2, Integer finalg) {
+        // if nothing was passed in, do nothing
+        if ((cid ==null || cid.equals("-1")) && (cname == null || cname.equals("-1")) && (meets_at == null ||
+                meets_at.equals("-1")) && (room == null || room.equals("-1")) && (fname == null ||
+                fname.equals("-1")) && (limit == null || limit ==-1)) {
+            return;
+        }
+        try {
+            String buildquery = "INSERT INTO Courses ";
+            ArrayList<String> cols = new ArrayList<String>();
+            ArrayList<String> vals = new ArrayList<String>();
+            if (cid != null && !cid.equals("-1")) {
+                cols.add("cid");
+                vals.add(cid);
+            }
+            else {
+                // cannot enter row without primary key
+                return;
+            }
+            if (cname != null && !cname.equals("-1")) {
+                cols.add("cname");
+                vals.add(cname);
+            }
+            if (meets_at != null && !meets_at.equals("-1")) {
+                cols.add("meets_at");
+                vals.add(meets_at);
+            }
+            if (room != null && !room.equals("-1")) {
+                cols.add("room");
+                vals.add(room);
+            }
+            if (fname != null && !fname.equals("-1") && !fname.isEmpty()) {
+                Integer fid = findFacID(con, fname);
+                if (fid != null) {
+                    cols.add("fid");
+                    vals.add(fid.toString());
+                }
+                // faculty cannot be invalid
+                else { return; }
+            }
+            // faculty cannot be empty
+            else { return; }
+            if (limit != null && limit != -1) {
+                cols.add("limit");
+                vals.add(limit.toString());
+            }
+            buildquery += "(";
+            for (String c : cols) {
+                buildquery += c + ",";
+            }
+            if (buildquery.endsWith(",")) {
+                buildquery = buildquery.substring(0,buildquery.length() - 1);
+            }
+            buildquery += ") VALUES (";
+            for (String v : vals) {
+                buildquery += "'" + v + "',";
+            }
+            if (buildquery.endsWith(",")) {
+                buildquery = buildquery.substring(0,buildquery.length() - 1);
+            }
+            buildquery += ")";
+            Statement st = con.createStatement();
+            st.executeUpdate(buildquery);
+            st.close();
+            return;
+        }
+        catch (Exception ex){
+            System.out.println("SQLException: "+ex);
+            return;
+        }
+    }
+
+    public void delEnrl (Connection con, String cid) {
+        // cannot do anything without id
+        if (cid ==null || cid.equals("-1")) {
+            return;
+        }
+        try {
+            String query = "DELETE FROM Courses WHERE cid='" + cid +"'";
+            Statement st = con.createStatement();
+            st.executeUpdate(query);
+            st.close();
+            return;
+        }
+        catch (Exception ex) {
+            System.out.println("SQLException: " + ex);
+            return;
+        }
+    }
 }
