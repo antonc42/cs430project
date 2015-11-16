@@ -1028,11 +1028,11 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="enrlFinal" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                                  <Component id="enrlExam2" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                                  <Component id="enrlStudent" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                                  <Component id="enrlCourse" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                                  <Component id="enrlExam1" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                  <Component id="enrlFinal" alignment="0" pref="200" max="32767" attributes="0"/>
+                                  <Component id="enrlExam2" alignment="0" pref="200" max="32767" attributes="0"/>
+                                  <Component id="enrlExam1" alignment="0" pref="200" max="32767" attributes="0"/>
+                                  <Component id="enrlCourse" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="enrlStudent" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -1094,14 +1094,24 @@
                 <Property name="text" type="java.lang.String" value="Course"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="enrlCourse">
+            <Component class="javax.swing.JComboBox" name="enrlCourse">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.DefaultComboBoxModel(new String[] { &quot;&quot; })" type="code"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="enrlStudentLabel">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Student"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="enrlStudent">
+            <Component class="javax.swing.JComboBox" name="enrlStudent">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.DefaultComboBoxModel(new String[] { &quot;&quot; })" type="code"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="enrlExam1Label">
               <Properties>
