@@ -1104,8 +1104,10 @@ public class FacultyStaff extends javax.swing.JFrame {
                     }
                     // course should never be null
                     enrlCourse.setSelectedItem(colhash.get("Course").toString());
+                    enrlCourse.setEnabled(false);
                     // student should never be null
                     enrlStudent.setSelectedItem(colhash.get("Student").toString());
+                    enrlStudent.setEnabled(false);
                     if (colhash.get("Exam 1") != null) {
                         enrlExam1.setText(colhash.get("Exam 1").toString());
                     }
@@ -1160,7 +1162,7 @@ public class FacultyStaff extends javax.swing.JFrame {
         for (Object stu : stus) {
             enrlStudent.addItem(stu);
         }
-        Object[] cors = db.getStuList(con);
+        Object[] cors = db.getCorList(con);
         for (Object cor : cors) {
             enrlCourse.addItem(cor);
         }
@@ -1726,8 +1728,10 @@ public class FacultyStaff extends javax.swing.JFrame {
         }
         // do delete action
         else if (!enrlNewAction && staffPermission){
-            db.delEnrl(con, cid);
+            db.delEnrl(con, cid, sname);
             clearEnrlForm();
+            enrlCourse.setEnabled(true);
+            enrlStudent.setEnabled(true);
             enrlNew.setText("New");
             enrlNewAction = true;
             enrlSearch.setText("Search");
@@ -1739,11 +1743,61 @@ public class FacultyStaff extends javax.swing.JFrame {
     }//GEN-LAST:event_enrlNewActionPerformed
 
     private void enrlSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrlSearchActionPerformed
-
+        Database db = new Database();
+        String cid = "-1";
+        String sname = "-1";
+        Integer exam1 = -1;
+        Integer exam2 = -1;
+        Integer finalg = -1;
+        if (!enrlCourse.getSelectedItem().toString().isEmpty()) {
+            cid = enrlCourse.getSelectedItem().toString();
+        }
+        if (!enrlStudent.getSelectedItem().toString().isEmpty()) {
+            sname = enrlStudent.getSelectedItem().toString();
+        }
+        if (!enrlExam1.getText().isEmpty()) {
+            exam1 = Integer.parseInt(enrlExam1.getText());
+        }
+        if (!enrlExam2.getText().isEmpty()) {
+            exam2 = Integer.parseInt(enrlExam2.getText());
+        }
+        if (!enrlFinal.getText().isEmpty()) {
+            finalg = Integer.parseInt(enrlFinal.getText());
+        }
+        // do search action
+        if (enrlSearchAction) {
+            Object[][] result = db.searchEnrl(con, cid, sname, exam1, exam2, finalg);
+            cleartable(enrlTable);
+            addtoTable(enrlTable, result);
+        }
+        // do edit action
+        else if (!enrlSearchAction && staffPermission){
+            db.editEnrl(con, cid, sname, exam1, exam2, finalg);
+            clearEnrlForm();
+            enrlStudent.setEnabled(true);
+            enrlCourse.setEnabled(true);
+            enrlNew.setText("New");
+            enrlNewAction = true;
+            enrlSearch.setText("Search");
+            enrlSearchAction = true;
+            Object[][] allenrl = db.searchEnrl(con);
+            cleartable(enrlTable);
+            addtoTable(enrlTable,allenrl);
+        }
     }//GEN-LAST:event_enrlSearchActionPerformed
 
     private void enrlClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrlClearActionPerformed
-
+        cleartable(enrlTable);
+        clearEnrlForm();
+        enrlStudent.setEnabled(true);
+        enrlCourse.setEnabled(true);
+        enrlNew.setText("New");
+        enrlNewAction = true;
+        enrlSearch.setText("Search");
+        enrlSearchAction = true;
+        Database db = new Database();
+        Object[][] allenrl = db.searchEnrl(con);
+        addtoTable(enrlTable,allenrl);
     }//GEN-LAST:event_enrlClearActionPerformed
 
     // populate tables when tab selected
