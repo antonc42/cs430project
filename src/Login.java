@@ -139,6 +139,9 @@ public class Login extends javax.swing.JFrame {
             student.setVisible(true);
             student.setConnection(con);
         }
+        else {
+            System.out.println("Not found!");
+        }
         //maybe make an else to popup warning?
         
     }//GEN-LAST:event_loginButtonActionPerformed
