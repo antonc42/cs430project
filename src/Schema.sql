@@ -46,13 +46,3 @@ CREATE TABLE Staff (
   deptid INTEGER CONSTRAINT staDep_fk REFERENCES Department (did),
   CONSTRAINT staff_pk PRIMARY KEY (sid)
 );
-
-CREATE TRIGGER limitEnroll
-BEFORE INSERT ON Enrolled
-REFERENCING NEW AS new
-FOR EACH ROW
-BEGIN
-  SELECT COUNT(*) INTO numEnrolled
-    FROM Enrolled
-      WHERE cid = :new.cid;
-END;
