@@ -637,14 +637,17 @@ public class Database {
             if (buildquery.endsWith(",")) {
                 buildquery = buildquery.substring(0,buildquery.length() - 1);
             }
-            buildquery += ") VALUES (";
+            buildquery += ") SELECT ";
             for (String v : vals) {
                 buildquery += "'" + v + "',";
             }
             if (buildquery.endsWith(",")) {
                 buildquery = buildquery.substring(0,buildquery.length() - 1);
             }
-            buildquery += ")";
+            buildquery += " FROM DUAL WHERE NOT EXISTS (" +
+                    "(SELECT fid FROM Faculty WHERE fid="+sid+")" +
+                    " UNION " +
+                    "(SELECT sid from Staff WHERE sid="+sid+"))";
             Statement st = con.createStatement();
             st.executeUpdate(buildquery);
             st.close();
@@ -827,14 +830,17 @@ public class Database {
             if (buildquery.endsWith(",")) {
                 buildquery = buildquery.substring(0,buildquery.length() - 1);
             }
-            buildquery += ") VALUES (";
+            buildquery += ") SELECT ";
             for (String v : vals) {
                 buildquery += "'" + v + "',";
             }
             if (buildquery.endsWith(",")) {
                 buildquery = buildquery.substring(0,buildquery.length() - 1);
             }
-            buildquery += ")";
+            buildquery += " FROM DUAL WHERE NOT EXISTS (" +
+                    "(SELECT sid from Student WHERE sid="+fid+")" +
+                    " UNION " +
+                    "(SELECT sid from Staff WHERE sid="+fid+"))";
             Statement st = con.createStatement();
             st.executeUpdate(buildquery);
             st.close();
@@ -1021,14 +1027,17 @@ public class Database {
             if (buildquery.endsWith(",")) {
                 buildquery = buildquery.substring(0,buildquery.length() - 1);
             }
-            buildquery += ") VALUES (";
+            buildquery += ") SELECT ";
             for (String v : vals) {
                 buildquery += "'" + v + "',";
             }
             if (buildquery.endsWith(",")) {
                 buildquery = buildquery.substring(0,buildquery.length() - 1);
             }
-            buildquery += ")";
+            buildquery += " FROM DUAL WHERE NOT EXISTS (" +
+                    "(SELECT fid FROM Faculty WHERE fid="+sid+")" +
+                    " UNION " +
+                    "(SELECT sid FROM Student WHERE sid="+sid+"))";
             Statement st = con.createStatement();
             st.executeUpdate(buildquery);
             st.close();
