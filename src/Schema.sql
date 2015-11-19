@@ -46,3 +46,37 @@ CREATE TABLE Staff (
   deptid INTEGER CONSTRAINT staDep_fk REFERENCES Department (did),
   CONSTRAINT staff_pk PRIMARY KEY (sid)
 );
+
+CREATE VIEW CourseEnrolled AS
+  SELECT cid,COUNT(sid) AS enrld
+  FROM Enrolled
+  GROUP BY cid;
+
+CREATE VIEW FullCourses AS
+  SELECT cid
+  FROM Courses
+  WHERE limit > (
+    SELECT COUNT(sid)
+    FROM Enrolled
+    WHERE Courses.cid = Enrolled.cid
+    GROUP BY cid
+  );
+
+INSERT INTO Enrolled (sid,cid)
+  SELECT 3,'CS101'
+  FROM DUAL
+    JOIN CourseEnrolled
+      ON CourseEnrolled.cid = 'CS101'
+  WHERE CourseEnrolled.enrld < (
+    SELECT limit
+    FROM Courses
+    WHERE Courses.cid = 'CS101'
+  );
+
+INSERT INTO Enrolled (sid,cid)
+  SELECT 4,'CS101'
+  FROM DUAL
+  WHERE 'CS101' NOT IN (
+    SELECT cid
+    FROM FullCourses
+  );
