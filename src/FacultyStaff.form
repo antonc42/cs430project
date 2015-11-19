@@ -299,7 +299,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="facName" pref="200" max="32767" attributes="0"/>
-                                  <Component id="facDep" max="32767" attributes="0"/>
+                                  <Component id="facDep" pref="200" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
@@ -473,7 +473,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="staName" alignment="0" pref="200" max="32767" attributes="0"/>
-                                  <Component id="staDep" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="staDep" alignment="0" pref="200" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
@@ -1031,8 +1031,8 @@
                                   <Component id="enrlFinal" alignment="0" pref="200" max="32767" attributes="0"/>
                                   <Component id="enrlExam2" alignment="0" pref="200" max="32767" attributes="0"/>
                                   <Component id="enrlExam1" alignment="0" pref="200" max="32767" attributes="0"/>
-                                  <Component id="enrlCourse" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="enrlStudent" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="enrlCourse" alignment="0" pref="200" max="32767" attributes="0"/>
+                                  <Component id="enrlStudent" alignment="0" pref="200" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
