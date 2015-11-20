@@ -41,6 +41,9 @@ public class Student extends javax.swing.JFrame {
             }
         initComponents();
         populateComboBoxes();
+        Object[][] allcor = db.searchCor(con);
+        cleartable(corTable);
+        addtoTable(corTable,allcor);
         addCorTableListener();
         corEnroll.setEnabled(false);
         /*coursesTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -424,7 +427,10 @@ public class Student extends javax.swing.JFrame {
     }//GEN-LAST:event_corEnrollActionPerformed
 
     private void corClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corClearActionPerformed
-        // TODO add your handling code here:
+        cleartable(corTable);
+        clearCorForm();
+        Object[][] allcor = db.searchCor(con);
+        addtoTable(corTable,allcor);
     }//GEN-LAST:event_corClearActionPerformed
 
     private void dropButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropButtonActionPerformed

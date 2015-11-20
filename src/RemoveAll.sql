@@ -1,3 +1,4 @@
+DROP VIEW EnrollCount;
 DROP VIEW FullCourses;
 DROP TABLE Staff;
 DROP TABLE Enrolled;
