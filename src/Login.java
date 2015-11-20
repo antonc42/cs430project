@@ -135,9 +135,8 @@ public class Login extends javax.swing.JFrame {
             fs.setVisible(true);
         }
         else if (db.isStu(con,userName.getText())) {
-            Student student = new Student();
+            Student student = new Student(con,Integer.parseInt(userName.getText()));
             student.setVisible(true);
-            student.setConnection(con);
         }
         else {
             System.out.println("Not found!");

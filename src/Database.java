@@ -107,6 +107,34 @@ public class Database {
         }
     }
 
+    public boolean isCourse (Connection con, String cid) {
+        if (cid == null || cid.isEmpty()){
+            System.err.println("No Course given!");
+            return false;
+        }
+        try {
+            String query = "SELECT cid FROM Course WHERE cid='"+cid+"'";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            if (rs.next()){
+                String id = rs.getString(1);
+                if (id.toString().equals(cid)) {
+                    rs.close();
+                    st.close();
+                    return true;
+                }
+                else { return false; }
+            }
+            else {
+                return false;
+            }
+        }
+        catch (Exception ex){
+            System.out.println("SQLException: "+ex);
+            return false;
+        }
+    }
+
     public Integer findDepID (Connection con, String dname) {
         try {
             String depquery = "SELECT did FROM Department WHERE dname=?";
@@ -1406,6 +1434,72 @@ public class Database {
                 }
                 // student cannot be invalid
                 else { return; }
+            }
+            // student cannot be empty
+            else { return; }
+            if (exam1 != null && exam1 != -1) {
+                cols.add("exam1");
+                vals.add(exam1.toString());
+            }
+            if (exam2 != null && exam2 != -1) {
+                cols.add("exam2");
+                vals.add(exam2.toString());
+            }
+            if (finalg != null && finalg != -1) {
+                cols.add("final");
+                vals.add(finalg.toString());
+            }
+            buildquery += "(";
+            for (String c : cols) {
+                buildquery += c + ",";
+            }
+            if (buildquery.endsWith(",")) {
+                buildquery = buildquery.substring(0,buildquery.length() - 1);
+            }
+            buildquery += ") SELECT ";
+            for (String v : vals) {
+                buildquery += "'" + v + "',";
+            }
+            if (buildquery.endsWith(",")) {
+                buildquery = buildquery.substring(0,buildquery.length() - 1);
+            }
+            buildquery += " FROM DUAL " +
+                    "WHERE '"+cid+"' NOT IN (" +
+                    "SELECT cid " +
+                    "FROM FullCourses" +
+                    ")";
+            Statement st = con.createStatement();
+            st.executeUpdate(buildquery);
+            st.close();
+            return;
+        }
+        catch (Exception ex){
+            System.out.println("SQLException: "+ex);
+            return;
+        }
+    }
+
+    public void newEnrl (Connection con, String cid, Integer sid, Integer exam1, Integer exam2, Integer finalg) {
+        // if nothing was passed in, do nothing
+        if ((cid ==null || cid.equals("-1")) && (sid == null || sid ==-1) && (exam1 == null ||
+                exam1 == -1) && (exam2 == null || exam2 == -1) && (finalg == null || finalg ==-1)) {
+            return;
+        }
+        try {
+            String buildquery = "INSERT INTO Enrolled ";
+            ArrayList<String> cols = new ArrayList<String>();
+            ArrayList<String> vals = new ArrayList<String>();
+            if (cid != null && !cid.equals("-1")) {
+                cols.add("cid");
+                vals.add(cid);
+            }
+            else {
+                // cannot enter row without primary key
+                return;
+            }
+            if (sid != null && sid != -1) {
+                cols.add("sid");
+                vals.add(sid.toString());
             }
             // student cannot be empty
             else { return; }

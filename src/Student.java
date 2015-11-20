@@ -1,8 +1,11 @@
 
-import javax.swing.JTable;
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.*;
 import java.awt.Component;
 import java.sql.Connection;
+import java.util.Hashtable;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,11 +20,19 @@ import java.sql.Connection;
 public class Student extends javax.swing.JFrame {
 
     private Connection con;
+
+    private Integer studentID;
+
+    private String course;
+
+    private Database db = new Database();
     
     /**
      * Creates new form Student
      */
-    public Student() {
+    public Student(Connection passedcon, Integer studentID) {
+        setConnection(passedcon);
+        setStudentID(studentID);
         try {
             javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
             }
@@ -29,7 +40,10 @@ public class Student extends javax.swing.JFrame {
             e.printStackTrace();
             }
         initComponents();
-        coursesTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        populateComboBoxes();
+        addCorTableListener();
+        corEnroll.setEnabled(false);
+        /*coursesTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         for (int column = 0; column < coursesTable.getColumnCount(); column++) {
             TableColumn tableColumn = coursesTable.getColumnModel().getColumn(column);
             int preferredWidth = tableColumn.getMinWidth();
@@ -48,7 +62,7 @@ public class Student extends javax.swing.JFrame {
             tableColumn.setPreferredWidth( preferredWidth );
         }
         this.revalidate();
-        this.repaint();
+        this.repaint();*/
     }
 
     /**
@@ -318,13 +332,107 @@ public class Student extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void populateComboBoxes() {
+        Object[] facs = db.getFacList(con);
+        for (Object fac : facs) {
+            corInstructor.addItem(fac);
+        }
+    }
+
+    private void clearComboBoxes() {
+        while (corInstructor.getItemCount() > 1) {
+            corInstructor.removeItemAt(1);
+        }
+    }
+
+    private void addCorTableListener() {
+        corTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        corTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent e) {
+                if (e.getValueIsAdjusting()) return;
+                ListSelectionModel lsm = (ListSelectionModel) e.getSource();
+                if (!lsm.isSelectionEmpty()) {
+                    Integer selectedRow = lsm.getMinSelectionIndex();
+                    Integer numcols = corTable.getColumnCount();
+                    Hashtable<String,Object> colhash = new Hashtable<String, Object>();
+                    for (int col=0; col < numcols; col++) {
+                        String colname = corTable.getColumnName(col);
+                        Object colcontent = corTable.getValueAt(selectedRow,col);
+                        if (colcontent != null) {
+                            colhash.put(colname, colcontent);
+                        }
+                    }
+                    course = colhash.get("ID").toString();
+                    corEnroll.setEnabled(true);
+                }
+            }
+        });
+    }
+
     private void corSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corSearchActionPerformed
-        // TODO add your handling code here:
+        String cid = "-1";
+        String cname = "-1";
+        String meets_at = "-1";
+        String room = "-1";
+        String fname = "-1";
+        Integer limit = -1;
+        if (!corID.getText().isEmpty()) {
+            cid = corID.getText();
+        }
+        if (!corName.getText().isEmpty()) {
+            cname = corName.getText();
+        }
+        if (!corTime.getText().isEmpty()) {
+            meets_at = corTime.getText();
+        }
+        if (!corRoom.getText().isEmpty()) {
+            room = corRoom.getText();
+        }
+        if (!corInstructor.getSelectedItem().toString().isEmpty()) {
+            fname = corInstructor.getSelectedItem().toString();
+        }
+        if (!corSize.getText().isEmpty()) {
+            limit = Integer.parseInt(corSize.getText());
+        }
+        // do search action
+        Object[][] result = db.searchCor(con, cid, cname, meets_at, room, fname, limit);
+        cleartable(corTable);
+        addtoTable(corTable, result);
     }//GEN-LAST:event_corSearchActionPerformed
 
     private void corEnrollActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corEnrollActionPerformed
-        // TODO add your handling code here:
+        if (course != null && !course.isEmpty() && db.isCourse(con,course)) {
+            db.newEnrl(con,course,studentID,0,0,0);
+        }
     }//GEN-LAST:event_corEnrollActionPerformed
+
+    private void cleartable (JTable table) {
+        table.clearSelection();
+        DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+        int rowcount = tableModel.getRowCount();
+        for (int idx = 0; idx < rowcount; idx++) {
+            tableModel.removeRow(0);
+        }
+    }
+
+    public void addtoTable (JTable table, Object[][] data) {
+        table.clearSelection();
+        DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+        if (data != null) {
+            for (Object[] row : data) {
+                tableModel.addRow(row);
+            }
+        }
+    }
+
+    public void clearCorForm () {
+        corID.setText("");
+        corName.setText("");
+        corTime.setText("");
+        corRoom.setText("");
+        corInstructor.setSelectedItem("");
+        corSize.setText("");
+    }
 
     public Connection getConnection () {
         return this.con;
@@ -332,6 +440,14 @@ public class Student extends javax.swing.JFrame {
 
     public void setConnection (Connection passedcon) {
         this.con = passedcon;
+    }
+
+    public Integer getStudentID() {
+        return studentID;
+    }
+
+    public void setStudentID(Integer studentID) {
+        this.studentID = studentID;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
