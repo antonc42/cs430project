@@ -42,10 +42,6 @@ public class Setup extends javax.swing.JFrame {
         dbUserText = new javax.swing.JTextField();
         dbUserPw = new javax.swing.JLabel();
         dbPwField = new javax.swing.JPasswordField();
-        schemaLabel = new javax.swing.JLabel();
-        schemaCheck = new javax.swing.JCheckBox();
-        sampleLabel = new javax.swing.JLabel();
-        sampleCheck = new javax.swing.JCheckBox();
         saveLabel = new javax.swing.JLabel();
         saveCheck = new javax.swing.JCheckBox();
         loginButton = new javax.swing.JButton();
@@ -57,10 +53,6 @@ public class Setup extends javax.swing.JFrame {
         dbUserLabel.setText("Database Username:");
 
         dbUserPw.setText("Database Password:");
-
-        schemaLabel.setText("Database Schema");
-
-        sampleLabel.setText("Sample Data");
 
         saveLabel.setText("Save Configuration");
 
@@ -86,24 +78,20 @@ public class Setup extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(schemaLabel)
                         .addComponent(dbUserPw)
-                        .addComponent(sampleLabel)
                         .addComponent(saveLabel))
                     .addComponent(dbUserLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(sampleCheck)
+                        .addComponent(saveCheck)
                         .addGap(18, 18, 18)
                         .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(saveCheck)
-                        .addGap(18, 18, 18)
+                        .addGap(40, 40, 40)
                         .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(dbUserText, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dbPwField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(schemaCheck))
+                    .addComponent(dbPwField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -117,24 +105,14 @@ public class Setup extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dbUserPw)
                     .addComponent(dbPwField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(schemaCheck)
-                            .addComponent(schemaLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(sampleCheck)
-                            .addComponent(sampleLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(saveLabel)
-                            .addComponent(saveCheck)))
-                    .addGroup(layout.createSequentialGroup()
+                    .addComponent(saveCheck)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(loginButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cancelButton)))
+                        .addComponent(saveLabel)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cancelButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -180,11 +158,7 @@ public class Setup extends javax.swing.JFrame {
     private javax.swing.JLabel dbUserPw;
     private javax.swing.JTextField dbUserText;
     private javax.swing.JButton loginButton;
-    private javax.swing.JCheckBox sampleCheck;
-    private javax.swing.JLabel sampleLabel;
     private javax.swing.JCheckBox saveCheck;
     private javax.swing.JLabel saveLabel;
-    private javax.swing.JCheckBox schemaCheck;
-    private javax.swing.JLabel schemaLabel;
     // End of variables declaration//GEN-END:variables
 }

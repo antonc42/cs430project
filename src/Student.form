@@ -247,7 +247,11 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="corSize" min="-2" pref="200" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="corSearch" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="corEnroll" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="corSearch" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="corIDLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -292,7 +296,10 @@
                           <Component id="corSize" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="corSearch" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="corSearch" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="corEnroll" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="corScroll" pref="194" max="32767" attributes="0"/>
                   </Group>
@@ -333,7 +340,12 @@
                 <Property name="text" type="java.lang.String" value="Instructor"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="corInstructor">
+            <Component class="javax.swing.JComboBox" name="corInstructor">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.DefaultComboBoxModel(new String[] { &quot;&quot; })" type="code"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="corSizeLabel">
               <Properties>
@@ -341,6 +353,14 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="corSize">
+            </Component>
+            <Component class="javax.swing.JButton" name="corEnroll">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Enroll"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="corEnrollActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="corSearch">
               <Properties>
