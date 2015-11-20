@@ -1642,14 +1642,18 @@ public class Database {
             if (buildquery.endsWith(",")) {
                 buildquery = buildquery.substring(0,buildquery.length() - 1);
             }
-            buildquery += ") VALUES (";
+            buildquery += ") SELECT ";
             for (String v : vals) {
                 buildquery += "'" + v + "',";
             }
             if (buildquery.endsWith(",")) {
                 buildquery = buildquery.substring(0,buildquery.length() - 1);
             }
-            buildquery += ")";
+            buildquery += " FROM DUAL " +
+                    "WHERE '"+cid+"' NOT IN (" +
+                    "SELECT cid " +
+                    "FROM FullCourses" +
+                    ")";
             Statement st = con.createStatement();
             st.executeUpdate(buildquery);
             st.close();
