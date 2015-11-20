@@ -154,12 +154,6 @@ public class Setup extends javax.swing.JFrame {
         String dbname = "cs";
         Database db = new Database();
         Connection con = db.connect(server, port, dbname, dbUserText.getText(), String.valueOf(dbPwField.getPassword()));
-        if (schemaCheck.isSelected()) {
-            db.setupSchema(con);
-        }
-        if (sampleCheck.isSelected()) {
-            db.enterData(con);
-        }
         if (saveCheck.isSelected()) {
             try {
                 String filename = System.getProperty("user.home");
