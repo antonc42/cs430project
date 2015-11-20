@@ -98,6 +98,7 @@ public class Student extends javax.swing.JFrame {
         corSize = new javax.swing.JTextField();
         corEnroll = new javax.swing.JButton();
         corSearch = new javax.swing.JButton();
+        corClear = new javax.swing.JButton();
         corScroll = new javax.swing.JScrollPane();
         corTable = new javax.swing.JTable();
 
@@ -151,6 +152,11 @@ public class Student extends javax.swing.JFrame {
         }
 
         dropButton.setText("Drop");
+        dropButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dropButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout stuInfoTabLayout = new javax.swing.GroupLayout(stuInfoTab);
         stuInfoTab.setLayout(stuInfoTabLayout);
@@ -218,6 +224,13 @@ public class Student extends javax.swing.JFrame {
             }
         });
 
+        corClear.setText("Clear");
+        corClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                corClearActionPerformed(evt);
+            }
+        });
+
         corTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -268,17 +281,20 @@ public class Student extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(corInstructor, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, courseTabLayout.createSequentialGroup()
-                        .addComponent(corSizeLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(corSize, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, courseTabLayout.createSequentialGroup()
-                        .addComponent(corEnroll)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(corSearch))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, courseTabLayout.createSequentialGroup()
                         .addComponent(corIDLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(corID, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(corID, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, courseTabLayout.createSequentialGroup()
+                        .addComponent(corSizeLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(courseTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, courseTabLayout.createSequentialGroup()
+                                .addComponent(corEnroll)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(corSearch)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(corClear))
+                            .addComponent(corSize, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         courseTabLayout.setVerticalGroup(
@@ -311,7 +327,8 @@ public class Student extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(courseTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(corSearch)
-                    .addComponent(corEnroll))
+                    .addComponent(corEnroll)
+                    .addComponent(corClear))
                 .addGap(18, 18, 18)
                 .addComponent(corScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))
         );
@@ -406,6 +423,14 @@ public class Student extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_corEnrollActionPerformed
 
+    private void corClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corClearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_corClearActionPerformed
+
+    private void dropButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dropButtonActionPerformed
+
     private void cleartable (JTable table) {
         table.clearSelection();
         DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
@@ -452,6 +477,7 @@ public class Student extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ageLabel;
+    private javax.swing.JButton corClear;
     private javax.swing.JButton corEnroll;
     private javax.swing.JTextField corID;
     private javax.swing.JLabel corIDLabel;
