@@ -13,6 +13,7 @@ import javax.swing.event.ListSelectionListener;
 public class FacultyStaff extends javax.swing.JFrame {
 
     private Connection con;
+    private Database db = new Database();
     private boolean staffPermission = false;
     private boolean stuSearchAction = true;
     private boolean stuNewAction = true;
@@ -1178,7 +1179,7 @@ public class FacultyStaff extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     private void populateComboBoxes() {
-        Database db = new Database();
+        //Database db = new Database();
         Object[] deps = db.getDepList(con);
         for (Object dep : deps) {
             facDep.addItem(dep);
@@ -1224,7 +1225,7 @@ public class FacultyStaff extends javax.swing.JFrame {
      * @param evt
      */
     private void stuNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stuNewActionPerformed
-        Database db = new Database();
+        //Database db = new Database();
         Integer sid = -1;
         String sname = "-1";
         String major = "-1";
@@ -1278,7 +1279,7 @@ public class FacultyStaff extends javax.swing.JFrame {
      * @param evt
      */
     private void stuSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stuSearchActionPerformed
-        Database db = new Database();
+        //Database db = new Database();
         Integer sid = -1;
         String sname = "-1";
         String major = "-1";
@@ -1332,7 +1333,7 @@ public class FacultyStaff extends javax.swing.JFrame {
         stuNewAction = true;
         stuSearch.setText("Search");
         stuSearchAction = true;
-        Database db = new Database();
+        //Database db = new Database();
         Object[][] allstu = db.searchStu(con);
         addtoTable(stuTable,allstu);
     }//GEN-LAST:event_stuClearActionPerformed
@@ -1342,7 +1343,7 @@ public class FacultyStaff extends javax.swing.JFrame {
      * @param evt
      */
     private void facNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facNewActionPerformed
-        Database db = new Database();
+        //Database db = new Database();
         Integer fid = -1;
         String fname = "-1";
         String dname = "-1";
@@ -1394,7 +1395,7 @@ public class FacultyStaff extends javax.swing.JFrame {
      * @param evt
      */
     private void facSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facSearchActionPerformed
-        Database db = new Database();
+        //Database db = new Database();
         Integer fid = -1;
         String fname = "-1";
         String dname = "-1";
@@ -1443,7 +1444,7 @@ public class FacultyStaff extends javax.swing.JFrame {
         facNewAction = true;
         facSearch.setText("Search");
         facSearchAction = true;
-        Database db = new Database();
+        //Database db = new Database();
         Object[][] allfac = db.searchFac(con);
         addtoTable(facTable,allfac);
     }//GEN-LAST:event_facClearActionPerformed
@@ -1453,7 +1454,7 @@ public class FacultyStaff extends javax.swing.JFrame {
      * @param evt
      */
     private void staNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staNewActionPerformed
-        Database db = new Database();
+        //Database db = new Database();
         Integer sid = -1;
         String sname = "-1";
         String dname = "-1";
@@ -1499,7 +1500,7 @@ public class FacultyStaff extends javax.swing.JFrame {
      * @param evt
      */
     private void staSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staSearchActionPerformed
-        Database db = new Database();
+        //Database db = new Database();
         Integer sid = -1;
         String sname = "-1";
         String dname = "-1";
@@ -1545,7 +1546,7 @@ public class FacultyStaff extends javax.swing.JFrame {
         staNewAction = true;
         staSearch.setText("Search");
         staSearchAction = true;
-        Database db = new Database();
+        //Database db = new Database();
         Object[][] allsta = db.searchSta(con);
         addtoTable(staTable,allsta);
     }//GEN-LAST:event_staClearActionPerformed
@@ -1555,7 +1556,7 @@ public class FacultyStaff extends javax.swing.JFrame {
      * @param evt
      */
     private void depNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depNewActionPerformed
-        Database db = new Database();
+        //Database db = new Database();
         Integer did = -1;
         String dname = "-1";
         if (!depID.getText().isEmpty()) {
@@ -1603,7 +1604,7 @@ public class FacultyStaff extends javax.swing.JFrame {
      * @param evt
      */
     private void depSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depSearchActionPerformed
-        Database db = new Database();
+        //Database db = new Database();
         Integer did = -1;
         String dname = "-1";
         if (!depID.getText().isEmpty()) {
@@ -1648,7 +1649,7 @@ public class FacultyStaff extends javax.swing.JFrame {
         depNewAction = true;
         depSearch.setText("Search");
         depSearchAction = true;
-        Database db = new Database();
+        //Database db = new Database();
         Object[][] alldep = db.searchDep(con);
         addtoTable(depTable,alldep);
     }//GEN-LAST:event_depClearActionPerformed
@@ -1658,7 +1659,7 @@ public class FacultyStaff extends javax.swing.JFrame {
      * @param evt
      */
     private void corNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corNewActionPerformed
-        Database db = new Database();
+        //Database db = new Database();
         String cid = "-1";
         String cname = "-1";
         String meets_at = "-1";
@@ -1716,7 +1717,7 @@ public class FacultyStaff extends javax.swing.JFrame {
      * @param evt
      */
     private void corSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corSearchActionPerformed
-        Database db = new Database();
+        //Database db = new Database();
         String cid = "-1";
         String cname = "-1";
         String meets_at = "-1";
@@ -1774,7 +1775,7 @@ public class FacultyStaff extends javax.swing.JFrame {
         corNewAction = true;
         corSearch.setText("Search");
         corSearchAction = true;
-        Database db = new Database();
+        //Database db = new Database();
         Object[][] allcor = db.searchCor(con);
         addtoTable(corTable,allcor);
     }//GEN-LAST:event_corClearActionPerformed
@@ -1784,7 +1785,7 @@ public class FacultyStaff extends javax.swing.JFrame {
      * @param evt
      */
     private void enrlNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrlNewActionPerformed
-        Database db = new Database();
+        //Database db = new Database();
         String cid = "-1";
         String sname = "-1";
         Integer exam1 = -1;
@@ -1838,7 +1839,7 @@ public class FacultyStaff extends javax.swing.JFrame {
      * @param evt
      */
     private void enrlSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrlSearchActionPerformed
-        Database db = new Database();
+        //Database db = new Database();
         String cid = "-1";
         String sname = "-1";
         Integer exam1 = -1;
@@ -1894,7 +1895,7 @@ public class FacultyStaff extends javax.swing.JFrame {
         enrlNewAction = true;
         enrlSearch.setText("Search");
         enrlSearchAction = true;
-        Database db = new Database();
+        //Database db = new Database();
         Object[][] allenrl = db.searchEnrl(con);
         addtoTable(enrlTable,allenrl);
     }//GEN-LAST:event_enrlClearActionPerformed
@@ -1907,7 +1908,7 @@ public class FacultyStaff extends javax.swing.JFrame {
     private void facstaffTabStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_facstaffTabStateChanged
         JTabbedPane temp = (JTabbedPane) evt.getSource();
         int index = temp.getSelectedIndex();
-        Database db = new Database();
+        //Database db = new Database();
         if (index == 0) {
             Object[][] allstu = db.searchStu(con);
             cleartable(stuTable);

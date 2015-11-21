@@ -3,30 +3,20 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.*;
-import java.awt.Component;
+//import java.awt.Component;
 import java.sql.Connection;
 import java.util.Hashtable;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- *
- * @author anton
+ * Class for student window.
+ * @author Anton Castelli
  */
 public class Student extends javax.swing.JFrame {
 
     private Connection con;
-
     private Integer studentID;
-
     private String course;
-
     private String dropcourse;
-
     private Database db = new Database();
     
     /**
