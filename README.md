@@ -92,4 +92,4 @@ Some extra functions of this program were not able to be implemented in the time
  * SQL injection attack mitigation
  * User login passwords
    * Need additional table in database
-   * Passwords would be properly hashed and salted with sha256crypt
+   * Passwords would be properly hashed and salted with sha512crypt
