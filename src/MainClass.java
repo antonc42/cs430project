@@ -1,6 +1,7 @@
 /**
  * Created by anton on 10/17/15.
  * Main class for project
+ * @author Anton Castelli
  */
 import javax.swing.*;
 import java.nio.file.Files;
@@ -8,9 +9,16 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.*;
 import java.io.*;
+
+
 public class MainClass {
+    /**
+     * Main Method for project
+     * Looks for pre-existing config file and displays setup window if not found.
+     * Then starts user login dialog.
+     * @param args
+     */
     public static void main(String[] args){
-        // if config file exists and is readable, skip setup dialog
         String filename = System.getProperty("user.home");
         filename += File.separator + ".cs430dbconfig";
         Path config = Paths.get(filename);
@@ -33,7 +41,6 @@ public class MainClass {
                 JOptionPane.showMessageDialog(null, "Cannot open config file - error reading!");
             }
         }
-        // if no config file exists, go to setup dialog
         else {
             Setup setupbox = new Setup();
             setupbox.setVisible(true);

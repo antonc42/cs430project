@@ -1,24 +1,17 @@
-
-import javax.swing.JOptionPane;
-import javax.xml.crypto.Data;
+/**
+ * Class for user login dialog
+ * @author Anton Castelli
+ */
+//import javax.swing.JOptionPane;
+//import javax.xml.crypto.Data;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author anton
- */
 public class Login extends javax.swing.JFrame {
 
     private Connection con;
     /**
-     * Creates new form GUI
+     * Creates new form Login
      */
     public Login() {
         try {
@@ -109,6 +102,11 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Action Listener for Cancel button.
+     * Closes the database connection and exits the program.
+     * @param evt
+     */
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         try {
             con.close();
@@ -118,13 +116,14 @@ public class Login extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_cancelButtonActionPerformed
 
+    /**
+     * Action Listener for Login button.
+     * Hides this user login window.
+     * Opens either the faculty, staff, or student window depending on permissions of user who logged in.
+     * @param evt
+     */
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        
-        //JOptionPane.showMessageDialog(rootPane, "User: "+dbuser+"\nPass: "+dbpw);
-        // put db login check here
-        
         this.setVisible(false);
-
         Database db = new Database();
         if (db.isFac(con, userName.getText())) {
             FacultyStaff fs = new FacultyStaff(con);
@@ -141,14 +140,20 @@ public class Login extends javax.swing.JFrame {
         else {
             System.out.println("Not found!");
         }
-        //maybe make an else to popup warning?
-        
     }//GEN-LAST:event_loginButtonActionPerformed
 
+    /**
+     * Getter for DB connection.
+     * @return JDBC Connection
+     */
     public Connection getConnection () {
         return this.con;
     }
-    
+
+    /**
+     * Setter for DB connection.
+     * @param passedcon
+     */
     public void setConnection (Connection passedcon) {
         this.con = passedcon;
     }
