@@ -25,6 +25,8 @@ public class Student extends javax.swing.JFrame {
 
     private String course;
 
+    private String dropcourse;
+
     private Database db = new Database();
     
     /**
@@ -41,11 +43,11 @@ public class Student extends javax.swing.JFrame {
             }
         initComponents();
         populateComboBoxes();
-        Object[][] allcor = db.searchCor(con);
-        cleartable(corTable);
-        addtoTable(corTable,allcor);
         addCorTableListener();
+        addClassTableListener();
         corEnroll.setEnabled(false);
+        dropButton.setEnabled(false);
+        displayStuInfo();
         reloadClassList();
         /*coursesTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         for (int column = 0; column < coursesTable.getColumnCount(); column++) {
@@ -396,10 +398,47 @@ public class Student extends javax.swing.JFrame {
         });
     }
 
+    private void addClassTableListener() {
+        coursesTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        coursesTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent e) {
+                if (e.getValueIsAdjusting()) return;
+                ListSelectionModel lsm = (ListSelectionModel) e.getSource();
+                if (!lsm.isSelectionEmpty()) {
+                    Integer selectedRow = lsm.getMinSelectionIndex();
+                    Integer numcols = coursesTable.getColumnCount();
+                    Hashtable<String,Object> colhash = new Hashtable<String, Object>();
+                    for (int col=0; col < numcols; col++) {
+                        String colname = coursesTable.getColumnName(col);
+                        Object colcontent = coursesTable.getValueAt(selectedRow,col);
+                        if (colcontent != null) {
+                            colhash.put(colname, colcontent);
+                        }
+                    }
+                    dropcourse = colhash.get("ID").toString();
+                    dropButton.setEnabled(true);
+                }
+            }
+        });
+    }
+
     private void reloadClassList() {
         cleartable(coursesTable);
         Object[][] stuClasses = db.getEnrolled(con,studentID);
-        addtoTable(coursesTable,stuClasses);
+        addtoTable(coursesTable, stuClasses);
+        dropButton.setEnabled(false);
+    }
+
+    private void displayStuInfo () {
+        Object[][] info = db.searchStu(con,studentID,"-1","-1","-1",-1);
+        String name = info[0][1].toString();
+        String major = info[0][2].toString();
+        String s_level = info[0][3].toString();
+        Integer age = Integer.parseInt(info[0][4].toString());
+        nameLabel.setText("Name: "+name);
+        majorLabel.setText("Major: "+major);
+        levelLabel.setText("Level: "+s_level);
+        ageLabel.setText("Age: "+age);
     }
 
     private void corSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corSearchActionPerformed
@@ -444,15 +483,29 @@ public class Student extends javax.swing.JFrame {
         clearCorForm();
         Object[][] allcor = db.searchCor(con);
         addtoTable(corTable,allcor);
+        corEnroll.setEnabled(false);
     }//GEN-LAST:event_corClearActionPerformed
 
     private void dropButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropButtonActionPerformed
-
+        if (dropcourse != null && !dropcourse.isEmpty() && db.isCourse(con,dropcourse)) {
+            db.delEnrl(con,dropcourse,studentID);
+        }
         reloadClassList();
     }//GEN-LAST:event_dropButtonActionPerformed
 
     private void stuTabsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_stuTabsStateChanged
-        // TODO add your handling code here:
+        JTabbedPane temp = (JTabbedPane) evt.getSource();
+        int index = temp.getSelectedIndex();
+        Database db = new Database();
+        if (index == 0) {
+            reloadClassList();
+        }
+        else if (index == 1) {
+            Object[][] allcor = db.searchCor(con);
+            cleartable(corTable);
+            addtoTable(corTable,allcor);
+            corEnroll.setEnabled(false);
+        }
     }//GEN-LAST:event_stuTabsStateChanged
 
     private void cleartable (JTable table) {

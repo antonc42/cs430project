@@ -1574,6 +1574,24 @@ public class Database {
         }
     }
 
+    public void delEnrl (Connection con, String cid, Integer sid) {
+        // cannot do anything without ids
+        if ((cid == null || cid.equals("-1")) || (sid == null || sid == -1)) {
+            return;
+        }
+        try {
+            String query = "DELETE FROM Enrolled WHERE cid='" + cid +"' AND sid="+sid;
+            Statement st = con.createStatement();
+            st.executeUpdate(query);
+            st.close();
+            return;
+        }
+        catch (Exception ex) {
+            System.out.println("SQLException: " + ex);
+            return;
+        }
+    }
+
     // student courses
     public Object[][] getEnrolled (Connection con, Integer sid){
         Object[][] obj = null;
