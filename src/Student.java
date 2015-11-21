@@ -361,6 +361,7 @@ public class Student extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    @SuppressWarnings("unchecked")
     private void populateComboBoxes() {
         Object[] facs = db.getFacList(con);
         for (Object fac : facs) {
