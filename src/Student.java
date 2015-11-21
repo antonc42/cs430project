@@ -191,7 +191,7 @@ public class Student extends javax.swing.JFrame {
                     .addComponent(levelLabel)
                     .addComponent(ageLabel))
                 .addGap(18, 18, 18)
-                .addComponent(coursesScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(coursesScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE))
         );
 
         stuTabs.addTab("Student Info", stuInfoTab);
@@ -330,7 +330,7 @@ public class Student extends javax.swing.JFrame {
                     .addComponent(corEnroll)
                     .addComponent(corClear))
                 .addGap(18, 18, 18)
-                .addComponent(corScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))
+                .addComponent(corScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE))
         );
 
         stuTabs.addTab("Course Search", courseTab);
