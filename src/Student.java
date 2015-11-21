@@ -18,9 +18,11 @@ public class Student extends javax.swing.JFrame {
     private String course;
     private String dropcourse;
     private Database db = new Database();
-    
+
     /**
-     * Creates new form Student
+     * Creates new form Student given connection to DB and student ID number.
+     * @param passedcon
+     * @param studentID
      */
     public Student(Connection passedcon, Integer studentID) {
         setConnection(passedcon);
@@ -39,26 +41,6 @@ public class Student extends javax.swing.JFrame {
         dropButton.setEnabled(false);
         displayStuInfo();
         reloadClassList();
-        /*coursesTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        for (int column = 0; column < coursesTable.getColumnCount(); column++) {
-            TableColumn tableColumn = coursesTable.getColumnModel().getColumn(column);
-            int preferredWidth = tableColumn.getMinWidth();
-            int maxWidth = tableColumn.getMaxWidth();
-            for (int row = 0; row < coursesTable.getRowCount(); row++) {
-                TableCellRenderer cellRenderer = coursesTable.getCellRenderer(row, column);
-                Component c = coursesTable.prepareRenderer(cellRenderer, row, column);
-                int width = c.getPreferredSize().width + coursesTable.getIntercellSpacing().width;
-                preferredWidth = Math.max(preferredWidth, width);
-                //  We've exceeded the maximum width, no need to check other rows
-                if (preferredWidth >= maxWidth) {
-                    preferredWidth = maxWidth;
-                    break;
-                }
-            }
-            tableColumn.setPreferredWidth( preferredWidth );
-        }
-        this.revalidate();
-        this.repaint();*/
     }
 
     /**
@@ -351,6 +333,9 @@ public class Student extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Populates combo box on courses tab with data from DB.
+     */
     @SuppressWarnings("unchecked")
     private void populateComboBoxes() {
         Object[] facs = db.getFacList(con);
@@ -359,12 +344,19 @@ public class Student extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Clears combo box on courses tab.
+     */
     private void clearComboBoxes() {
         while (corInstructor.getItemCount() > 1) {
             corInstructor.removeItemAt(1);
         }
     }
 
+    /**
+     * Adds action listener to courses tab table.
+     * When user clicks entry in the table, allows for student to enroll in course.
+     */
     private void addCorTableListener() {
         corTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         corTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -389,6 +381,10 @@ public class Student extends javax.swing.JFrame {
         });
     }
 
+    /**
+     * Adds action listener to student tab table.
+     * When user clicks entry in the table, allows for student to drop course.
+     */
     private void addClassTableListener() {
         coursesTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         coursesTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -413,6 +409,9 @@ public class Student extends javax.swing.JFrame {
         });
     }
 
+    /**
+     * Reloads the table of classes student is enrolled in on the student tab.
+     */
     private void reloadClassList() {
         cleartable(coursesTable);
         Object[][] stuClasses = db.getEnrolled(con,studentID);
@@ -420,6 +419,9 @@ public class Student extends javax.swing.JFrame {
         dropButton.setEnabled(false);
     }
 
+    /**
+     * Gets info of the logged-in student from the DB and puts into labels at the top of the student tab.
+     */
     private void displayStuInfo () {
         Object[][] info = db.searchStu(con,studentID,"-1","-1","-1",-1);
         String name = info[0][1].toString();
@@ -432,6 +434,12 @@ public class Student extends javax.swing.JFrame {
         ageLabel.setText("Age: "+age);
     }
 
+    /**
+     * Action Listener for courses tab Search button.
+     * Gets the entries from the fields and searches DB.
+     * Clears and re-populates table with results.
+     * @param evt
+     */
     private void corSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corSearchActionPerformed
         String cid = "-1";
         String cname = "-1";
@@ -463,12 +471,22 @@ public class Student extends javax.swing.JFrame {
         addtoTable(corTable, result);
     }//GEN-LAST:event_corSearchActionPerformed
 
+    /**
+     * Action Listener for courses tab Enroll button.
+     * Enrolls the logged-in student in the selected course.
+     * @param evt
+     */
     private void corEnrollActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corEnrollActionPerformed
         if (course != null && !course.isEmpty() && db.isCourse(con,course)) {
             db.newEnrl(con,course,studentID,0,0,0);
         }
     }//GEN-LAST:event_corEnrollActionPerformed
 
+    /**
+     * Action Listener for courses tab Clear button.
+     * Clears the fields and resets the table.
+     * @param evt
+     */
     private void corClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corClearActionPerformed
         cleartable(corTable);
         clearCorForm();
@@ -477,6 +495,11 @@ public class Student extends javax.swing.JFrame {
         corEnroll.setEnabled(false);
     }//GEN-LAST:event_corClearActionPerformed
 
+    /**
+     * Action Listener for student tab Drop button.
+     * Removes the logged-in user from the selected course.
+     * @param evt
+     */
     private void dropButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropButtonActionPerformed
         if (dropcourse != null && !dropcourse.isEmpty() && db.isCourse(con,dropcourse)) {
             db.delEnrl(con,dropcourse,studentID);
@@ -484,6 +507,11 @@ public class Student extends javax.swing.JFrame {
         reloadClassList();
     }//GEN-LAST:event_dropButtonActionPerformed
 
+    /**
+     * Action Listener for tabbed pane
+     * Detects which tab is selected and reloads table for that tab.
+     * @param evt
+     */
     private void stuTabsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_stuTabsStateChanged
         JTabbedPane temp = (JTabbedPane) evt.getSource();
         int index = temp.getSelectedIndex();
@@ -499,6 +527,10 @@ public class Student extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_stuTabsStateChanged
 
+    /**
+     * Clears entries from given table.
+     * @param table
+     */
     private void cleartable (JTable table) {
         table.clearSelection();
         DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
@@ -508,6 +540,11 @@ public class Student extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Adds given data to given table.
+     * @param table
+     * @param data
+     */
     public void addtoTable (JTable table, Object[][] data) {
         table.clearSelection();
         DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
@@ -518,6 +555,9 @@ public class Student extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Clears fields on courses tab.
+     */
     public void clearCorForm () {
         corID.setText("");
         corName.setText("");
@@ -527,18 +567,35 @@ public class Student extends javax.swing.JFrame {
         corSize.setText("");
     }
 
+
+    /**
+     * Getter for staff permission
+     * @return boolean
+     */
     public Connection getConnection () {
         return this.con;
     }
 
+    /**
+     * Setter for DB connection.
+     * @param passedcon
+     */
     public void setConnection (Connection passedcon) {
         this.con = passedcon;
     }
 
+    /**
+     * Getter for logged-in student ID number.
+     * @return Integer
+     */
     public Integer getStudentID() {
         return studentID;
     }
 
+    /**
+     * Setter for logged-in student ID number.
+     * @param studentID
+     */
     public void setStudentID(Integer studentID) {
         this.studentID = studentID;
     }
