@@ -46,6 +46,7 @@ public class Student extends javax.swing.JFrame {
         addtoTable(corTable,allcor);
         addCorTableListener();
         corEnroll.setEnabled(false);
+        reloadClassList();
         /*coursesTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         for (int column = 0; column < coursesTable.getColumnCount(); column++) {
             TableColumn tableColumn = coursesTable.getColumnModel().getColumn(column);
@@ -389,6 +390,12 @@ public class Student extends javax.swing.JFrame {
         });
     }
 
+    private void reloadClassList() {
+        cleartable(coursesTable);
+        Object[][] stuClasses = db.getEnrolled(con,studentID);
+        addtoTable(coursesTable,stuClasses);
+    }
+
     private void corSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corSearchActionPerformed
         String cid = "-1";
         String cname = "-1";
@@ -434,7 +441,8 @@ public class Student extends javax.swing.JFrame {
     }//GEN-LAST:event_corClearActionPerformed
 
     private void dropButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropButtonActionPerformed
-        // TODO add your handling code here:
+
+        reloadClassList();
     }//GEN-LAST:event_dropButtonActionPerformed
 
     private void cleartable (JTable table) {

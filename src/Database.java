@@ -113,7 +113,7 @@ public class Database {
             return false;
         }
         try {
-            String query = "SELECT cid FROM Course WHERE cid='"+cid+"'";
+            String query = "SELECT cid FROM Courses WHERE cid='"+cid+"'";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             if (rs.next()){
@@ -1607,7 +1607,7 @@ public class Database {
                 Integer Rexam1 = rs.getInt(8);
                 Integer Rexam2 = rs.getInt(9);
                 Integer Rfinalg = rs.getInt(10);
-                Object[] row = {Rcid.toString(),Rcname,Rexam1.toString(),Rexam2.toString(),Rfinalg.toString()};
+                Object[] row = {Rcid.toString(),Rcname,Rmeets,Rroom,Rfname,Renrl,Rlimit.toString(),Rexam1.toString(),Rexam2.toString(),Rfinalg.toString()};
                 temp.add(row);
             }
             obj = new Object[temp.size()][];
