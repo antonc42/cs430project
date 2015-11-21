@@ -109,6 +109,12 @@ public class Student extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(700, 500));
 
+        stuTabs.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                stuTabsStateChanged(evt);
+            }
+        });
+
         nameLabel.setText("Name:");
 
         majorLabel.setText("Major:");
@@ -444,6 +450,10 @@ public class Student extends javax.swing.JFrame {
 
         reloadClassList();
     }//GEN-LAST:event_dropButtonActionPerformed
+
+    private void stuTabsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_stuTabsStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_stuTabsStateChanged
 
     private void cleartable (JTable table) {
         table.clearSelection();
