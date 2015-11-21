@@ -1221,11 +1221,12 @@ public class FacultyStaff extends javax.swing.JFrame {
     }
 
     /**
-     * Action Listener for student tab New/Delete button
+     * Action Listener for student tab New/Delete button.
+     * Gets values from fields and adds to DB if no entry from the table was selected.
+     * Gets values from fields and deletes from DB if an entry from the table was selected.
      * @param evt
      */
     private void stuNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stuNewActionPerformed
-        //Database db = new Database();
         Integer sid = -1;
         String sname = "-1";
         String major = "-1";
@@ -1275,11 +1276,12 @@ public class FacultyStaff extends javax.swing.JFrame {
     }//GEN-LAST:event_stuNewActionPerformed
 
     /**
-     * Action Listener for student tab Search/Edit button
+     * Action Listener for student tab Search/Edit button.
+     * Gets values from fields and searches DB if no entry from the table was selected.
+     * Gets values from fields and edits DB if an entry from the table was selected.
      * @param evt
      */
     private void stuSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stuSearchActionPerformed
-        //Database db = new Database();
         Integer sid = -1;
         String sname = "-1";
         String major = "-1";
@@ -1322,7 +1324,8 @@ public class FacultyStaff extends javax.swing.JFrame {
     }//GEN-LAST:event_stuSearchActionPerformed
 
     /**
-     * Action Listener for student tab Clear button
+     * Action Listener for student tab Clear button.
+     * Clears all fields and resets table.
      * @param evt
      */
     private void stuClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stuClearActionPerformed
@@ -1339,11 +1342,12 @@ public class FacultyStaff extends javax.swing.JFrame {
     }//GEN-LAST:event_stuClearActionPerformed
 
     /**
-     * Action Listener for faculty tab New/Delete button
+     * Action Listener for faculty tab New/Delete button.
+     * Gets values from fields and adds to DB if no entry from the table was selected.
+     * Gets values from fields and deletes from DB if an entry from the table was selected.
      * @param evt
      */
     private void facNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facNewActionPerformed
-        //Database db = new Database();
         Integer fid = -1;
         String fname = "-1";
         String dname = "-1";
@@ -1391,11 +1395,12 @@ public class FacultyStaff extends javax.swing.JFrame {
     }//GEN-LAST:event_facNewActionPerformed
 
     /**
-     * Action Listener for faculty tab Search/Edit button
+     * Action Listener for faculty tab Search/Edit button.
+     * Gets values from fields and searches DB if no entry from the table was selected.
+     * Gets values from fields and edits DB if an entry from the table was selected.
      * @param evt
      */
     private void facSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facSearchActionPerformed
-        //Database db = new Database();
         Integer fid = -1;
         String fname = "-1";
         String dname = "-1";
@@ -1433,7 +1438,8 @@ public class FacultyStaff extends javax.swing.JFrame {
     }//GEN-LAST:event_facSearchActionPerformed
 
     /**
-     * Action Listener for faculty tab Clear button
+     * Action Listener for faculty tab Clear button.
+     * Clears all fields and resets table.
      * @param evt
      */
     private void facClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facClearActionPerformed
@@ -1450,11 +1456,12 @@ public class FacultyStaff extends javax.swing.JFrame {
     }//GEN-LAST:event_facClearActionPerformed
 
     /**
-     * Action Listener for staff tab New/Delete button
+     * Action Listener for staff tab New/Delete button.
+     * Gets values from fields and adds to DB if no entry from the table was selected.
+     * Gets values from fields and deletes from DB if an entry from the table was selected.
      * @param evt
      */
     private void staNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staNewActionPerformed
-        //Database db = new Database();
         Integer sid = -1;
         String sname = "-1";
         String dname = "-1";
@@ -1496,11 +1503,12 @@ public class FacultyStaff extends javax.swing.JFrame {
     }//GEN-LAST:event_staNewActionPerformed
 
     /**
-     * Action Listener for staff tab Search/Edit button
+     * Action Listener for staff tab Search/Edit button.
+     * Gets values from fields and searches DB if no entry from the table was selected.
+     * Gets values from fields and edits DB if an entry from the table was selected.
      * @param evt
      */
     private void staSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staSearchActionPerformed
-        //Database db = new Database();
         Integer sid = -1;
         String sname = "-1";
         String dname = "-1";
@@ -1535,7 +1543,8 @@ public class FacultyStaff extends javax.swing.JFrame {
     }//GEN-LAST:event_staSearchActionPerformed
 
     /**
-     * Action Listener for staff tab Clear button
+     * Action Listener for staff tab Clear button.
+     * Clears all fields and resets table.
      * @param evt
      */
     private void staClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staClearActionPerformed
@@ -1552,11 +1561,12 @@ public class FacultyStaff extends javax.swing.JFrame {
     }//GEN-LAST:event_staClearActionPerformed
 
     /**
-     * Action Listener for department tab New/Delete button
+     * Action Listener for department tab New/Delete button.
+     * Gets values from fields and adds to DB if no entry from the table was selected.
+     * Gets values from fields and deletes from DB if an entry from the table was selected.
      * @param evt
      */
     private void depNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depNewActionPerformed
-        //Database db = new Database();
         Integer did = -1;
         String dname = "-1";
         if (!depID.getText().isEmpty()) {
@@ -1600,11 +1610,12 @@ public class FacultyStaff extends javax.swing.JFrame {
     }//GEN-LAST:event_depNewActionPerformed
 
     /**
-     * Action Listener for department tab Search/Edit button
+     * Action Listener for department tab Search/Edit button.
+     * Gets values from fields and searches DB if no entry from the table was selected.
+     * Gets values from fields and edits DB if an entry from the table was selected.
      * @param evt
      */
     private void depSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depSearchActionPerformed
-        //Database db = new Database();
         Integer did = -1;
         String dname = "-1";
         if (!depID.getText().isEmpty()) {
@@ -1638,7 +1649,8 @@ public class FacultyStaff extends javax.swing.JFrame {
     }//GEN-LAST:event_depSearchActionPerformed
 
     /**
-     * Action Listener for department tab Clear button
+     * Action Listener for department tab Clear button.
+     * Clears all fields and resets table.
      * @param evt
      */
     private void depClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depClearActionPerformed
@@ -1655,11 +1667,12 @@ public class FacultyStaff extends javax.swing.JFrame {
     }//GEN-LAST:event_depClearActionPerformed
 
     /**
-     * Action Listener for courses tab New/Delete button
+     * Action Listener for courses tab New/Delete button.
+     * Gets values from fields and adds to DB if no entry from the table was selected.
+     * Gets values from fields and deletes from DB if an entry from the table was selected.
      * @param evt
      */
     private void corNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corNewActionPerformed
-        //Database db = new Database();
         String cid = "-1";
         String cname = "-1";
         String meets_at = "-1";
@@ -1713,11 +1726,12 @@ public class FacultyStaff extends javax.swing.JFrame {
     }//GEN-LAST:event_corNewActionPerformed
 
     /**
-     * Action Listener for courses tab Search/Edit button
+     * Action Listener for courses tab Search/Edit button.
+     * Gets values from fields and searches DB if no entry from the table was selected.
+     * Gets values from fields and edits DB if an entry from the table was selected.
      * @param evt
      */
     private void corSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corSearchActionPerformed
-        //Database db = new Database();
         String cid = "-1";
         String cname = "-1";
         String meets_at = "-1";
@@ -1764,7 +1778,8 @@ public class FacultyStaff extends javax.swing.JFrame {
     }//GEN-LAST:event_corSearchActionPerformed
 
     /**
-     * Action Listener for courses tab Clear button
+     * Action Listener for courses tab Clear button.
+     * Clears all fields and resets table.
      * @param evt
      */
     private void corClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corClearActionPerformed
@@ -1781,11 +1796,12 @@ public class FacultyStaff extends javax.swing.JFrame {
     }//GEN-LAST:event_corClearActionPerformed
 
     /**
-     * Action Listener for enrolled tab New/Delete button
+     * Action Listener for enrolled tab New/Delete button.
+     * Gets values from fields and adds to DB if no entry from the table was selected.
+     * Gets values from fields and deletes from DB if an entry from the table was selected.
      * @param evt
      */
     private void enrlNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrlNewActionPerformed
-        //Database db = new Database();
         String cid = "-1";
         String sname = "-1";
         Integer exam1 = -1;
@@ -1835,11 +1851,12 @@ public class FacultyStaff extends javax.swing.JFrame {
     }//GEN-LAST:event_enrlNewActionPerformed
 
     /**
-     * Action Listener for enrolled tab Search/Edit button
+     * Action Listener for enrolled tab Search/Edit button.
+     * Gets values from fields and searches DB if no entry from the table was selected.
+     * Gets values from fields and edits DB if an entry from the table was selected.
      * @param evt
      */
     private void enrlSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrlSearchActionPerformed
-        //Database db = new Database();
         String cid = "-1";
         String sname = "-1";
         Integer exam1 = -1;
@@ -1883,7 +1900,8 @@ public class FacultyStaff extends javax.swing.JFrame {
     }//GEN-LAST:event_enrlSearchActionPerformed
 
     /**
-     * Action Listener for enrolled tab Clear button
+     * Action Listener for enrolled tab Clear button.
+     * Clears all fields and resets table.
      * @param evt
      */
     private void enrlClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrlClearActionPerformed
@@ -1908,7 +1926,6 @@ public class FacultyStaff extends javax.swing.JFrame {
     private void facstaffTabStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_facstaffTabStateChanged
         JTabbedPane temp = (JTabbedPane) evt.getSource();
         int index = temp.getSelectedIndex();
-        //Database db = new Database();
         if (index == 0) {
             Object[][] allstu = db.searchStu(con);
             cleartable(stuTable);
@@ -2056,7 +2073,7 @@ public class FacultyStaff extends javax.swing.JFrame {
 
     /**
      * Setter for staff permission.
-     * Removes the New buttons from all the tabs if user is not staff.
+     * Removes the New buttons from all the tabs and disallows selection of rows in all tables if user is not staff.
      * Adds the table listeners to all the tabs if user is staff.
      * @param staffPermission
      */
@@ -2072,6 +2089,12 @@ public class FacultyStaff extends javax.swing.JFrame {
         }
         else {
             disableNewButtons();
+            stuTable.setRowSelectionAllowed(false);
+            facTable.setRowSelectionAllowed(false);
+            staTable.setRowSelectionAllowed(false);
+            depTable.setRowSelectionAllowed(false);
+            corTable.setRowSelectionAllowed(false);
+            enrlTable.setRowSelectionAllowed(false);
         }
     }
 
