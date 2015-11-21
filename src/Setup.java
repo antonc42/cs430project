@@ -1,13 +1,12 @@
-/**
- * Setup window class
- * @author Anton Castelli
- */
-
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+
+/**
+ * Setup window class
+ * @author Anton Castelli
+ */
 
 public class Setup extends javax.swing.JFrame {
 

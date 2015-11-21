@@ -6,15 +6,9 @@ import java.util.Hashtable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- *
- * @author anton
+ * Class for faculty and staff window.
+ * @author Anton Castelli
  */
 public class FacultyStaff extends javax.swing.JFrame {
 
@@ -34,7 +28,8 @@ public class FacultyStaff extends javax.swing.JFrame {
     private boolean enrlNewAction = true;
 
     /**
-     * Creates new form
+     * Creates new form FacultyStaff given connection to DB.
+     * @param passedcon
      */
     public FacultyStaff(Connection passedcon) {
         setConnection(passedcon);
@@ -47,8 +42,14 @@ public class FacultyStaff extends javax.swing.JFrame {
         initComponents();
         populateComboBoxes();
         disableNewButtons();
+        setStaffPermission(false);
     }
 
+    /**
+     * Creates new form FacultyStaff given connection to DB and if user should have staff permissions
+     * @param passedcon
+     * @param staffPermission
+     */
     public FacultyStaff(Connection passedcon, boolean staffPermission) {
         setConnection(passedcon);
         try {
@@ -888,7 +889,10 @@ public class FacultyStaff extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // table select action listeners
+    /**
+     * Adds action listener to student tab table.
+     * When user clicks entry in the table, populates fields above and allows editing or deleting of entry
+     */
     private void addStuTableListener() {
         stuTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         stuTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -933,6 +937,10 @@ public class FacultyStaff extends javax.swing.JFrame {
         });
     }
 
+    /**
+     * Adds action listener to faculty tab table.
+     * When user clicks entry in the table, populates fields above and allows editing or deleting of entry
+     */
     private void addFacTableListener() {
         facTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         facTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -966,6 +974,10 @@ public class FacultyStaff extends javax.swing.JFrame {
         });
     }
 
+    /**
+     * Adds action listener to staff tab table.
+     * When user clicks entry in the table, populates fields above and allows editing or deleting of entry
+     */
     private void addStaTableListener() {
         staTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         staTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -999,6 +1011,10 @@ public class FacultyStaff extends javax.swing.JFrame {
         });
     }
 
+    /**
+     * Adds action listener to department tab table.
+     * When user clicks entry in the table, populates fields above and allows editing or deleting of entry
+     */
     private void addDepTableListener() {
         depTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         depTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -1030,6 +1046,10 @@ public class FacultyStaff extends javax.swing.JFrame {
         });
     }
 
+    /**
+     * Adds action listener to courses tab table.
+     * When user clicks entry in the table, populates fields above and allows editing or deleting of entry
+     */
     private void addCorTableListener() {
         corTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         corTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -1085,6 +1105,10 @@ public class FacultyStaff extends javax.swing.JFrame {
         });
     }
 
+    /**
+     * Adds action listener to enrolled tab table.
+     * When user clicks entry in the table, populates fields above and allows editing or deleting of entry
+     */
     private void addEnrlTableListener() {
         enrlTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         enrlTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -1135,7 +1159,9 @@ public class FacultyStaff extends javax.swing.JFrame {
         });
     }
 
-
+    /**
+     * Removes all New buttons from all tabs
+     */
     private void disableNewButtons() {
         stuNew.setVisible(false);
         corNew.setVisible(false);
@@ -1147,6 +1173,9 @@ public class FacultyStaff extends javax.swing.JFrame {
         this.repaint();
     }
 
+    /**
+     * Populates combo boxes on all tabs with data from DB
+     */
     @SuppressWarnings("unchecked")
     private void populateComboBoxes() {
         Database db = new Database();
@@ -1169,6 +1198,9 @@ public class FacultyStaff extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Clears combo boxes on all tabs
+     */
     private void clearComboBoxes() {
         while (facDep.getItemCount() > 1) {
             facDep.removeItemAt(1);
@@ -1187,7 +1219,10 @@ public class FacultyStaff extends javax.swing.JFrame {
         }
     }
 
-    // student buttons
+    /**
+     * Action Listener for student tab New/Delete button
+     * @param evt
+     */
     private void stuNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stuNewActionPerformed
         Database db = new Database();
         Integer sid = -1;
@@ -1238,6 +1273,10 @@ public class FacultyStaff extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_stuNewActionPerformed
 
+    /**
+     * Action Listener for student tab Search/Edit button
+     * @param evt
+     */
     private void stuSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stuSearchActionPerformed
         Database db = new Database();
         Integer sid = -1;
@@ -1281,6 +1320,10 @@ public class FacultyStaff extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_stuSearchActionPerformed
 
+    /**
+     * Action Listener for student tab Clear button
+     * @param evt
+     */
     private void stuClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stuClearActionPerformed
         cleartable(stuTable);
         clearStuForm();
@@ -1294,7 +1337,10 @@ public class FacultyStaff extends javax.swing.JFrame {
         addtoTable(stuTable,allstu);
     }//GEN-LAST:event_stuClearActionPerformed
 
-    // faculty buttons
+    /**
+     * Action Listener for faculty tab New/Delete button
+     * @param evt
+     */
     private void facNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facNewActionPerformed
         Database db = new Database();
         Integer fid = -1;
@@ -1343,6 +1389,10 @@ public class FacultyStaff extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_facNewActionPerformed
 
+    /**
+     * Action Listener for faculty tab Search/Edit button
+     * @param evt
+     */
     private void facSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facSearchActionPerformed
         Database db = new Database();
         Integer fid = -1;
@@ -1381,6 +1431,10 @@ public class FacultyStaff extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_facSearchActionPerformed
 
+    /**
+     * Action Listener for faculty tab Clear button
+     * @param evt
+     */
     private void facClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facClearActionPerformed
         cleartable(facTable);
         clearFacForm();
@@ -1394,7 +1448,10 @@ public class FacultyStaff extends javax.swing.JFrame {
         addtoTable(facTable,allfac);
     }//GEN-LAST:event_facClearActionPerformed
 
-    // staff buttons
+    /**
+     * Action Listener for staff tab New/Delete button
+     * @param evt
+     */
     private void staNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staNewActionPerformed
         Database db = new Database();
         Integer sid = -1;
@@ -1437,6 +1494,10 @@ public class FacultyStaff extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_staNewActionPerformed
 
+    /**
+     * Action Listener for staff tab Search/Edit button
+     * @param evt
+     */
     private void staSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staSearchActionPerformed
         Database db = new Database();
         Integer sid = -1;
@@ -1472,6 +1533,10 @@ public class FacultyStaff extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_staSearchActionPerformed
 
+    /**
+     * Action Listener for staff tab Clear button
+     * @param evt
+     */
     private void staClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staClearActionPerformed
         cleartable(staTable);
         clearStaForm();
@@ -1485,7 +1550,10 @@ public class FacultyStaff extends javax.swing.JFrame {
         addtoTable(staTable,allsta);
     }//GEN-LAST:event_staClearActionPerformed
 
-    // department buttons
+    /**
+     * Action Listener for department tab New/Delete button
+     * @param evt
+     */
     private void depNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depNewActionPerformed
         Database db = new Database();
         Integer did = -1;
@@ -1530,6 +1598,10 @@ public class FacultyStaff extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_depNewActionPerformed
 
+    /**
+     * Action Listener for department tab Search/Edit button
+     * @param evt
+     */
     private void depSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depSearchActionPerformed
         Database db = new Database();
         Integer did = -1;
@@ -1564,6 +1636,10 @@ public class FacultyStaff extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_depSearchActionPerformed
 
+    /**
+     * Action Listener for department tab Clear button
+     * @param evt
+     */
     private void depClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depClearActionPerformed
         cleartable(depTable);
         clearDepForm();
@@ -1577,7 +1653,10 @@ public class FacultyStaff extends javax.swing.JFrame {
         addtoTable(depTable,alldep);
     }//GEN-LAST:event_depClearActionPerformed
 
-    // courses buttons
+    /**
+     * Action Listener for courses tab New/Delete button
+     * @param evt
+     */
     private void corNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corNewActionPerformed
         Database db = new Database();
         String cid = "-1";
@@ -1632,6 +1711,10 @@ public class FacultyStaff extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_corNewActionPerformed
 
+    /**
+     * Action Listener for courses tab Search/Edit button
+     * @param evt
+     */
     private void corSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corSearchActionPerformed
         Database db = new Database();
         String cid = "-1";
@@ -1679,6 +1762,10 @@ public class FacultyStaff extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_corSearchActionPerformed
 
+    /**
+     * Action Listener for courses tab Clear button
+     * @param evt
+     */
     private void corClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corClearActionPerformed
         cleartable(corTable);
         clearCorForm();
@@ -1692,7 +1779,10 @@ public class FacultyStaff extends javax.swing.JFrame {
         addtoTable(corTable,allcor);
     }//GEN-LAST:event_corClearActionPerformed
 
-    // enrolled buttons
+    /**
+     * Action Listener for enrolled tab New/Delete button
+     * @param evt
+     */
     private void enrlNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrlNewActionPerformed
         Database db = new Database();
         String cid = "-1";
@@ -1743,6 +1833,10 @@ public class FacultyStaff extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_enrlNewActionPerformed
 
+    /**
+     * Action Listener for enrolled tab Search/Edit button
+     * @param evt
+     */
     private void enrlSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrlSearchActionPerformed
         Database db = new Database();
         String cid = "-1";
@@ -1787,6 +1881,10 @@ public class FacultyStaff extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_enrlSearchActionPerformed
 
+    /**
+     * Action Listener for enrolled tab Clear button
+     * @param evt
+     */
     private void enrlClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrlClearActionPerformed
         cleartable(enrlTable);
         clearEnrlForm();
@@ -1801,7 +1899,11 @@ public class FacultyStaff extends javax.swing.JFrame {
         addtoTable(enrlTable,allenrl);
     }//GEN-LAST:event_enrlClearActionPerformed
 
-    // populate tables when tab selected
+    /**
+     * Action Listener for tabbed pane
+     * Detects which tab is selected, then clears and repopulates all entries from DB for that tab
+     * @param evt
+     */
     private void facstaffTabStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_facstaffTabStateChanged
         JTabbedPane temp = (JTabbedPane) evt.getSource();
         int index = temp.getSelectedIndex();
@@ -1839,6 +1941,10 @@ public class FacultyStaff extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_facstaffTabStateChanged
 
+    /**
+     * Clears all the entries from the given table.
+     * @param table
+     */
     private void cleartable (JTable table) {
         table.clearSelection();
         DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
@@ -1848,6 +1954,11 @@ public class FacultyStaff extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Adds the given data to the given table.
+     * @param table
+     * @param data
+     */
     public void addtoTable (JTable table, Object[][] data) {
         table.clearSelection();
         DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
@@ -1858,6 +1969,9 @@ public class FacultyStaff extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Clears the student tab fields
+     */
     public void clearStuForm () {
         stuID.setText("");
         stuName.setText("");
@@ -1866,23 +1980,35 @@ public class FacultyStaff extends javax.swing.JFrame {
         stuAge.setText("");
     }
 
+    /**
+     * Clears the faculty tab fields
+     */
     public void clearFacForm () {
         facID.setText("");
         facName.setText("");
         facDep.setSelectedItem("");
     }
 
+    /**
+     * Clears the staff tab fields
+     */
     public void clearStaForm () {
         staID.setText("");
         staName.setText("");
         staDep.setSelectedItem("");
     }
 
+    /**
+     * Clears the department tab fields
+     */
     public void clearDepForm () {
         depID.setText("");
         depName.setText("");
     }
 
+    /**
+     * Clears the courses tab fields
+     */
     public void clearCorForm () {
         corID.setText("");
         corName.setText("");
@@ -1892,6 +2018,9 @@ public class FacultyStaff extends javax.swing.JFrame {
         corSize.setText("");
     }
 
+    /**
+     * Clears the enrolled tab fields
+     */
     public void clearEnrlForm () {
         enrlCourse.setSelectedItem("");
         enrlStudent.setSelectedItem("");
@@ -1900,18 +2029,36 @@ public class FacultyStaff extends javax.swing.JFrame {
         enrlFinal.setText("");
     }
 
+    /**
+     * Getter for DB connection.
+     * @return JDBC Connection
+     */
     public Connection getConnection () {
         return this.con;
     }
 
+    /**
+     * Setter for DB connection.
+     * @param passedcon
+     */
     public void setConnection (Connection passedcon) {
         this.con = passedcon;
     }
 
+    /**
+     * Getter for staff permission
+     * @return boolean
+     */
     public boolean isStaffPermission() {
         return staffPermission;
     }
 
+    /**
+     * Setter for staff permission.
+     * Removes the New buttons from all the tabs if user is not staff.
+     * Adds the table listeners to all the tabs if user is staff.
+     * @param staffPermission
+     */
     public void setStaffPermission(boolean staffPermission) {
         this.staffPermission = staffPermission;
         if (staffPermission) {

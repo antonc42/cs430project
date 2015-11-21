@@ -1,8 +1,3 @@
-/**
- * Created by anton on 10/17/15.
- * Main class for project
- * @author Anton Castelli
- */
 import javax.swing.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -10,7 +5,11 @@ import java.nio.file.Paths;
 import java.sql.*;
 import java.io.*;
 
-
+/**
+ * Created by anton on 10/17/15.
+ * Main class for project
+ * @author Anton Castelli
+ */
 public class MainClass {
     /**
      * Main Method for project

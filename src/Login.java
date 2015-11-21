@@ -1,12 +1,10 @@
+import java.sql.Connection;
+import java.sql.SQLException;
+
 /**
  * Class for user login dialog
  * @author Anton Castelli
  */
-//import javax.swing.JOptionPane;
-//import javax.xml.crypto.Data;
-import java.sql.Connection;
-import java.sql.SQLException;
-
 public class Login extends javax.swing.JFrame {
 
     private Connection con;
