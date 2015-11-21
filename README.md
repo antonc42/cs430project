@@ -13,5 +13,24 @@ Faculty(**fid**: integer, fname: string, deptid: integer)
 Staff(**sid**: integer, sname: string, deptid: integer)  
 Department(**did**: integer, dname: string)
 
-## Questions
-1. Should I instantiate the Database class so many times? Just once per class? Too many instances? Garbage collection?
+## Setup
+
+### Prerequisites
+
+1. Java JDK 7 or 8
+2. Access to CS Oracle DB server
+3. SQL*Plus Oracle client
+
+### Compile Project
+
+1. 
+
+### Setup Database
+
+1. Using SQL*Plus client, log into Oracle DB server
+2. Remove and existing tables or views with the same names by running the RemoveAll.sql script
+`START /path/to/project/directory/RemoveAll.sql`
+3. Load the DB schema using the Schema.sql script
+`START /path/to/project/directory/Schema.sql`
+4. Load the example entries using the ExampleData.sql script
+`START /path/to/project/directory/ExampleData.sql`
