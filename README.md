@@ -38,13 +38,13 @@ Department( **did**: integer, dname: string)
 4. Load the example entries using the ExampleData.sql script
 `START /path/to/project/directory/ExampleData.sql`
 
-## Run Project
+# Run Project
 
 1. In the project directory, run the main class.
 `java MainClass`
 2. The login to the Oracle database may take some time. Please be patient.
 
-## Test Project
+# Test Project
 
 1. When the project is run for the first time, a dialog should appear prompting for the entry of the DB username and password.
 2. Enter the Oracle DB username and password and check the Save Configuration box to save the username and password to a file.
@@ -61,4 +61,35 @@ Department( **did**: integer, dname: string)
   * Enter search terms in the fields and click the Search button to find a class.
   * Click the Clear button to clear the fields and search results.
   * Selecting a class from the list enables the Enroll button, which can be used to enroll in the class.
-10. 
+10. If logging in as staff or faculty, the faculty/staff window will appear.
+  * Staff can search, add, edit, or delete information from the database.
+  * Faculty can only search for information in the database.
+  * Each of the tabs represents a table in the database: Students, Faculty, Staff, Departments, Courses, Enrolled.
+  * On each tab, certain functions are available (all for staff and search only for faculty).
+    * Each tab will populate the table with all information from the database in the related database table when selected.
+    * Search terms can be entered in the fields. When the Search button is clicked, the results show up in the table.
+    * A new entry can be made by entering data into all the required fields and any other fields desired, then clicking the New button.
+    * When an entry from the table is selected, the fields are automatically filled in with the data from that entry.
+      * Any field with the exception of the primary keys can be changed. The changes will be saved to the database when the Edit button is clicked.
+      * Alternatively, the Delete button can be clicked and the entry will be removed from the database.
+      * Either action will reset the fields and the displayed table.
+    * Entries on any tab cannot be deleted if they violate the referential integrity constraints in the database.
+
+# Wish List
+
+Some extra functions of this program were not able to be implemented in the time available.
+
+ * Proper exception handling
+   * For SQL exceptions
+   * For incorrect user input
+   * For database constraints
+ * Error popup dialogs
+ * Information popup dialogs
+ * User prompt dialogs
+   * Yes/No save configuration
+   * Yes/No delete from database
+   * Yes/No drop class
+ * SQL injection attack mitigation
+ * User login passwords
+   * Need additional table in database
+   * Passwords would be properly hashed and salted with sha256crypt
