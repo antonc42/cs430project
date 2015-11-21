@@ -113,7 +113,7 @@ public class Database {
             return false;
         }
         try {
-            String query = "SELECT cid FROM Course WHERE cid='"+cid+"'";
+            String query = "SELECT cid FROM Courses WHERE cid='"+cid+"'";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             if (rs.next()){
@@ -1571,6 +1571,54 @@ public class Database {
         catch (Exception ex) {
             System.out.println("SQLException: " + ex);
             return;
+        }
+    }
+
+    // student courses
+    public Object[][] getEnrolled (Connection con, Integer sid){
+        Object[][] obj = null;
+        ArrayList<Object[]> temp = new ArrayList<Object[]>();
+        // if nothing was passed in, don't try to build the sql expression - it will just throw a sql exception
+        // because of the dangling "WHEN"
+        if ((sid == null || sid ==-1)) {
+            return obj;
+        }
+        try {
+            String buildquery = "SELECT Enrolled.cid,cname,meets_at,room,fname,enrl,limit,exam1,exam2,final " +
+                    "FROM Enrolled " +
+                    "JOIN EnrollCount " +
+                    "ON Enrolled.cid=EnrollCount.cid " +
+                    "JOIN Courses " +
+                    "ON Enrolled.cid=Courses.cid " +
+                    "JOIN Faculty " +
+                    "ON Courses.fid=Faculty.fid " +
+                    "WHERE sid="+sid;
+
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(buildquery);
+            while (rs.next()){
+                String Rcid = rs.getString(1);
+                String Rcname = rs.getString(2);
+                String Rmeets = rs.getString(3);
+                String Rroom = rs.getString(4);
+                String Rfname = rs.getString(5);
+                Integer Renrl = rs.getInt(6);
+                Integer Rlimit = rs.getInt(7);
+                Integer Rexam1 = rs.getInt(8);
+                Integer Rexam2 = rs.getInt(9);
+                Integer Rfinalg = rs.getInt(10);
+                Object[] row = {Rcid.toString(),Rcname,Rmeets,Rroom,Rfname,Renrl,Rlimit.toString(),Rexam1.toString(),Rexam2.toString(),Rfinalg.toString()};
+                temp.add(row);
+            }
+            obj = new Object[temp.size()][];
+            temp.toArray(obj);
+            rs.close();
+            st.close();
+            return obj;
+        }
+        catch (Exception ex){
+            System.out.println("SQLException: "+ex);
+            return obj;
         }
     }
 }

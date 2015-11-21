@@ -56,3 +56,8 @@ CREATE VIEW FullCourses AS
     WHERE Courses.cid = Enrolled.cid
     GROUP BY cid
   );
+
+CREATE VIEW EnrollCount AS
+  SELECT cid,COUNT(sid) AS enrl
+  FROM Enrolled
+  GROUP BY cid;

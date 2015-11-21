@@ -41,8 +41,12 @@ public class Student extends javax.swing.JFrame {
             }
         initComponents();
         populateComboBoxes();
+        Object[][] allcor = db.searchCor(con);
+        cleartable(corTable);
+        addtoTable(corTable,allcor);
         addCorTableListener();
         corEnroll.setEnabled(false);
+        reloadClassList();
         /*coursesTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         for (int column = 0; column < coursesTable.getColumnCount(); column++) {
             TableColumn tableColumn = coursesTable.getColumnModel().getColumn(column);
@@ -386,6 +390,12 @@ public class Student extends javax.swing.JFrame {
         });
     }
 
+    private void reloadClassList() {
+        cleartable(coursesTable);
+        Object[][] stuClasses = db.getEnrolled(con,studentID);
+        addtoTable(coursesTable,stuClasses);
+    }
+
     private void corSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corSearchActionPerformed
         String cid = "-1";
         String cname = "-1";
@@ -424,11 +434,15 @@ public class Student extends javax.swing.JFrame {
     }//GEN-LAST:event_corEnrollActionPerformed
 
     private void corClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corClearActionPerformed
-        // TODO add your handling code here:
+        cleartable(corTable);
+        clearCorForm();
+        Object[][] allcor = db.searchCor(con);
+        addtoTable(corTable,allcor);
     }//GEN-LAST:event_corClearActionPerformed
 
     private void dropButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropButtonActionPerformed
-        // TODO add your handling code here:
+
+        reloadClassList();
     }//GEN-LAST:event_dropButtonActionPerformed
 
     private void cleartable (JTable table) {
