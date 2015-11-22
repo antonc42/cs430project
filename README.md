@@ -31,18 +31,22 @@ Department( **did**: integer, dname: string)
 ### Setup Database
 
 1. Using SQL*Plus client, log into Oracle DB server
-2. Remove and existing tables or views with the same names by running the RemoveAll.sql script
+2. Remove and existing tables or views with the same names by running the RemoveAll.sql script  
 `START /path/to/project/directory/RemoveAll.sql`
-3. Load the DB schema using the Schema.sql script
+3. Load the DB schema using the Schema.sql script  
 `START /path/to/project/directory/Schema.sql`
-4. Load the example entries using the ExampleData.sql script
+4. Load the example entries using the ExampleData.sql script  
 `START /path/to/project/directory/ExampleData.sql`
 
 # Run Project
 
-1. In the project directory, run the main class.
-`java MainClass`
-2. The login to the Oracle database may take some time. Please be patient.
+1. Optionally, set the classpath  
+`export CLASSPATH=$CLASSPATH:/full/path/to/project/ojdbc6_g.jar` in Linux  
+`set CLASSPATH=C:\full\path\to\project\ojdbc6_g.jar` in Windows  
+2. In the project directory, run the main class.  
+`java MainClass` if the classpath was set  
+`java -cp ojdbc6_g.jar:. MainClass` if the classpath was not set  
+3. The login to the Oracle database may take some time. Please be patient.
 
 # Test Project
 
