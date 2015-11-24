@@ -79,21 +79,3 @@ Department( **did**: integer, dname: string)
       * Either action will reset the fields and the displayed table.
     * Entries on any tab cannot be deleted if they violate the referential integrity constraints in the database.
 
-# Wish List
-
-Some extra functions of this program were not able to be implemented in the time available.
-
- * Proper exception handling
-   * For SQL exceptions
-   * For incorrect user input
-   * For database constraints
- * Error popup dialogs
- * Information popup dialogs
- * User prompt dialogs
-   * Yes/No save configuration
-   * Yes/No delete from database
-   * Yes/No drop class
- * SQL injection attack mitigation
- * User login passwords
-   * Need additional table in database
-   * Passwords would be properly hashed and salted with sha512crypt
